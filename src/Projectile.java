@@ -1,12 +1,12 @@
 
 public class Projectile {
 	boolean isUp;
-	int speed;
-	int xLoc;
-	int yLoc;
+	double speed;
+	double xLoc;
+	double yLoc;
 	
 	
-	public Projectile(boolean isUp, int speed,int xLoc, int yLoc ) {
+	public Projectile(boolean isUp, double speed,double xLoc, double yLoc ) {
 		this.isUp = isUp;
 		this.speed = speed;
 		this.xLoc = xLoc;
@@ -21,10 +21,10 @@ public class Projectile {
 			yLoc += speed;
 		}
 	}
-	public int getxLoc() {
+	public double getxLoc() {
 		return xLoc;
 	}
-	public int getyLoc() {
+	public double getyLoc() {
 		return yLoc;
 	}
 	

@@ -54,8 +54,8 @@ static final int PIXEL_SIZE = 10;
 		
 		g.setColor(ship);
 		Ship currentShip = currentGame.getPlayerShip();
-		int xloc = currentShip.getXloc();
-		int yloc = currentShip.getYloc();
+		int xloc = (int)currentShip.getXloc();
+		int yloc = (int)currentShip.getYloc();
 		
 		g.fillRect(xloc, yloc, 10, 10);
 	}
@@ -66,7 +66,7 @@ static final int PIXEL_SIZE = 10;
 		Color porjColor = Color.GREEN;
 		g.setColor(porjColor);
 		for(Projectile aProjectile: playerProjectiles) {
-			g.fillRect(aProjectile.getxLoc(), aProjectile.getyLoc(), 2, 5);
+			g.fillRect((int)aProjectile.getxLoc(), (int)aProjectile.getyLoc(), 2, 5);
 		}
 	}
 	@Override

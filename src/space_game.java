@@ -4,13 +4,13 @@ import java.util.LinkedList;
 public class space_game {
 
 	space_gui curGraphics;
-	Ship playerShip;
+	PlayerShip player;
 	LinkedList<Projectile> playerProjectiles;
 	
 	public space_game() {
 		curGraphics = new space_gui(this);
 		
-		playerShip = new Ship(this);
+		player = new PlayerShip();
 		playerProjectiles = new LinkedList<Projectile>();
 		
 	}
@@ -21,7 +21,7 @@ public class space_game {
 		while(true) {
 			
 			curGraphics.repaint();
-			playerShip.move();
+			player.move();
 			moveProjectiles();
 			try {
 				Thread.sleep(5);
@@ -46,43 +46,41 @@ public class space_game {
 
 	private void startMotion(char c) {
 		if(c == 'd') {
-			playerShip.setRightOn(true);
+			player.setRightOn(true);
 		}
 		else if(c == 'a') {
-			playerShip.setLeftOn(true);
+			player.setLeftOn(true);
 		}
 		else if(c == 'w') {
-			playerShip.setUpOn(true);
+			player.setUpOn(true);
 		}
 		else if(c == 's') {
-			playerShip.setDownOn(true);
+			player.setDownOn(true);
 		}
 	}
 
 	public Ship getPlayerShip() {
-		return playerShip;
+		return player;
 	}
 
 	public LinkedList<Projectile> getPlayerProjectiles(){
 		return playerProjectiles;
 		
 	}
-	public void setPlayerShip(Ship playerShip) {
-		this.playerShip = playerShip;
-	}
+	
 
 	private void stopMotion(char c) {
 		if(c == 'd') {
-			playerShip.setRightOn(false);
+			player.setRightOn(false);
 		}
 		else if(c == 'a') {
-			playerShip.setLeftOn(false);
+			player.setLeftOn(false);
 		}
 		else if(c == 'w') {
-			playerShip.setUpOn(false);
+			player.setUpOn(false);
 		}
 		else if(c == 's') {
-			playerShip.setDownOn(false);
+			player.setDownOn(false);
 		}
 	}
 
@@ -97,9 +95,9 @@ public class space_game {
 		if((c == 'w') || (c == 'a') || (c == 's') || (c == 'd') || ( c == 'j'))
     		  startMotion(c);
 		if(c == ' ') {
-			if(!playerShip.isShooting()) {
-				playerShip.setShooting(true);
-				playerProjectiles.add(playerShip.shoot());
+			if(!player.isShooting()) {
+				player.setShooting(true);
+				playerProjectiles.add(player.shoot());
 			}
 		}
 			
@@ -111,7 +109,7 @@ public class space_game {
 		if((c == 'w') || (c == 'a') || (c == 's') || (c == 'd') || ( c == 'j'))
   		  	stopMotion(c);
 		if(c == ' ') {
-			playerShip.setShooting(false);
+			player.setShooting(false);
 		}
 	}
 	
