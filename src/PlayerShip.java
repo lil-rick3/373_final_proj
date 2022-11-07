@@ -9,7 +9,7 @@ public class PlayerShip extends Ship{
 	boolean rightOn;
 	boolean leftOn;
 	boolean isShooting;
-	
+	boolean shootOnLeft;
 	
 	
 	public PlayerShip() {
@@ -20,6 +20,7 @@ public class PlayerShip extends Ship{
 		rightOn = false;
 		leftOn = false;
 		isShooting = false;
+		shootOnLeft = true;
 		
 	}
 	
@@ -50,8 +51,16 @@ public class PlayerShip extends Ship{
 	}
 	
 	public Projectile shoot() {
-	
-		return new Projectile(true, 0.1, xloc, yloc);
+		if(shootOnLeft) {
+			shootOnLeft = !shootOnLeft;
+			return new Projectile(true, 1, xloc, yloc);
+			
+		}
+		else {
+			shootOnLeft = !shootOnLeft;
+			return new Projectile(true, 1, xloc + 18, yloc);
+		}
+		
 	}
 	
 

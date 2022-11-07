@@ -2,8 +2,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -57,7 +61,16 @@ static final int PIXEL_SIZE = 10;
 		int xloc = (int)currentShip.getXloc();
 		int yloc = (int)currentShip.getYloc();
 		
-		g.fillRect(xloc, yloc, 10, 10);
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(new File("src/graphicImages/ship2.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		g.drawImage(image, xloc, yloc, this);
+		
+		//g.fillRect(xloc, yloc, 10, 10);
 	}
 	
 	private void paintProjectiles(Graphics g) {
