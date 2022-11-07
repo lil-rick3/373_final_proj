@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -38,43 +39,55 @@ static final int PIXEL_SIZE = 10;
 	public void paintComponent(Graphics g){		
 		paintBackground(g);
 		paintShip(g);
+		paintProjectiles(g);
 		
 	}
 	
 	
 	private void paintBackground(Graphics g) {
 		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 400, 400);
+		g.fillRect(0, 0, 600, 600);
 	}
 	
 	private void paintShip(Graphics g) {
 		Color ship = new Color(200,50,0);
 		
 		g.setColor(ship);
-		int xloc = currentGame.getXLoc();
-		int yloc = currentGame.getYLoc();
+		Ship currentShip = currentGame.getPlayerShip();
+		int xloc = currentShip.getXloc();
+		int yloc = currentShip.getYloc();
 		
 		g.fillRect(xloc, yloc, 10, 10);
 	}
+	
+	private void paintProjectiles(Graphics g) {
+		LinkedList<Projectile> playerProjectiles = currentGame.getPlayerProjectiles();
+		
+		Color porjColor = Color.GREEN;
+		g.setColor(porjColor);
+		for(Projectile aProjectile: playerProjectiles) {
+			g.fillRect(aProjectile.getxLoc(), aProjectile.getyLoc(), 2, 5);
+		}
+	}
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
+		currentGame.processKeyTyped(e);
 		
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		char c = e.getKeyChar();
+		currentGame.processKeyPressed(e);
 		
-		currentGame.startMotion(c);
 		
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		char c = e.getKeyChar();
+		currentGame.processKeyReleased(e);
 		
-			currentGame.stopMotion(c);
+		
+			
 		
 		
 	}
