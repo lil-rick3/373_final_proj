@@ -6,10 +6,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
 
 public class space_gui extends JPanel implements KeyListener{
 	
@@ -19,9 +19,10 @@ static final int PIXEL_SIZE = 10;
 	space_game currentGame;
 	boolean isFirstMove = true;
 	
-	public space_gui(space_game currentGame){
+	public space_gui(){
 		
-		this.currentGame = currentGame;
+		this.currentGame = new space_game(this);
+		
 		JFrame  graphic = new JFrame("space Game");
 		
 		addKeyListener(this);
@@ -37,7 +38,27 @@ static final int PIXEL_SIZE = 10;
 		
 		repaint();
 		graphic.setVisible(true);
-				
+		
+		
+		try
+	     {
+	    	 System.out.println("test");
+	         SimpleAudioPlayer audioPlayer = 
+	                         new SimpleAudioPlayer();
+	           
+	         audioPlayer.play();
+	         
+	         
+	     } 
+	       
+	     catch (Exception ex) 
+	     {
+	         System.out.println("Error with playing sound.");
+	         ex.printStackTrace();
+	       
+	       }
+		
+		currentGame.runGame();
 	}
 	
 	public void paintComponent(Graphics g){		
@@ -70,7 +91,7 @@ static final int PIXEL_SIZE = 10;
 		}
 		g.drawImage(image, xloc, yloc, this);
 		
-		//g.fillRect(xloc, yloc, 10, 10);
+		
 	}
 	
 	private void paintProjectiles(Graphics g) {

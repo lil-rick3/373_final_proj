@@ -7,12 +7,13 @@ public class space_game {
 	PlayerShip player;
 	LinkedList<Projectile> playerProjectiles;
 	
-	public space_game() {
-		curGraphics = new space_gui(this);
+	public space_game(space_gui curGraphics) {
+		
 		
 		player = new PlayerShip();
 		playerProjectiles = new LinkedList<Projectile>();
-		
+		this.curGraphics = curGraphics;
+				
 	}
 	
 	public void runGame() {
