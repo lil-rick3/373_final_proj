@@ -1,6 +1,12 @@
-package components;
+package components.ships;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import components.projectile.Projectile;
 
 public abstract class Ship {
 
@@ -10,6 +16,16 @@ public abstract class Ship {
 	protected int height;
 	protected BufferedImage projection;
 	
+	
+	public Ship(String imagePath) {
+		try {
+			projection = ImageIO.read(new File(imagePath));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	
 	public abstract void move();

@@ -1,4 +1,4 @@
-package components;
+package components.projectile;
 
 
 public class Projectile {

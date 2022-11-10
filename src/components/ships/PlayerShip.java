@@ -1,4 +1,4 @@
-package components;
+package components.ships;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -6,8 +6,17 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import components.projectile.Projectile;
 import game_engine.Space_Game;
 
+
+/***
+ * 
+ * @author Jaret Rickel
+ * 
+ * The player ship is an extension of ship, and will use keyboard inputs
+ *
+ */
 public class PlayerShip extends Ship{
 	
 	
@@ -32,13 +41,7 @@ public class PlayerShip extends Ship{
 	
 	public PlayerShip(double xloc, double yloc,String imagePath ) {
 		
-		try {
-			projection = ImageIO.read(new File(imagePath));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super(imagePath);
 		width = projection.getWidth();
 		height = projection.getHeight();
 		this.xloc = xloc;
@@ -47,9 +50,11 @@ public class PlayerShip extends Ship{
 		downOn = false;
 		rightOn = false;
 		leftOn = false;
-		isShooting = false;
+		
+		isShooting = false;//says if the user has spacebard constantly pressed
 		shootOnLeft = true;
-		willShoot = false;
+		willShoot = false;// says that during next game cycle, the player will
+		// shoot a projectile 
 		
 	}
 	
@@ -86,8 +91,8 @@ public class PlayerShip extends Ship{
 		else if(xloc > Space_Game.gameWidth - width) {
 			xloc = Space_Game.gameWidth - width;
 		}
-		if(yloc < 0) {
-			yloc = 0;
+		if(yloc < Space_Game.playerHeight) {
+			yloc = Space_Game.playerHeight;
 		}
 		else if(yloc > Space_Game.gameHeight - height) {
 			yloc = Space_Game.gameHeight - height;
