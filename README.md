@@ -14,7 +14,7 @@ main driver, but it gets player inputs from the jpanel. The projectile class has
 
 
 # what needs to be done at the moment:
-### Jframe addition
+### ~~Jframe addition~~
 Currently the gui is just a jpanel, but it should be a jframe. One of the big reasons is because the Jfram will allow us to have an exit command, and also allow the game gui to be its own thing, and further modularize this project. Currently when I close the game, the song gets played continuously. 
 ### thread errors
 ![thread example](https://i.groupme.com/915x153.png.91ba70aa7d8b4bbd95cd9609bb5631fb)
