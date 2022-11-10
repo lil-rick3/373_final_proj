@@ -38,7 +38,7 @@ public class EnemyShip extends Ship {
 		
 		int ranNum = (int) (Math.random() * 1000.0);
 		if(ranNum < 8) {
-			return new Projectile(false, 0.5, xloc, xloc);
+			return new Projectile(false, 0.5, xloc, yloc);
 		}
 		else {
 			return null;
