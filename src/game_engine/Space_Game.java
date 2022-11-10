@@ -54,6 +54,7 @@ public class Space_Game {
 			player.move();
 			for (EnemyShip aEnemyShip: enemies) {
 				aEnemyShip.move();
+				detectProjectileCollision();
 			}
 			moveStuff.increment();
 			tempProj = player.shoot();
@@ -62,11 +63,13 @@ public class Space_Game {
 				player.setWillShoot(false);
 			}
 			for (EnemyShip aEnemyShip: enemies) {
+				aEnemyShip.move();
 				tempProj = aEnemyShip.shoot();
 				if(tempProj != null) {
 					enemyProjectiles.add(tempProj);
 				
 				}
+				detectProjectileCollision();
 			}
 			deleteProjectiles();
 			moveProjectiles();
@@ -79,44 +82,36 @@ public class Space_Game {
 		}
 	}
 	
-	
-	
-	
-	
-	public void detectPlayerCollision(Projectile aProj) {
+	public void detectProjectileCollision() {
 		double MIN_EQUAL_DIFF = 0.0001;
-		
-			if (Math.abs(aProj.getxLoc() - player.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aProj.getyLoc() - player.getYloc()) < MIN_EQUAL_DIFF) {
+
+		//check for collision with player
+		for(Projectile aEnemyProj: enemyProjectiles) {
+			if (Math.abs(aEnemyProj.getxLoc() - player.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aEnemyProj.getyLoc() - player.getYloc()) < MIN_EQUAL_DIFF) {
 				//player and projectile collision
 				//TODO handle health
 			}
-
-	}
-
-	public void detectEnemyCollision(Projectile aProj, EnemyShip aEnemyShip) {
-		double MIN_EQUAL_DIFF = 0.0001;
-		
-			if (Math.abs(aProj.getxLoc() - aEnemyShip.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aProj.getyLoc() - aEnemyShip.getYloc()) < MIN_EQUAL_DIFF) {
-				//enemy and projectile collision
-				//TODO handle health
-
+		}
+		//check for collision with enemies
+		for(EnemyShip aEnemyShip: enemies) {
+			for(Projectile aPlayerProj: playerProjectiles) {
+				if (Math.abs(aPlayerProj.getxLoc() - aEnemyShip.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aPlayerProj.getyLoc() - aEnemyShip.getYloc()) < MIN_EQUAL_DIFF) {
+					//enemy and projectile collision
+					//TODO handle health
+				}
 			}
- 
+		}
 	}
-
 
 	private void moveProjectiles() {
 		// TODO Auto-generated method stub
 		for(Projectile aProj: playerProjectiles) {
 			aProj.move();
-			for(EnemyShip aEnemyShip: enemies) {
-				detectEnemyCollision(aProj, aEnemyShip);
-			}
 		}
 		for(Projectile aProj: enemyProjectiles) {
 			aProj.move();
-			detectPlayerCollision(aProj);
 		}
+		detectProjectileCollision(); //this may have to be called each time
 	}
 	/***
 	 * this function will run through all the projectiles and delete the ones 
