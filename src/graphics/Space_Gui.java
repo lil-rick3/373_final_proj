@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 
 import Audio.SimpleAudioPlayer;
 import components.projectile.Projectile;
+import components.ships.EnemyShip;
 import components.ships.Ship;
 import game_engine.Space_Game;
 
@@ -79,14 +80,15 @@ static final int PIXEL_SIZE = 10;
 		BufferedImage image = currentShip.getImage();
 		
 		g.drawImage(image, xloc, yloc, this);
-		currentShip = currentGame.getEnemyShip();
+		for(Ship aEnemyShip: currentGame.getEnemyShips()) {
 		
-		xloc = (int)currentShip.getXloc();
-		yloc = (int)currentShip.getYloc();
+			xloc = (int)aEnemyShip.getXloc();
+			yloc = (int)aEnemyShip.getYloc();
 		
-		image = currentShip.getImage();
+			image = aEnemyShip.getImage();
 		
 		g.drawImage(image, xloc, yloc, this);
+		}
 	}
 	
 	private void paintProjectiles(Graphics g) {

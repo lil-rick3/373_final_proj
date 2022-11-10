@@ -9,6 +9,7 @@ import components.ships.EnemyShip;
 import components.ships.PlayerShip;
 import components.ships.Ship;
 import graphics.Space_Gui;
+import java.lang.Math;
 
 
 
@@ -26,7 +27,7 @@ public class Space_Game {
 	
 	Space_Gui curGraphics;
 	PlayerShip player;
-	EnemyShip enemy;
+	LinkedList<EnemyShip> enemies;
 	LinkedList<Projectile> playerProjectiles;
 	LinkedList<Projectile> enemyProjectiles;
 	MovementPattern moveStuff;
@@ -37,7 +38,7 @@ public class Space_Game {
 		
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png");
 		moveStuff = new MovementPattern();
-		enemy = new EnemyShip(moveStuff, 0, "src/graphicImages/enemyship1.png");
+		enemies = new LinkedList<EnemyShip>(); //do we not need to individually construct each of the enemyships?
 		playerProjectiles = new LinkedList<Projectile>();
 		enemyProjectiles = new LinkedList<Projectile>();
 		this.curGraphics = curGraphics;
@@ -51,17 +52,21 @@ public class Space_Game {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
 			player.move();
-			enemy.move();
+			for (EnemyShip aEnemyShip: enemies) {
+				aEnemyShip.move();
+			}
 			moveStuff.increment();
 			tempProj = player.shoot();
 			if(tempProj != null) {
 				playerProjectiles.add(tempProj);
 				player.setWillShoot(false);
 			}
-			tempProj = enemy.shoot();
-			if(tempProj != null) {
-				enemyProjectiles.add(tempProj);
+			for (EnemyShip aEnemyShip: enemies) {
+				tempProj = aEnemyShip.shoot();
+				if(tempProj != null) {
+					enemyProjectiles.add(tempProj);
 				
+				}
 			}
 			deleteProjectiles();
 			moveProjectiles();
@@ -78,14 +83,39 @@ public class Space_Game {
 	
 	
 	
-	
+	public void detectPlayerCollision(Projectile aProj) {
+		double MIN_EQUAL_DIFF = 0.0001;
+		
+			if (Math.abs(aProj.getxLoc() - player.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aProj.getyLoc() - player.getYloc()) < MIN_EQUAL_DIFF) {
+				//player and projectile collision
+				//TODO handle health
+			}
+
+	}
+
+	public void detectEnemyCollision(Projectile aProj, EnemyShip aEnemyShip) {
+		double MIN_EQUAL_DIFF = 0.0001;
+		
+			if (Math.abs(aProj.getxLoc() - aEnemyShip.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aProj.getyLoc() - aEnemyShip.getYloc()) < MIN_EQUAL_DIFF) {
+				//enemy and projectile collision
+				//TODO handle health
+
+			}
+ 
+	}
+
+
 	private void moveProjectiles() {
 		// TODO Auto-generated method stub
 		for(Projectile aProj: playerProjectiles) {
 			aProj.move();
+			for(EnemyShip aEnemyShip: enemies) {
+				detectEnemyCollision(aProj, aEnemyShip);
+			}
 		}
 		for(Projectile aProj: enemyProjectiles) {
 			aProj.move();
+			detectPlayerCollision(aProj);
 		}
 	}
 	/***
@@ -135,8 +165,8 @@ public class Space_Game {
 	public Ship getPlayerShip() {
 		return player;
 	}
-	public Ship getEnemyShip() {
-		return enemy;
+	public LinkedList<EnemyShip> getEnemyShips() {
+		return enemies;
 	}
 	public LinkedList<Projectile> getPlayerProjectiles(){
 		return playerProjectiles;
