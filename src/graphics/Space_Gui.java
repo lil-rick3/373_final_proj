@@ -13,8 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Audio.SimpleAudioPlayer;
-import components.Projectile;
-import components.Ship;
+import components.projectile.Projectile;
+import components.ships.Ship;
 import game_engine.Space_Game;
 
 
@@ -79,8 +79,14 @@ static final int PIXEL_SIZE = 10;
 		BufferedImage image = currentShip.getImage();
 		
 		g.drawImage(image, xloc, yloc, this);
+		currentShip = currentGame.getEnemyShip();
 		
+		xloc = (int)currentShip.getXloc();
+		yloc = (int)currentShip.getYloc();
 		
+		image = currentShip.getImage();
+		
+		g.drawImage(image, xloc, yloc, this);
 	}
 	
 	private void paintProjectiles(Graphics g) {
@@ -89,6 +95,15 @@ static final int PIXEL_SIZE = 10;
 		Color porjColor = Color.GREEN;
 		g.setColor(porjColor);
 		for(Projectile aProjectile: playerProjectiles) {
+			g.fillRect((int)aProjectile.getxLoc(), (int)aProjectile.getyLoc(), 2, 5);
+		}
+		
+		
+		LinkedList<Projectile> enemyProjectiles = currentGame.getEnemyProjectiles();
+		
+		porjColor = Color.RED;
+		g.setColor(porjColor);
+		for(Projectile aProjectile: enemyProjectiles) {
 			g.fillRect((int)aProjectile.getxLoc(), (int)aProjectile.getyLoc(), 2, 5);
 		}
 	}
