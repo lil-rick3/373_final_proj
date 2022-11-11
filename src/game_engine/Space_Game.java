@@ -86,23 +86,63 @@ public class Space_Game {
 		double MIN_EQUAL_DIFF = 0.0001;
 
 		//check for collision with player
-		for(Projectile aEnemyProj: enemyProjectiles) {
+		ListIterator<Projectile> enemyProjIterator = enemyProjectiles.listIterator();
+		while(enemyProjIterator.hasNext()) {
+			Projectile aEnemyProj = enemyProjIterator.next();
 			if (Math.abs(aEnemyProj.getxLoc() - player.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aEnemyProj.getyLoc() - player.getYloc()) < MIN_EQUAL_DIFF) {
 				//player and projectile collision
-				//TODO handle health
+				enemyProjIterator.remove(); //delete the projectile
+				//handle health
+				handleHealth(true, 1);
 			}
 		}
 		//check for collision with enemies
-		for(EnemyShip aEnemyShip: enemies) {
-			for(Projectile aPlayerProj: playerProjectiles) {
+		ListIterator<EnemyShip> enemyShipIterator = enemies.listIterator();
+		ListIterator<Projectile> playerProjIterator = playerProjectiles.listIterator();
+		while (enemyShipIterator.hasNext()) {
+			EnemyShip aEnemyShip = enemyShipIterator.next();
+			while(playerProjIterator.hasNext()) {
+				Projectile aPlayerProj = playerProjIterator.next();
 				if (Math.abs(aPlayerProj.getxLoc() - aEnemyShip.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aPlayerProj.getyLoc() - aEnemyShip.getYloc()) < MIN_EQUAL_DIFF) {
 					//enemy and projectile collision
-					//TODO handle health
+					playerProjIterator.remove(); //delete the projectile
+					//handle health
+					if (handleHealth(1, aEnemyShip)) {
+						//enemy is dead
+						enemyShipIterator.remove();
+					}
+					
 				}
 			}
+			aEnemyShip = enemyShipIterator.next();
 		}
 	}
 
+	//handle health for enemy
+	private boolean handleHealth(int damage, EnemyShip aEnemyShip) {
+
+		aEnemyShip.setHealth(aEnemyShip.getHealth() - damage);
+		if (aEnemyShip.getHealth() <= 0) {
+			return true;
+		}
+		return false;
+	}
+
+	//handle health for player
+	private void handleHealth(boolean takeDamage, int healthChange) {
+		//if takeDamage == false, ship should gain that amount of health
+		if (takeDamage) {
+			player.setHealth(player.getHealth() - healthChange);
+		}
+		else {
+			player.setHealth(player.getHealth() + healthChange);
+		}
+		if (player.getHealth() <= 0) {
+			//TODO: kill player
+			
+		}
+
+	}
 	private void moveProjectiles() {
 		// TODO Auto-generated method stub
 		for(Projectile aProj: playerProjectiles) {
