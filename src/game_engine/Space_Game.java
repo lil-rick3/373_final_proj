@@ -4,6 +4,10 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import components.powerup.HealthUp;
+import components.powerup.Nuke;
+import components.powerup.Powerup;
+import components.powerup.WeaponUp;
 import components.projectile.Projectile;
 import components.ships.EnemyShip;
 import components.ships.PlayerShip;
@@ -30,6 +34,7 @@ public class Space_Game {
 	LinkedList<EnemyShip> enemies;
 	LinkedList<Projectile> playerProjectiles;
 	LinkedList<Projectile> enemyProjectiles;
+	LinkedList<Powerup> powerups;
 	MovementPattern moveStuff;
 	
 	
@@ -41,6 +46,7 @@ public class Space_Game {
 		enemies = new LinkedList<EnemyShip>(); //do we not need to individually construct each of the enemyships?
 		playerProjectiles = new LinkedList<Projectile>();
 		enemyProjectiles = new LinkedList<Projectile>();
+		powerups = new LinkedList<Powerup>();
 		this.curGraphics = curGraphics;
 				
 	}
@@ -52,10 +58,8 @@ public class Space_Game {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
 			player.move();
-			for (EnemyShip aEnemyShip: enemies) {
-				aEnemyShip.move();
-				detectProjectileCollision();
-			}
+			detectPowerupCollision();
+			detectProjectileCollision();
 			moveStuff.increment();
 			tempProj = player.shoot();
 			if(tempProj != null) {
@@ -73,6 +77,8 @@ public class Space_Game {
 			}
 			deleteProjectiles();
 			moveProjectiles();
+			deletePowerups();
+			movePowerups();
 			try {
 				Thread.sleep(5);
 			}catch(InterruptedException e) {
@@ -110,6 +116,8 @@ public class Space_Game {
 					if (handleHealth(1, aEnemyShip)) {
 						//enemy is dead
 						enemyShipIterator.remove();
+						//TODO: randomly generate powerup 
+						generatePowerup(aEnemyShip.getXloc(), aEnemyShip.getYloc());
 					}
 					
 				}
@@ -118,7 +126,67 @@ public class Space_Game {
 		}
 	}
 
-	//handle health for enemy
+	public void detectPowerupCollision() {
+		double MIN_EQUAL_DIFF = 0.0001;
+
+		//check for collision with player
+		ListIterator<Powerup> powerIterator = powerups.listIterator();
+		while(powerIterator.hasNext()) {
+			Powerup aPowerup = powerIterator.next();
+			if (Math.abs(aPowerup.getxLoc() - player.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aPowerup.getyLoc() - player.getYloc()) < MIN_EQUAL_DIFF) {
+				//player and projectile collision
+				if (aPowerup.getClass().getName() == "Nuke") {
+					//kill all enemies
+					ListIterator<EnemyShip> enemyShipIterator = enemies.listIterator();
+					while (enemyShipIterator.hasNext()) {
+						EnemyShip aEnemyShip = enemyShipIterator.next();
+						enemyShipIterator.remove();
+					}
+				}
+				else if (aPowerup.getClass().getName() == "WeaponUp") {
+					//TODO: upgrade player weapon
+				}
+				else if (aPowerup.getClass().getName() == "HealthUp") {
+					//restore 1 health
+					handleHealth(false, 1);
+
+				}
+				powerIterator.remove(); //delete the projectile
+			}
+		}
+	}
+
+
+	private void generatePowerup(double xloc, double yloc) {
+		int ranNum = (int) (Math.random() * 1000.0);
+
+		if (ranNum <= 50) { //5% chance
+			//generate healthup
+			HealthUp aHealthUp = new HealthUp(xloc, yloc, null);
+			powerups.add(aHealthUp);
+		}
+		else if (ranNum > 50 && ranNum <= 150) { //5% chance
+			//generate weapon upgrade
+			WeaponUp aWeaponUp = new WeaponUp(xloc, yloc, null);
+			powerups.add(aWeaponUp);
+		}
+		else if (ranNum > 150 && ranNum <= 160) { //1% chance
+			//generate nuke
+			Nuke aNuke = new Nuke(xloc, yloc, null);
+			powerups.add(aNuke);
+		}
+
+	}
+	private void movePowerups() {
+		for(Powerup aPowerup: powerups) {
+			aPowerup.move();
+		}
+		for(Powerup aPowerup: powerups) {
+			aPowerup.move();
+		}
+		detectPowerupCollision();
+	}
+	//handle health for enemy. Return true if enemy dies
 	private boolean handleHealth(int damage, EnemyShip aEnemyShip) {
 
 		aEnemyShip.setHealth(aEnemyShip.getHealth() - damage);
@@ -126,6 +194,19 @@ public class Space_Game {
 			return true;
 		}
 		return false;
+	}
+
+	private void deletePowerups() {
+		ListIterator<Powerup> powerIterator = powerups.listIterator();
+
+		while(powerIterator.hasNext()) {
+			
+			Powerup tempPowerup = powerIterator.next();
+			if(tempPowerup.getyLoc() < 10.0) {
+				powerIterator.remove();			
+			}
+		}
+		
 	}
 
 	//handle health for player

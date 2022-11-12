@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+import components.powerup.Powerup;
 import components.projectile.Projectile;
 import game_engine.Space_Game;
 
@@ -36,10 +37,11 @@ public class PlayerShip extends Ship{
 	private boolean willShoot;
 	//tells if the user has pressed spacebar this cycle, helps prevent 
 	//multithreading errors
-	
+
 	boolean hasShot;
+
 	
-	public PlayerShip(double xloc, double yloc,String imagePath ) {
+	public PlayerShip(double xloc, double yloc, String imagePath ) {
 		
 		super(imagePath);
 		width = projection.getWidth();
