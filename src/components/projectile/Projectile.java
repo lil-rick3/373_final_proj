@@ -8,7 +8,7 @@ public class Projectile {
 	double yLoc;
 	
 	
-	public Projectile(boolean isUp, double speed,double xLoc, double yLoc ) {
+	public Projectile(boolean isUp, double speed, double xLoc, double yLoc ) {
 		this.isUp = isUp;
 		this.speed = speed;
 		this.xLoc = xLoc;
@@ -17,10 +17,10 @@ public class Projectile {
 	
 	public void move() {
 		if(isUp) {
-			yLoc -= speed;
+			this.yLoc -= speed;
 		}
 		else {
-			yLoc += speed;
+			this.yLoc += speed;
 		}
 	}
 	public double getxLoc() {

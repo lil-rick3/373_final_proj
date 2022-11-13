@@ -14,6 +14,7 @@ public abstract class Ship {
 	protected double yloc;
 	protected int width;
 	protected int height;
+	protected int health;
 	protected BufferedImage projection;
 	
 	
@@ -25,6 +26,11 @@ public abstract class Ship {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		this.xloc = 0.0;
+		this.yloc = 0.0;
+		this.width = 0;
+		this.height = 0;
+		this.health = 3;
 	}
 	
 	
@@ -39,5 +45,11 @@ public abstract class Ship {
 	}
 	public BufferedImage getImage() {
 		return projection;
+	}
+	public void setHealth(int ahealth) {
+		this.health = ahealth;
+	}
+	public int getHealth() {
+		return this.health;
 	}
 }
