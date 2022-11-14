@@ -1,5 +1,8 @@
 package game_engine;
 
+import java.util.LinkedList;
+
+import components.ships.EnemyShip;
 
 /***
  * 
@@ -13,13 +16,19 @@ public class Round {
 
 	MovementPattern demMoves;
 	
-	public Round (String input, Space_Game theGame){
+	public Round (String input, Space_Game theGame, MovementPattern moves){
+		LinkedList<EnemyShip> listEnemies = theGame.getEnemyShips();
+		demMoves = moves;
 		
 		for(int i = 0; i < 3; i ++) {
-			for(int j = 0; j < 5; j++) {
-				
+			for(int j = 0; j < 10; j++) {
+				listEnemies.add(new EnemyShip(demMoves, (10 * i) + j, "src/graphicImages/enemyship1.png"));
 			}
 		}
+		
+		
+		
+	
 		
 		
 		

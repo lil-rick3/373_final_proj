@@ -54,6 +54,7 @@ public class Space_Game {
 	public void runGame() {
 		
 		Projectile tempProj;
+		Round round = new Round(null, this, moveStuff);
 		while(true) {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
@@ -89,7 +90,7 @@ public class Space_Game {
 	}
 	
 	public void detectProjectileCollision() {
-		double MIN_EQUAL_DIFF = 0.0001;
+		double MIN_EQUAL_DIFF = 0.1;
 
 		//check for collision with player
 		ListIterator<Projectile> enemyProjIterator = enemyProjectiles.listIterator();
