@@ -12,26 +12,41 @@ import components.ships.EnemyShip;
  */
 public class MovementPattern {
 	int phaseInCycle;
-	
+	int yOffSet;
+	int xOffSet;
+	boolean movingDown;
 	
 	public MovementPattern(){
 		phaseInCycle = 0;
+		yOffSet = 30;
+		xOffSet = 30;
+		movingDown = true;
+		
 	}
 	/***
 	 * 
 	 * @param aShip the ship that you want to move
 	 */
 	public void moveShip(EnemyShip aShip) {
-		aShip.setxloc(30 + phaseInCycle/2);
-		aShip.setyloc(30 + phaseInCycle/2);
+		int id = aShip.getId();
+		aShip.setxloc((30 + phaseInCycle/2) + (id%10)*xOffSet);
+		aShip.setyloc((30 + phaseInCycle/2) + (id/10)*yOffSet);
 	}
 	/***
 	 * increment is used to create a pattern for the ships
 	 */
 	public void increment() {
-		phaseInCycle++;
-		if(phaseInCycle > 160) {
-			phaseInCycle = 0;
+		if(movingDown && phaseInCycle <= 160) {
+			phaseInCycle++;
+		}
+		else if (movingDown && phaseInCycle > 160) {
+			movingDown = false;
+		}
+		else if (!movingDown && phaseInCycle >= 0) {
+			phaseInCycle--;
+		}
+		else if (!movingDown && phaseInCycle < 0) {
+			movingDown = true;
 		}
 	}
 	
