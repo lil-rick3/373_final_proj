@@ -1,5 +1,3 @@
-
-
 package main;
 import graphics.Space_Frame;
 
