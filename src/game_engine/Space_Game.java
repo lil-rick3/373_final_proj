@@ -52,8 +52,7 @@ public class Space_Game {
 	}
 	
 	public void runGame() {
-		
-		Projectile tempProj;
+		LinkedList<Projectile> tempProjList = new LinkedList<>();
 		Round round = new Round(null, this, moveStuff);
 		while(true) {
 			//TODO organize this function into smaller sub functions
@@ -62,20 +61,20 @@ public class Space_Game {
 			detectPowerupCollision();
 			detectProjectileCollision();
 			moveStuff.increment();
-			tempProj = player.shoot();
-			if(tempProj != null) {
-				playerProjectiles.add(tempProj);
+
+			tempProjList = player.shoot();
+			if(!tempProjList.isEmpty()) {
+				playerProjectiles.addAll(tempProjList);
 				player.setWillShoot(false);
 			}
 			for (EnemyShip aEnemyShip: enemies) {
 				aEnemyShip.move();
-				tempProj = aEnemyShip.shoot();
-				if(tempProj != null) {
-					enemyProjectiles.add(tempProj);
-				
+				tempProjList = aEnemyShip.shoot();
+				if(!tempProjList.isEmpty()) {
+					enemyProjectiles.addAll(tempProjList);
 				}
-				detectProjectileCollision();
 			}
+			detectProjectileCollision();
 			deleteProjectiles();
 			moveProjectiles();
 			deletePowerups();
@@ -85,8 +84,8 @@ public class Space_Game {
 			}catch(InterruptedException e) {
 				e.printStackTrace();
 			}
-			
 		}
+			
 	}
 	
 	public void detectProjectileCollision() {
