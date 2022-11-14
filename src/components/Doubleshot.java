@@ -1,0 +1,19 @@
+package components;
+
+import java.util.LinkedList;
+
+import components.projectile.Projectile;
+
+public class Doubleshot extends Weapon{
+    public Doubleshot() {
+        this.speed = 2;
+    }
+
+    public LinkedList<Projectile> shoot(double xloc, double yloc) {
+        LinkedList<Projectile> list = new LinkedList<>();
+        list.add(new Projectile(true, false, false, this.getSpeed(), xloc, yloc));
+        list.add(new Projectile(true, false, false, this.getSpeed(), xloc + 18, yloc));
+        return list;
+
+    }
+}

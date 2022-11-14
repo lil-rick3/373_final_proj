@@ -3,9 +3,14 @@ package components.ships;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
+import components.Doubleshot;
+import components.Singleshot;
+import components.Sprayshot;
+import components.Weapon;
 import components.powerup.Powerup;
 import components.projectile.Projectile;
 import game_engine.Space_Game;
@@ -39,6 +44,7 @@ public class PlayerShip extends Ship{
 	//multithreading errors
 
 	boolean hasShot;
+	Weapon weapon;
 
 	
 	public PlayerShip(double xloc, double yloc, String imagePath ) {
@@ -52,7 +58,7 @@ public class PlayerShip extends Ship{
 		downOn = false;
 		rightOn = false;
 		leftOn = false;
-		
+		weapon = new Sprayshot();
 		isShooting = false;//says if the user has spacebard constantly pressed
 		shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will
@@ -101,28 +107,18 @@ public class PlayerShip extends Ship{
 		}
 	}
 	
-	public Projectile shoot() {
+	public LinkedList<Projectile> shoot() {
+		LinkedList<Projectile> projList = new LinkedList<>();
 		if(willShoot) {
-			if(shootOnLeft) {
-				shootOnLeft = !shootOnLeft;
-				return new Projectile(true, 1, xloc, yloc);
-				
-			}
-			else {
-				shootOnLeft = !shootOnLeft;
-				return new Projectile(true, 1, xloc + 18, yloc);
-			}
-			
+			projList = this.getWeapon().shoot(this.getXloc(), this.getYloc());
 		}
-		else {
-			return null;
-		}
+		return projList;
+	}
+
+	public Weapon getWeapon() {
+		return this.weapon;
 	}
 	
-
-	
-
-
 	public void setUpOn(boolean upOn) {
 		this.upOn = upOn;
 	}

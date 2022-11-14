@@ -1,5 +1,7 @@
 package components.ships;
 
+import java.util.LinkedList;
+
 import components.projectile.Projectile;
 import game_engine.MovementPattern;
 
@@ -34,15 +36,14 @@ public class EnemyShip extends Ship {
 	}
 
 	@Override
-	public Projectile shoot() {
+	public LinkedList<Projectile> shoot() {
+		LinkedList<Projectile> list = new LinkedList<>();
 		
 		int ranNum = (int) (Math.random() * 1000.0);
-		if(ranNum < 8) {
-			return new Projectile(false, 0.5, xloc, yloc);
+		if(ranNum < 5) {
+			list.add(new Projectile(false, false, false, 1, xloc, yloc));
 		}
-		else {
-			return null;
-		}
+		return list;
 	}
 
 	

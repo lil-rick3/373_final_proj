@@ -3,6 +3,7 @@ package components.ships;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
@@ -35,7 +36,7 @@ public abstract class Ship {
 	
 	
 	public abstract void move();
-	public abstract Projectile shoot();
+	public abstract LinkedList<Projectile> shoot();
 	
 	public double getYloc() {
 		return yloc;
