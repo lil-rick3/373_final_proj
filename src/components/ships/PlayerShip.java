@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 import components.Doubleshot;
+import components.Entity;
 import components.Singleshot;
 import components.Sprayshot;
 import components.Weapon;
@@ -168,5 +169,12 @@ public class PlayerShip extends Ship{
 		else if(c == 's') {
 			downOn = false;
 		}
+	}
+
+
+	@Override
+	protected void collisonAction(Entity crashedInto) {
+		// TODO Auto-generated method stub
+		
 	}
 }

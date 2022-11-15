@@ -51,7 +51,7 @@ public abstract class Entity {
 			e2.collisonAction(e1);
 			return true;
 		}
-		if(checkIntersection(e1, e2)){
+		else if(checkIntersection(e1, e2)){
 			System.out.println("collision");
 			e1.collisonAction(e2);
 			e2.collisonAction(e1);
@@ -102,11 +102,9 @@ public abstract class Entity {
 
 	}
 
-	private void collisonAction(Entity crashedInto){
-		if(crashedInto instanceof PlayerShip){
-			this.toBeDestroyed = true;
-		}
-	}
+	protected abstract void collisonAction(Entity crashedInto);
+		
+	
 	
 	 
 	/***

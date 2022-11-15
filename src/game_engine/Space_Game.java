@@ -41,7 +41,7 @@ public class Space_Game {
 	
 	public Space_Game(Space_Gui curGraphics) {
 		
-		
+		Entity.setSize(gameWidth, gameHeight);
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png");
 		moveStuff = new MovementPattern();
 		enemies = new LinkedList<EnemyShip>(); //do we not need to individually construct each of the enemyships?
@@ -103,14 +103,25 @@ public class Space_Game {
 	public void detectCollisions(){
 
 		for(Projectile aProj: enemyProjectiles){
-			Entity.CheckCollision(player, aProj);
-				
-			
+			Entity.CheckCollision(player, aProj);			
+		}
+		for(Projectile aProj: playerProjectiles){
+			for(EnemyShip aEnemy: enemies){
+				Entity.CheckCollision(aEnemy, aProj);
+			}
 		}
 	}
 	private void purgeComponents(){
 		ListIterator<Projectile> projIterator = enemyProjectiles.listIterator();
 
+		while(projIterator.hasNext()) {
+			
+			Projectile tempProj = projIterator.next();
+			if(tempProj.getToBeDestroyed()) {
+				projIterator.remove();			
+			}
+		}
+		projIterator = playerProjectiles.listIterator();
 		while(projIterator.hasNext()) {
 			
 			Projectile tempProj = projIterator.next();

@@ -55,6 +55,12 @@ public class EnemyShip extends Ship {
 		this.yloc = yloc;
 		
 	}
+
+	@Override
+	protected void collisonAction(Entity crashedInto) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 }

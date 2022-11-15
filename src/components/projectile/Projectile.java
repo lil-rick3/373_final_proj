@@ -1,6 +1,7 @@
 package components.projectile;
 
 import components.Entity;
+import components.ships.Ship;
 
 public class Projectile extends Entity{
 	boolean isUp;
@@ -50,6 +51,14 @@ public class Projectile extends Entity{
 				this.yloc += speed;
 			}
 		}
+	}
+
+	@Override
+	protected void collisonAction(Entity crashedInto) {
+		if(crashedInto instanceof Ship){
+			toBeDestroyed = true;
+		}
+		
 	}
 	
 	
