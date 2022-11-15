@@ -9,7 +9,7 @@ import game_engine.MovementPattern;
 public class EnemyShip extends Ship {
 
 	
-	
+
 	MovementPattern howToMove;
 	private int id;
 	
@@ -44,6 +44,9 @@ public class EnemyShip extends Ship {
 		return list;
 	}
 
+	public void checkBoundsForRemoval(){
+		
+	}
 	public void setxloc(double xloc){
 		this.xloc = xloc;
 		
@@ -52,5 +55,6 @@ public class EnemyShip extends Ship {
 		this.yloc = yloc;
 		
 	}
+	
 	
 }
