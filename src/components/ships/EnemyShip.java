@@ -28,7 +28,7 @@ public class EnemyShip extends Ship {
 	@Override
 	public void move() {
 		howToMove.moveShip(this);
-		System.out.println(id);
+		
 		
 	}
 
