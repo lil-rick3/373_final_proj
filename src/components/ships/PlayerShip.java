@@ -58,7 +58,7 @@ public class PlayerShip extends Ship{
 		downOn = false;
 		rightOn = false;
 		leftOn = false;
-		weapon = new Sprayshot();
+		weapon = new Singleshot();
 		isShooting = false;//says if the user has spacebard constantly pressed
 		shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will

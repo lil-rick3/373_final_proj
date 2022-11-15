@@ -8,7 +8,7 @@ public class Projectile extends Entity{
 	boolean isDiag;
 	boolean isLeft;
 	double speed;
-	
+	private int damage;
 	
 	public Projectile(boolean isUp, boolean isDiag, boolean isLeft, double speed, double xLoc, double yLoc , String imagePath) {
 		super(imagePath);
@@ -18,6 +18,7 @@ public class Projectile extends Entity{
 		this.speed = speed;
 		this.xloc = xLoc;
 		this.yloc = yLoc;
+		damage = 1;
 	}
 	
 	public void move() {
@@ -60,7 +61,9 @@ public class Projectile extends Entity{
 		}
 		
 	}
-	
+	public int getDamage(){
+		return damage;
+	}
 	
 	
 	

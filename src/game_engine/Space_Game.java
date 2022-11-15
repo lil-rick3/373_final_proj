@@ -111,6 +111,9 @@ public class Space_Game {
 			}
 		}
 	}
+	/***
+	 * all deletion of game entities should be done in here
+	 */
 	private void purgeComponents(){
 		ListIterator<Projectile> projIterator = enemyProjectiles.listIterator();
 
@@ -129,6 +132,14 @@ public class Space_Game {
 				projIterator.remove();			
 			}
 		}
+		ListIterator<EnemyShip> enemyIterator = enemies.listIterator();
+		while(enemyIterator.hasNext()){
+			EnemyShip tempEnemy = enemyIterator.next();
+			if(tempEnemy.getToBeDestroyed()){
+				enemyIterator.remove();
+			}
+		}
+
 	}
 
 	public void detectProjectileCollision() {

@@ -18,7 +18,7 @@ public abstract class Ship extends Entity{
 	
 	public Ship(String imagePath) {
 		super(imagePath);
-		this.health = 3;
+		
 	}
 	
 	
