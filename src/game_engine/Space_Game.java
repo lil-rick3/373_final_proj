@@ -39,6 +39,7 @@ public class Space_Game {
 	MovementPattern moveStuff;
 	boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	
+
 	public Space_Game(Space_Gui curGraphics) {
 		
 		Entity.setSize(gameWidth, gameHeight);
@@ -50,6 +51,7 @@ public class Space_Game {
 		powerups = new LinkedList<Powerup>();
 		this.curGraphics = curGraphics;
 		currentlyModifying = false;
+
 				
 	}
 	

@@ -32,7 +32,7 @@ public class SimpleAudioPlayer
  {
      // create AudioInputStream object
      audioInputStream = 
-             AudioSystem.getAudioInputStream(new File("src/music/musicfile1.wav"));
+             AudioSystem.getAudioInputStream(new File("src/music/musicfile2.wav"));
        
      // create clip reference
      clip = AudioSystem.getClip();

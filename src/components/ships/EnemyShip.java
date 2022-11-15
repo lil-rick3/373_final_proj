@@ -39,7 +39,7 @@ public class EnemyShip extends Ship {
 		LinkedList<Projectile> list = new LinkedList<>();
 		
 		int ranNum = (int) (Math.random() * 1000.0);
-		if(ranNum < 5) {
+		if(ranNum < 1) {
 			list.add(new Projectile(false, false, false, 1, xloc, yloc, projectileFilePath));
 			//System.out.println(xloc + " " + yloc);
 		}
