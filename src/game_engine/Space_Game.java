@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import components.Entity;
 import components.powerup.HealthUp;
 import components.powerup.Nuke;
 import components.powerup.Powerup;
@@ -75,6 +76,7 @@ public class Space_Game {
 					enemyProjectiles.addAll(tempProjList);
 				}
 			}
+			detectCollisions();
 			//detectProjectileCollision();
 			deleteProjectiles();
 			moveProjectiles();
@@ -88,7 +90,14 @@ public class Space_Game {
 		}
 			
 	}
-	
+	public void detectCollisions(){
+
+		for(Projectile aProj: enemyProjectiles){
+			Entity.CheckCollision(player, aProj);
+		}
+	}
+
+
 	public void detectProjectileCollision() {
 		double MIN_EQUAL_DIFF = 0.1;
 
@@ -233,7 +242,7 @@ public class Space_Game {
 		for(Projectile aProj: enemyProjectiles) {
 			aProj.move();
 		}
-		detectProjectileCollision(); //this may have to be called each time
+		//detectProjectileCollision(); //this may have to be called each time
 	}
 	/***
 	 * this function will run through all the projectiles and delete the ones 
