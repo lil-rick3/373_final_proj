@@ -23,11 +23,12 @@ import game_engine.Space_Game;
 public class Space_Gui extends JPanel implements KeyListener{
 	
 	
-static final int PIXEL_SIZE = 10;
+
 	
 	Space_Game currentGame;
-	boolean isFirstMove = true;
+	boolean currentlyPainting = false;
 	
+
 	public Space_Gui(){
 		
 		this.currentGame = new Space_Game(this);
@@ -45,7 +46,7 @@ static final int PIXEL_SIZE = 10;
 		this.setSize(600,600);
 		//graphic.setBackground(Color.RED);
 		
-		repaint();
+		//repaint();
 		//graphic.setVisible(true);
 		
 		
@@ -56,10 +57,20 @@ static final int PIXEL_SIZE = 10;
 		currentGame.runGame();
 	}
 	
-	public void paintComponent(Graphics g){		
+	public void paintComponent(Graphics g){	
+		while(currentGame.getCurrentlyModifying()){
+			try {
+				Thread.sleep(0, 1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		currentlyPainting = true;	
 		paintBackground(g);
 		paintShip(g);
 		paintProjectiles(g);
+		currentlyPainting = false;
 		
 	}
 	
@@ -97,6 +108,9 @@ static final int PIXEL_SIZE = 10;
 		for(Projectile aProjectile: enemyProjectiles) {
 			aProjectile.paintEntity(g, this);
 		}
+	}
+	public boolean getCurrentlyPainting(){
+		return currentlyPainting;
 	}
 	
 	@Override

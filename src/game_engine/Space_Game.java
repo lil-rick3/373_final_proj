@@ -37,7 +37,7 @@ public class Space_Game {
 	LinkedList<Projectile> enemyProjectiles;
 	LinkedList<Powerup> powerups;
 	MovementPattern moveStuff;
-	
+	boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	
 	public Space_Game(Space_Gui curGraphics) {
 		
@@ -49,12 +49,16 @@ public class Space_Game {
 		enemyProjectiles = new LinkedList<Projectile>();
 		powerups = new LinkedList<Powerup>();
 		this.curGraphics = curGraphics;
+		currentlyModifying = false;
 				
 	}
 	
 	public void runGame() {
+		waitForTurn();
+		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
 		Round round = new Round(null, this, moveStuff);
+		currentlyModifying = false;
 		while(true) {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
@@ -62,7 +66,8 @@ public class Space_Game {
 			//detectPowerupCollision();
 			//detectProjectileCollision();
 			moveStuff.increment();
-
+			waitForTurn();
+			currentlyModifying = true;
 			tempProjList = player.shoot();
 			if(!tempProjList.isEmpty()) {
 				playerProjectiles.addAll(tempProjList);
@@ -76,9 +81,13 @@ public class Space_Game {
 					enemyProjectiles.addAll(tempProjList);
 				}
 			}
+			currentlyModifying = false;
 			detectCollisions();
 			//detectProjectileCollision();
+			waitForTurn();
+			currentlyModifying = true;
 			deleteProjectiles();
+			currentlyModifying = false;
 			moveProjectiles();
 			//deletePowerups();
 			//movePowerups();
@@ -287,7 +296,16 @@ public class Space_Game {
 			player.setDownOn(true);
 		}
 	}
-
+	private void waitForTurn(){
+		while(curGraphics.getCurrentlyPainting()){
+			try {
+				Thread.sleep(0, 1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 	public Ship getPlayerShip() {
 		return player;
 	}
@@ -348,6 +366,8 @@ public class Space_Game {
 			player.setShooting(false);
 		}
 	}
-	
+	public boolean getCurrentlyModifying(){
+		return currentlyModifying;
+	}
 	
 }
