@@ -233,7 +233,7 @@ public class Space_Game {
 		for(Projectile aProj: enemyProjectiles) {
 			aProj.move();
 		}
-		detectProjectileCollision(); //this may have to be called each time
+		//detectProjectileCollision(); //this may have to be called each time
 	}
 	/***
 	 * this function will run through all the projectiles and delete the ones 
@@ -251,15 +251,18 @@ public class Space_Game {
 		while(projIterator.hasNext()) {
 			
 			Projectile tempProj = projIterator.next();
-			if(tempProj.getyloc() < 10.0) {
+			if(tempProj.getyloc() < 10.0 || tempProj.getxloc() > 595) {
 				projIterator.remove();			
 			}
 		}
 		
-		
-		for(Projectile aProj: playerProjectiles) {
-			if(aProj.getyloc() < 10.0) {
-				
+		projIterator = enemyProjectiles.listIterator();
+
+		while(projIterator.hasNext()) {
+			
+			Projectile tempProj = projIterator.next();
+			if(tempProj.getyloc() > 593.0 || tempProj.getxloc() > 595) {
+				projIterator.remove();			
 			}
 		}
 	}

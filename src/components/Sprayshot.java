@@ -9,7 +9,7 @@ public class Sprayshot extends Weapon {
 
 
     public Sprayshot() {
-        this.speed = 2;
+        this.speed = 4;
         this.shootOnLeft = true;
     }
 

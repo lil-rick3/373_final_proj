@@ -29,18 +29,20 @@ public class MovementPattern {
 	 */
 	public void moveShip(EnemyShip aShip) {
 		int id = aShip.getId();
+		//aShip.setxloc((30 + phaseInCycle/2) + (id%10)*xOffSet);
+		//aShip.setyloc((30 + phaseInCycle/2) + (id/10)*yOffSet);
 		aShip.setxloc((30 + phaseInCycle/2) + (id%10)*xOffSet);
-		aShip.setyloc((30 + phaseInCycle/2) + (id/10)*yOffSet);
+		aShip.setyloc(30 + (id/10)*yOffSet);
 		
 	}
 	/***
 	 * increment is used to create a pattern for the ships
 	 */
 	public void increment() {
-		if(movingDown && phaseInCycle <= 160) {
+		if(movingDown && phaseInCycle <= 450) {
 			phaseInCycle++;
 		}
-		else if (movingDown && phaseInCycle > 160) {
+		else if (movingDown && phaseInCycle > 450) {
 			movingDown = false;
 		}
 		else if (!movingDown && phaseInCycle >= 0) {

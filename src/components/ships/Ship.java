@@ -18,10 +18,6 @@ public abstract class Ship extends Entity{
 	
 	public Ship(String imagePath) {
 		super(imagePath);
-		this.xloc = 0.0;
-		this.yloc = 0.0;
-		this.width = 0;
-		this.height = 0;
 		this.health = 3;
 	}
 	
