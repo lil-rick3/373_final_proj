@@ -14,5 +14,5 @@ public abstract class Weapon {
     public int getSpeed() {
         return this.speed;
     }
-    public abstract LinkedList<Projectile> shoot(double xloc, double yloc);
+    public abstract LinkedList<Projectile> shoot(double xloc, double yloc, String ImageFilePath);
 }

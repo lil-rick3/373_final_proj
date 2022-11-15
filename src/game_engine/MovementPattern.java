@@ -31,6 +31,7 @@ public class MovementPattern {
 		int id = aShip.getId();
 		aShip.setxloc((30 + phaseInCycle/2) + (id%10)*xOffSet);
 		aShip.setyloc((30 + phaseInCycle/2) + (id/10)*yOffSet);
+		
 	}
 	/***
 	 * increment is used to create a pattern for the ships

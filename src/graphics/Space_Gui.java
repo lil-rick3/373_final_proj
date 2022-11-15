@@ -68,47 +68,37 @@ static final int PIXEL_SIZE = 10;
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, 600, 600);
 	}
-	
 	private void paintShip(Graphics g) {
-		Color ship = new Color(200,50,0);
 		
-		g.setColor(ship);
 		Ship currentShip = currentGame.getPlayerShip();
-		int xloc = (int)currentShip.getXloc();
-		int yloc = (int)currentShip.getYloc();
 		
-		BufferedImage image = currentShip.getImage();
+		currentShip.paintEntity(g, this);
 		
-		g.drawImage(image, xloc, yloc, this);
 		for(Ship aEnemyShip: currentGame.getEnemyShips()) {
 		
-			xloc = (int)aEnemyShip.getXloc();
-			yloc = (int)aEnemyShip.getYloc();
+			aEnemyShip.paintEntity(g, this);
 		
-			image = aEnemyShip.getImage();
 		
-		g.drawImage(image, xloc, yloc, this);
 		}
 	}
 	
 	private void paintProjectiles(Graphics g) {
 		LinkedList<Projectile> playerProjectiles = currentGame.getPlayerProjectiles();
 		
-		Color porjColor = Color.GREEN;
-		g.setColor(porjColor);
+		
 		for(Projectile aProjectile: playerProjectiles) {
-			g.fillRect((int)aProjectile.getxLoc(), (int)aProjectile.getyLoc(), 2, 5);
+			aProjectile.paintEntity(g, this);
 		}
 		
 		
 		LinkedList<Projectile> enemyProjectiles = currentGame.getEnemyProjectiles();
 		
-		porjColor = Color.RED;
-		g.setColor(porjColor);
+		
 		for(Projectile aProjectile: enemyProjectiles) {
-			g.fillRect((int)aProjectile.getxLoc(), (int)aProjectile.getyLoc(), 2, 5);
+			aProjectile.paintEntity(g, this);
 		}
 	}
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		currentGame.processKeyTyped(e);

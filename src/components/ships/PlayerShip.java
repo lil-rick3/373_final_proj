@@ -50,8 +50,7 @@ public class PlayerShip extends Ship{
 	public PlayerShip(double xloc, double yloc, String imagePath ) {
 		
 		super(imagePath);
-		width = projection.getWidth();
-		height = projection.getHeight();
+		
 		this.xloc = xloc;
 		this.yloc = yloc;
 		upOn = false;
@@ -63,7 +62,9 @@ public class PlayerShip extends Ship{
 		shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will
 		// shoot a projectile 
-		
+		projectileFilePath = "src/graphicImages/PlayerProjectile.png";
+
+
 	}
 	
 	
@@ -110,7 +111,7 @@ public class PlayerShip extends Ship{
 	public LinkedList<Projectile> shoot() {
 		LinkedList<Projectile> projList = new LinkedList<>();
 		if(willShoot) {
-			projList = this.getWeapon().shoot(this.getXloc(), this.getYloc());
+			projList = this.weapon.shoot(xloc,yloc, projectileFilePath);
 		}
 		return projList;
 	}

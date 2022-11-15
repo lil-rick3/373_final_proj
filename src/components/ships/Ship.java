@@ -1,32 +1,23 @@
 package components.ships;
 
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.LinkedList;
 
-import javax.imageio.ImageIO;
 
+
+import components.Entity;
 import components.projectile.Projectile;
 
-public abstract class Ship {
+public abstract class Ship extends Entity{
 
-	protected double xloc;
-	protected double yloc;
-	protected int width;
-	protected int height;
+	
 	protected int health;
-	protected BufferedImage projection;
+	String projectileFilePath;
 	
 	
 	public Ship(String imagePath) {
-		try {
-			projection = ImageIO.read(new File(imagePath));
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		super(imagePath);
 		this.xloc = 0.0;
 		this.yloc = 0.0;
 		this.width = 0;
@@ -38,15 +29,8 @@ public abstract class Ship {
 	public abstract void move();
 	public abstract LinkedList<Projectile> shoot();
 	
-	public double getYloc() {
-		return yloc;
-	}
-	public double getXloc() {
-		return xloc;
-	}
-	public BufferedImage getImage() {
-		return projection;
-	}
+	
+	
 	public void setHealth(int ahealth) {
 		this.health = ahealth;
 	}

@@ -58,8 +58,8 @@ public class Space_Game {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
 			player.move();
-			detectPowerupCollision();
-			detectProjectileCollision();
+			//detectPowerupCollision();
+			//detectProjectileCollision();
 			moveStuff.increment();
 
 			tempProjList = player.shoot();
@@ -67,6 +67,7 @@ public class Space_Game {
 				playerProjectiles.addAll(tempProjList);
 				player.setWillShoot(false);
 			}
+			
 			for (EnemyShip aEnemyShip: enemies) {
 				aEnemyShip.move();
 				tempProjList = aEnemyShip.shoot();
@@ -74,11 +75,11 @@ public class Space_Game {
 					enemyProjectiles.addAll(tempProjList);
 				}
 			}
-			detectProjectileCollision();
+			//detectProjectileCollision();
 			deleteProjectiles();
 			moveProjectiles();
-			deletePowerups();
-			movePowerups();
+			//deletePowerups();
+			//movePowerups();
 			try {
 				Thread.sleep(5);
 			}catch(InterruptedException e) {
@@ -95,7 +96,7 @@ public class Space_Game {
 		ListIterator<Projectile> enemyProjIterator = enemyProjectiles.listIterator();
 		while(enemyProjIterator.hasNext()) {
 			Projectile aEnemyProj = enemyProjIterator.next();
-			if (Math.abs(aEnemyProj.getxLoc() - player.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aEnemyProj.getyLoc() - player.getYloc()) < MIN_EQUAL_DIFF) {
+			if (Math.abs(aEnemyProj.getxloc() - player.getxloc()) < MIN_EQUAL_DIFF  && Math.abs(aEnemyProj.getyloc() - player.getyloc()) < MIN_EQUAL_DIFF) {
 				//player and projectile collision
 				enemyProjIterator.remove(); //delete the projectile
 				//handle health
@@ -109,7 +110,7 @@ public class Space_Game {
 			EnemyShip aEnemyShip = enemyShipIterator.next();
 			while(playerProjIterator.hasNext()) {
 				Projectile aPlayerProj = playerProjIterator.next();
-				if (Math.abs(aPlayerProj.getxLoc() - aEnemyShip.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aPlayerProj.getyLoc() - aEnemyShip.getYloc()) < MIN_EQUAL_DIFF) {
+				if (Math.abs(aPlayerProj.getxloc() - aEnemyShip.getxloc()) < MIN_EQUAL_DIFF  && Math.abs(aPlayerProj.getyloc() - aEnemyShip.getyloc()) < MIN_EQUAL_DIFF) {
 					//enemy and projectile collision
 					playerProjIterator.remove(); //delete the projectile
 					//handle health
@@ -117,7 +118,7 @@ public class Space_Game {
 						//enemy is dead
 						enemyShipIterator.remove();
 						//TODO: randomly generate powerup 
-						generatePowerup(aEnemyShip.getXloc(), aEnemyShip.getYloc());
+						generatePowerup(aEnemyShip.getxloc(), aEnemyShip.getyloc());
 					}
 					
 				}
@@ -133,7 +134,7 @@ public class Space_Game {
 		ListIterator<Powerup> powerIterator = powerups.listIterator();
 		while(powerIterator.hasNext()) {
 			Powerup aPowerup = powerIterator.next();
-			if (Math.abs(aPowerup.getxLoc() - player.getXloc()) < MIN_EQUAL_DIFF  && Math.abs(aPowerup.getyLoc() - player.getYloc()) < MIN_EQUAL_DIFF) {
+			if (Math.abs(aPowerup.getxLoc() - player.getxloc()) < MIN_EQUAL_DIFF  && Math.abs(aPowerup.getyLoc() - player.getyloc()) < MIN_EQUAL_DIFF) {
 				//player and projectile collision
 				if (aPowerup.getClass().getName() == "Nuke") {
 					//kill all enemies
@@ -250,14 +251,14 @@ public class Space_Game {
 		while(projIterator.hasNext()) {
 			
 			Projectile tempProj = projIterator.next();
-			if(tempProj.getyLoc() < 10.0) {
+			if(tempProj.getyloc() < 10.0) {
 				projIterator.remove();			
 			}
 		}
 		
 		
 		for(Projectile aProj: playerProjectiles) {
-			if(aProj.getyLoc() < 10.0) {
+			if(aProj.getyloc() < 10.0) {
 				
 			}
 		}
