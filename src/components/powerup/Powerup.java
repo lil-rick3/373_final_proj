@@ -5,40 +5,33 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public abstract class Powerup {
+import components.Entity;
 
-    protected double xLoc;
-	protected double yLoc;
-	protected int width;
-	protected int height;
-    protected BufferedImage projection;
+public abstract class Powerup extends Entity{
+
+    protected double speed;
 
     //TODO: graphics for powerups
     public Powerup(double xloc, double yloc, String imagePath) {
 
-        try {
-            projection = ImageIO.read(new File(imagePath));
-            
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-
-        this.xLoc = 0.0;
-        this.yLoc = 0.0;
-        this.width = 0;
-        this.height = 0;
+        super(imagePath);
+        this.xloc = xloc;
+        this.yloc = yloc;
+        this.speed = 0.3;
     }
 
     public void move() {
-		this.yLoc += 0.1;
+		this.yloc += speed;
 	}
 
     public double getyLoc() {
-        return this.yLoc;
+        return this.yloc;
     }
     public double getxLoc() {
-        return this.xLoc;
+        return this.xloc;
+    }
+    public double getSpeed() {
+        return this.speed;
     }
 
    

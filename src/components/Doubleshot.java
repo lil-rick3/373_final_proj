@@ -6,7 +6,7 @@ import components.projectile.Projectile;
 
 public class Doubleshot extends Weapon{
     public Doubleshot() {
-        this.speed = 2;
+        this.speed = 3;
     }
 
     public LinkedList<Projectile> shoot(double xloc, double yloc, String ImageFilePath) {

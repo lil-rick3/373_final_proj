@@ -12,7 +12,10 @@ import components.Entity;
 import components.Singleshot;
 import components.Sprayshot;
 import components.Weapon;
+import components.powerup.HealthUp;
+import components.powerup.Nuke;
 import components.powerup.Powerup;
+import components.powerup.WeaponUp;
 import components.projectile.Projectile;
 import game_engine.Space_Game;
 
@@ -58,7 +61,7 @@ public class PlayerShip extends Ship{
 		downOn = false;
 		rightOn = false;
 		leftOn = false;
-		weapon = new Sprayshot();
+		weapon = new Singleshot();
 		isShooting = false;//says if the user has spacebard constantly pressed
 		shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will
@@ -173,8 +176,26 @@ public class PlayerShip extends Ship{
 
 
 	@Override
-	protected void collisonAction(Entity crashedInto) {
+	protected void collisionAction(Entity crashedInto) {
 		// TODO Auto-generated method stub
+		if(crashedInto instanceof HealthUp) {
+			health += 1;
+		}
+		else if (crashedInto instanceof Nuke) {
+			Space_Game.nukeFlag = true;
+		}
+		else if (crashedInto instanceof WeaponUp) {
+			if (weapon instanceof Singleshot) {
+				weapon = new Doubleshot();
+			}
+			else if (weapon instanceof Doubleshot) {
+				weapon = new Sprayshot();
+			}
+		}
+		else if (crashedInto instanceof Projectile) {
+			Projectile crashedProjectile = (Projectile)crashedInto;
+			health -= crashedProjectile.getDamage();
+		}
 		
 	}
 }

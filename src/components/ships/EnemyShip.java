@@ -59,7 +59,7 @@ public class EnemyShip extends Ship {
 	}
 
 	@Override
-	protected void collisonAction(Entity crashedInto) {
+	protected void collisionAction(Entity crashedInto) {
 		// TODO Auto-generated method stub
 		if(crashedInto instanceof Projectile){
 

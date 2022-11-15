@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 import components.ships.PlayerShip;
+import components.ships.Ship;
 
 public abstract class Entity {
 	
@@ -47,16 +48,10 @@ public abstract class Entity {
 
 		if(checkIntersection(e1,e2)){
 			System.out.println("collision");
-			e1.collisonAction(e2);
-			e2.collisonAction(e1);
+			e1.collisionAction(e2);
+			e2.collisionAction(e1);
 			return true;
-		}
-		else if(checkIntersection(e1, e2)){
-			System.out.println("collision");
-			e1.collisonAction(e2);
-			e2.collisonAction(e1);
-			return true;
-		}
+		}		
 		return false;
 	}
 	/***
@@ -102,14 +97,11 @@ public abstract class Entity {
 
 	}
 
-	protected abstract void collisonAction(Entity crashedInto);
-		
-	
-	
-	 
+	protected abstract void collisionAction(Entity crashedInto);
 	/***
 	 * checks bounds for an entity and sets the tobedestroyed 
 	 */
+	//TODO: fix bounds
 	public void checkBounds(){
 		if((xloc < 0 - 10) || (xloc > XSIZE + 10)
 		|| (yloc < 0 - 10)|| (xloc > YSIZE + 10)){
@@ -130,6 +122,10 @@ public abstract class Entity {
 	
 	public boolean getToBeDestroyed(){
 		return toBeDestroyed;
+	}
+
+	public void setToBeDestroyed(boolean destroy) {
+		toBeDestroyed = destroy;
 	}
 	public static void setSize(int xsize, int ysize){
 		XSIZE = xsize;

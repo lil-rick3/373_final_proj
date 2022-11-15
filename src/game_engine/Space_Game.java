@@ -29,6 +29,7 @@ public class Space_Game {
 	public final static int gameHeight = 600;
 	public final static int gameWidth = 600;
 	public final static int playerHeight = 400;
+	public static boolean nukeFlag;
 	
 	Space_Gui curGraphics;
 	PlayerShip player;
@@ -51,6 +52,7 @@ public class Space_Game {
 		powerups = new LinkedList<Powerup>();
 		this.curGraphics = curGraphics;
 		currentlyModifying = false;
+		nukeFlag = false;
 
 				
 	}
@@ -65,8 +67,6 @@ public class Space_Game {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
 			player.move();
-			//detectPowerupCollision();
-			//detectProjectileCollision();
 			moveStuff.increment();
 			waitForTurn();
 			currentlyModifying = true;
@@ -85,15 +85,15 @@ public class Space_Game {
 			}
 			currentlyModifying = false;
 			detectCollisions();
-			//detectProjectileCollision();
 			waitForTurn();
 			currentlyModifying = true;
-			deleteProjectiles();
+			if(nukeFlag) {
+				NukeEnemies();
+			}
 			purgeComponents();
 			currentlyModifying = false;
 			moveProjectiles();
-			//deletePowerups();
-			//movePowerups();
+			movePowerups();
 			try {
 				Thread.sleep(5);
 			}catch(InterruptedException e) {
@@ -111,6 +111,9 @@ public class Space_Game {
 			for(EnemyShip aEnemy: enemies){
 				Entity.CheckCollision(aEnemy, aProj);
 			}
+		}
+		for(Powerup aPowerup: powerups) {
+			Entity.CheckCollision(player, aPowerup);
 		}
 	}
 	/***
@@ -139,153 +142,66 @@ public class Space_Game {
 			EnemyShip tempEnemy = enemyIterator.next();
 			if(tempEnemy.getToBeDestroyed()){
 				enemyIterator.remove();
+				generatePowerup(tempEnemy.getxloc(), tempEnemy.getyloc());
+			}
+		}
+		ListIterator<Powerup> powerupIterator = powerups.listIterator();
+		while(powerupIterator.hasNext()) {
+			Powerup tempPowerup = powerupIterator.next();
+			if(tempPowerup.getToBeDestroyed()) {
+				powerupIterator.remove();
 			}
 		}
 
-	}
-
-	
-
-	public void detectPowerupCollision() {
-		double MIN_EQUAL_DIFF = 0.0001;
-
-		//check for collision with player
-		ListIterator<Powerup> powerIterator = powerups.listIterator();
-		while(powerIterator.hasNext()) {
-			Powerup aPowerup = powerIterator.next();
-			if (Math.abs(aPowerup.getxLoc() - player.getxloc()) < MIN_EQUAL_DIFF  && Math.abs(aPowerup.getyLoc() - player.getyloc()) < MIN_EQUAL_DIFF) {
-				//player and projectile collision
-				if (aPowerup.getClass().getName() == "Nuke") {
-					//kill all enemies
-					ListIterator<EnemyShip> enemyShipIterator = enemies.listIterator();
-					while (enemyShipIterator.hasNext()) {
-						EnemyShip aEnemyShip = enemyShipIterator.next();
-						enemyShipIterator.remove();
-					}
-				}
-				else if (aPowerup.getClass().getName() == "WeaponUp") {
-					//TODO: upgrade player weapon
-				}
-				else if (aPowerup.getClass().getName() == "HealthUp") {
-					//restore 1 health
-					handleHealth(false, 1);
-
-				}
-				powerIterator.remove(); //delete the projectile
-			}
-		}
 	}
 
 
 	private void generatePowerup(double xloc, double yloc) {
 		int ranNum = (int) (Math.random() * 1000.0);
 
-		if (ranNum <= 50) { //5% chance
+		if (ranNum <= 150) { //5% chance
 			//generate healthup
-			HealthUp aHealthUp = new HealthUp(xloc, yloc, null);
-			powerups.add(aHealthUp);
+			powerups.add(new HealthUp(xloc, yloc,"src/graphicImages/HealthUp.png"));
 		}
-		else if (ranNum > 50 && ranNum <= 150) { //5% chance
+		else if (ranNum > 500) { //5% chance
 			//generate weapon upgrade
-			WeaponUp aWeaponUp = new WeaponUp(xloc, yloc, null);
-			powerups.add(aWeaponUp);
+			powerups.add(new WeaponUp(xloc, yloc, "src/graphicImages/WeaponUp.png"));
 		}
-		else if (ranNum > 150 && ranNum <= 160) { //1% chance
+		else if (ranNum > 150 && ranNum <= 500) { //1% chance
 			//generate nuke
-			Nuke aNuke = new Nuke(xloc, yloc, null);
-			powerups.add(aNuke);
+			powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
 		}
 
 	}
+
+	public void NukeEnemies() {
+		for (EnemyShip aEnemyShip: enemies) {
+			aEnemyShip.setToBeDestroyed(true);
+		}
+		nukeFlag = false;
+	}
+
 	private void movePowerups() {
 		for(Powerup aPowerup: powerups) {
 			aPowerup.move();
+			aPowerup.checkBounds();
 		}
 		for(Powerup aPowerup: powerups) {
 			aPowerup.move();
+			aPowerup.checkBounds();
 		}
-		detectPowerupCollision();
-	}
-	//handle health for enemy. Return true if enemy dies
-	private boolean handleHealth(int damage, EnemyShip aEnemyShip) {
-
-		aEnemyShip.setHealth(aEnemyShip.getHealth() - damage);
-		if (aEnemyShip.getHealth() <= 0) {
-			return true;
-		}
-		return false;
-	}
-
-	private void deletePowerups() {
-		ListIterator<Powerup> powerIterator = powerups.listIterator();
-
-		while(powerIterator.hasNext()) {
-			
-			Powerup tempPowerup = powerIterator.next();
-			if(tempPowerup.getyLoc() < 10.0) {
-				powerIterator.remove();			
-			}
-		}
-		
-	}
-
-	//handle health for player
-	private void handleHealth(boolean takeDamage, int healthChange) {
-		//if takeDamage == false, ship should gain that amount of health
-		if (takeDamage) {
-			player.setHealth(player.getHealth() - healthChange);
-		}
-		else {
-			player.setHealth(player.getHealth() + healthChange);
-		}
-		if (player.getHealth() <= 0) {
-			//TODO: kill player
-			
-		}
-
 	}
 	private void moveProjectiles() {
 		// TODO Auto-generated method stub
 		for(Projectile aProj: playerProjectiles) {
 			aProj.move();
+			aProj.checkBounds();
 		}
 		for(Projectile aProj: enemyProjectiles) {
 			aProj.move();
-		}
-		//detectProjectileCollision(); //this may have to be called each time
-	}
-	/***
-	 * this function will run through all the projectiles and delete the ones 
-	 * that are out of bounds, that way we aren't storing memory for projectiles
-	 * that are not on the map
-	 * 
-	 * 
-	 * TODO delete the enemy projectiles as well
-	 */
-	private void deleteProjectiles() {		
-		ListIterator<Projectile> projIterator = playerProjectiles.listIterator();
-		
-
-		
-		while(projIterator.hasNext()) {
-			
-			Projectile tempProj = projIterator.next();
-			if(tempProj.getyloc() < 10.0 || tempProj.getxloc() > 595) {
-				projIterator.remove();			
-			}
-		}
-		
-		projIterator = enemyProjectiles.listIterator();
-
-		while(projIterator.hasNext()) {
-			
-			Projectile tempProj = projIterator.next();
-			if(tempProj.getyloc() > 593.0 || tempProj.getxloc() > 595) {
-				projIterator.remove();			
-			}
+			aProj.checkBounds();
 		}
 	}
-
 	private void startMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(true);
@@ -325,6 +241,9 @@ public class Space_Game {
 		
 	}
 
+	public LinkedList<Powerup> getPowerups() {
+		return powerups;
+	}
 	private void stopMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(false);
