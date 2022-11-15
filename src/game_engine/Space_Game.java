@@ -87,6 +87,7 @@ public class Space_Game {
 			waitForTurn();
 			currentlyModifying = true;
 			deleteProjectiles();
+			purgeComponents();
 			currentlyModifying = false;
 			moveProjectiles();
 			//deletePowerups();
@@ -103,9 +104,21 @@ public class Space_Game {
 
 		for(Projectile aProj: enemyProjectiles){
 			Entity.CheckCollision(player, aProj);
+				
+			
 		}
 	}
+	private void purgeComponents(){
+		ListIterator<Projectile> projIterator = enemyProjectiles.listIterator();
 
+		while(projIterator.hasNext()) {
+			
+			Projectile tempProj = projIterator.next();
+			if(tempProj.getToBeDestroyed()) {
+				projIterator.remove();			
+			}
+		}
+	}
 
 	public void detectProjectileCollision() {
 		double MIN_EQUAL_DIFF = 0.1;
