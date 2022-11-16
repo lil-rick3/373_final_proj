@@ -70,6 +70,9 @@ public class Space_Game {
 			moveStuff.increment();
 			waitForTurn();
 			currentlyModifying = true;
+			if(enemies.size() == 0){
+				round = new Round(null, this, moveStuff);
+			}
 			tempProjList = player.shoot();
 			if(!tempProjList.isEmpty()) {
 				playerProjectiles.addAll(tempProjList);
