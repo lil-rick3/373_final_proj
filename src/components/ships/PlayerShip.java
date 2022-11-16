@@ -50,13 +50,14 @@ public class PlayerShip extends Ship{
 	boolean hasShot;
 	Weapon weapon;
 
-	
-	public PlayerShip(double xloc, double yloc, String imagePath ) {
+	Space_Game curGame;
+	public PlayerShip(double xloc, double yloc, String imagePath, Space_Game curGame) {
 		
 		super(imagePath);
 		
 		this.xloc = xloc;
 		this.yloc = yloc;
+		this.curGame = curGame;
 		upOn = false;
 		downOn = false;
 		rightOn = false;
@@ -182,7 +183,7 @@ public class PlayerShip extends Ship{
 			health += 1;
 		}
 		else if (crashedInto instanceof Nuke) {
-			Space_Game.nukeFlag = true;
+			curGame.triggerNuke();
 		}
 		else if (crashedInto instanceof WeaponUp) {
 			if (weapon instanceof Singleshot) {

@@ -29,7 +29,7 @@ public class Space_Game {
 	public final static int gameHeight = 600;
 	public final static int gameWidth = 600;
 	public final static int playerHeight = 400;
-	public static boolean nukeFlag;
+	private boolean nukeFlag;
 	
 	Space_Gui curGraphics;
 	PlayerShip player;
@@ -44,7 +44,7 @@ public class Space_Game {
 	public Space_Game(Space_Gui curGraphics) {
 		
 		Entity.setSize(gameWidth, gameHeight);
-		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png");
+		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
 		moveStuff = new MovementPattern();
 		enemies = new LinkedList<EnemyShip>(); //do we not need to individually construct each of the enemyships?
 		playerProjectiles = new LinkedList<Projectile>();
@@ -177,7 +177,9 @@ public class Space_Game {
 	public void NukeEnemies() {
 		for (EnemyShip aEnemyShip: enemies) {
 			aEnemyShip.setToBeDestroyed(true);
+			
 		}
+		curGraphics.setNukeGraphics();
 		nukeFlag = false;
 	}
 
@@ -259,6 +261,9 @@ public class Space_Game {
 		}
 	}
 
+	public void triggerNuke(){
+		nukeFlag = true;
+	}
 	public void processKeyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		

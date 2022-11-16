@@ -28,10 +28,10 @@ public class Space_Gui extends JPanel implements KeyListener{
 	
 	Space_Game currentGame;
 	boolean currentlyPainting = false;
-	
+	int nukeCounter;
 
 	public Space_Gui(){
-		
+		nukeCounter = 0;
 		this.currentGame = new Space_Game(this);
 		
 		//JFrame  graphic = new JFrame("space Game");
@@ -76,10 +76,20 @@ public class Space_Gui extends JPanel implements KeyListener{
 		
 	}
 	
-	
+	public void setNukeGraphics(){
+		nukeCounter = 1000;
+	}
 	private void paintBackground(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, 600, 600);
+		if(nukeCounter == 0){
+			g.setColor(new Color(0,0,0));
+			g.fillRect(0, 0, 600, 600);
+		}
+		else{
+			g.setColor(new Color(nukeCounter/10,nukeCounter/10,
+			nukeCounter/10));
+			g.fillRect(0, 0, 600, 600);
+			nukeCounter--;
+		}
 	}
 	private void paintShip(Graphics g) {
 		
