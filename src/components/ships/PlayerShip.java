@@ -7,16 +7,13 @@ import java.util.LinkedList;
 
 import javax.imageio.ImageIO;
 
-import components.Doubleshot;
 import components.Entity;
-import components.Singleshot;
-import components.Sprayshot;
-import components.Weapon;
 import components.powerup.HealthUp;
 import components.powerup.Nuke;
 import components.powerup.Powerup;
 import components.powerup.WeaponUp;
 import components.projectile.Projectile;
+import components.ships.weapon.*;
 import game_engine.Space_Game;
 
 
