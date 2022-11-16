@@ -44,27 +44,7 @@ public class SimpleAudioPlayer
      clip.loop(Clip.LOOP_CONTINUOUSLY);
  }
 
-// public static void main(String[] args) 
-// {
-//     try
-//     {
-//    	 System.out.println("test");
-//         SimpleAudioPlayer audioPlayer = 
-//                         new SimpleAudioPlayer();
-//           
-//         audioPlayer.play();
-//         
-//         
-//     } 
-//       
-//     catch (Exception ex) 
-//     {
-//         System.out.println("Error with playing sound.");
-//         ex.printStackTrace();
-//       
-//       }
-// }
-   
+
  // Work as the user enters his choice
    
  private void gotoChoice(int c)

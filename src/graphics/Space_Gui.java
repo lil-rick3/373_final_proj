@@ -82,7 +82,9 @@ public class Space_Gui extends JPanel implements KeyListener{
 	private void paintBackground(Graphics g) {
 		if(nukeCounter == 0){
 			g.setColor(new Color(0,0,0));
-			g.fillRect(0, 0, 600, 600);
+			g.fillRect(0, 0, 600, 500);
+			g.setColor(Color.RED);
+			g.fillRect(0,500, 600, 100);
 		}
 		else{
 			g.setColor(new Color(nukeCounter/10,nukeCounter/10,

@@ -51,7 +51,7 @@ public class PlayerShip extends Ship{
 	public PlayerShip(double xloc, double yloc, String imagePath, Space_Game curGame) {
 		
 		super(imagePath);
-		
+		health = 3;
 		this.xloc = xloc;
 		this.yloc = yloc;
 		this.curGame = curGame;
@@ -118,6 +118,9 @@ public class PlayerShip extends Ship{
 		return projList;
 	}
 
+	public int getLives(){
+		return health;
+	}
 	public Weapon getWeapon() {
 		return this.weapon;
 	}

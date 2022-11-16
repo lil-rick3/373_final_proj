@@ -26,9 +26,9 @@ import java.lang.Math;
  *This is the game that drives the whole thing
  */
 public class Space_Game {
-	public final static int gameHeight = 600;
+	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
-	public final static int playerHeight = 400;
+	public final static int playerHeight = 300;
 	private boolean nukeFlag;
 	
 	Space_Gui curGraphics;
