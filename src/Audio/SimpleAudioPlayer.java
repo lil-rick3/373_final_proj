@@ -31,6 +31,7 @@ public class SimpleAudioPlayer
      IOException, LineUnavailableException 
  {
      // create AudioInputStream object
+     status = "play";
      audioInputStream = 
              AudioSystem.getAudioInputStream(new File("src/music/musicfile2.wav"));
        
