@@ -9,13 +9,14 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
+
 public class Home_Screen extends GUI_Panel_Class {
 	JButton newGame;
 	JButton tutorial;
 	JButton highScore;
 	JPanel mainView;
 	
-	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Space_Gui gameIn) { //Pass in the name of the background image
+	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn) { //Pass in the name of the background image
 		super(backgroundIn);
 		this.mainView = mainViewIn;
 		//Set the desired layout
@@ -33,17 +34,17 @@ public class Home_Screen extends GUI_Panel_Class {
 		this.addVerticalSpacing();
 		
 		//register buttons with action listener
-		newGame.addActionListener(new ButtonListener(gameIn));
-		tutorial.addActionListener(new ButtonListener(gameIn));
-		highScore.addActionListener(new ButtonListener(gameIn));
+		newGame.addActionListener(new ButtonListener(threadIn));
+		tutorial.addActionListener(new ButtonListener(threadIn));
+		highScore.addActionListener(new ButtonListener(threadIn));
 	}
 	
 	private class ButtonListener implements ActionListener
 	{
-		private Space_Gui game;
+		private Thread gameThread;
 		
-		public ButtonListener(Space_Gui gameIn) {
-			this.game = gameIn;
+		public ButtonListener(Thread threadIn) {
+			this.gameThread = threadIn;
 		}
 		
 		public void actionPerformed(ActionEvent e) //this is the method MenuListener must implement, as it comes from the ActionListener interface.
@@ -61,8 +62,8 @@ public class Home_Screen extends GUI_Panel_Class {
 			}
 			else if (source.equals(newGame)) {
 				CardLayout temp = (CardLayout)(mainView.getLayout());
-				temp.show(mainView, "GAME");				
-				this.game.run();
+				temp.show(mainView, "GAME");
+				this.gameThread.start();
 			}
 			
 		}
