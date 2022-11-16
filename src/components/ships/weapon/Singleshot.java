@@ -1,4 +1,4 @@
-package components;
+package components.ships.weapon;
 
 import java.util.LinkedList;
 
