@@ -104,7 +104,7 @@ public abstract class Entity {
 	//TODO: fix bounds
 	public void checkBounds(){
 		if((xloc < 0 - 10) || (xloc > XSIZE + 10)
-		|| (yloc < 0 - 10)|| (xloc > YSIZE)){
+		|| (yloc < 0 - 10)|| (yloc > YSIZE + 10)){
 			toBeDestroyed = true;
 		}
 		

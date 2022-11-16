@@ -1,6 +1,7 @@
 package graphics;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -16,6 +17,7 @@ import Audio.SimpleAudioPlayer;
 import components.powerup.Powerup;
 import components.projectile.Projectile;
 import components.ships.EnemyShip;
+import components.ships.PlayerShip;
 import components.ships.Ship;
 import game_engine.Space_Game;
 
@@ -72,6 +74,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 		paintShip(g);
 		paintProjectiles(g);
 		paintPowerups(g);
+		paintDetails(g);
 		currentlyPainting = false;
 		
 	}
@@ -83,8 +86,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 		if(nukeCounter == 0){
 			g.setColor(new Color(0,0,0));
 			g.fillRect(0, 0, 600, 500);
-			g.setColor(Color.RED);
-			g.fillRect(0,500, 600, 100);
+			
 		}
 		else{
 			g.setColor(new Color(nukeCounter/10,nukeCounter/10,
@@ -93,9 +95,20 @@ public class Space_Gui extends JPanel implements KeyListener{
 			nukeCounter--;
 		}
 	}
+	private void paintDetails(Graphics g){
+		g.setColor(Color.RED);
+		g.fillRect(0,500, 600, 100);
+
+		PlayerShip player = currentGame.getPlayerShip();
+
+		g.setColor(Color.black);
+		String statusStr = "Lives: " + player.getLives();
+		g.drawString(statusStr, 0, 550);
+
+	}
 	private void paintShip(Graphics g) {
 		
-		Ship currentShip = currentGame.getPlayerShip();
+		PlayerShip currentShip = currentGame.getPlayerShip();
 		
 		currentShip.paintEntity(g, this);
 		
