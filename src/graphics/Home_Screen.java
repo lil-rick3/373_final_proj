@@ -8,7 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import Audio.SimpleAudioPlayer;
+import Audio.AudioPlayer;
 
 
 
@@ -17,9 +17,9 @@ public class Home_Screen extends GUI_Panel_Class {
 	JButton tutorial;
 	JButton highScore;
 	JPanel mainView;
-	SimpleAudioPlayer musicPlayer;
+	AudioPlayer musicPlayer;
 
-	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn, SimpleAudioPlayer musicPlayer) { //Pass in the name of the background image
+	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn, AudioPlayer musicPlayer) { //Pass in the name of the background image
 		super(backgroundIn);
 		this.mainView = mainViewIn;
 		//Set the desired layout

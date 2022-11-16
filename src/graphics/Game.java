@@ -5,7 +5,7 @@ import java.awt.CardLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import Audio.SimpleAudioPlayer;
+import Audio.AudioPlayer;
 
 public class Game {
 	//Create the main GUI control panel
@@ -21,14 +21,14 @@ public class Game {
 	High_Score_Screen highScoreScreen = new High_Score_Screen("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
 
 	//Sound player
-	SimpleAudioPlayer musicPlayer;
+	AudioPlayer musicPlayer;
 	
 	public Game() {
 		
 		try
 	    {
 	    	System.out.println("test");
-	        musicPlayer = new SimpleAudioPlayer();
+	        musicPlayer = new AudioPlayer();
 			musicPlayer.pause();
 	        //musicPlayer.play(); 
 	    } 
