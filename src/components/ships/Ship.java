@@ -26,7 +26,6 @@ public abstract class Ship extends Entity{
 	public abstract LinkedList<Projectile> shoot();
 	
 	
-	
 	public void setHealth(int ahealth) {
 		this.health = ahealth;
 	}

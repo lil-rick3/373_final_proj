@@ -9,7 +9,7 @@ public class Singleshot extends Weapon {
 
     public Singleshot() {
         super();
-        this.speed = 1;
+        this.speed = 3;
         this.shootOnLeft = true;
     }
 

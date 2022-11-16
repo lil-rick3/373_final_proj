@@ -55,12 +55,13 @@ public class Projectile extends Entity{
 	}
 
 	@Override
-	protected void collisonAction(Entity crashedInto) {
+	protected void collisionAction(Entity crashedInto) {
 		if(crashedInto instanceof Ship){
 			toBeDestroyed = true;
 		}
 		
 	}
+
 	public int getDamage(){
 		return damage;
 	}

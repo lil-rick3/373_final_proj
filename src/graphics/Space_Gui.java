@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import Audio.SimpleAudioPlayer;
+import components.powerup.Powerup;
 import components.projectile.Projectile;
 import components.ships.EnemyShip;
 import components.ships.Ship;
@@ -70,6 +71,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 		paintBackground(g);
 		paintShip(g);
 		paintProjectiles(g);
+		paintPowerups(g);
 		currentlyPainting = false;
 		
 	}
@@ -109,9 +111,19 @@ public class Space_Gui extends JPanel implements KeyListener{
 			aProjectile.paintEntity(g, this);
 		}
 	}
+
+	private void paintPowerups(Graphics g) {
+		LinkedList<Powerup> powerups = currentGame.getPowerups();
+
+		for(Powerup aPowerup: powerups) {
+			aPowerup.paintEntity(g, this);
+		}
+	}
+
 	public boolean getCurrentlyPainting(){
 		return currentlyPainting;
 	}
+	
 	
 	@Override
 	public void keyTyped(KeyEvent e) {
