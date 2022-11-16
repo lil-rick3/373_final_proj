@@ -16,7 +16,7 @@ public class Game {
 	Thread gameThread = new Thread(game);
 
 	//Creates the GUI Pages
-	Home_Screen homeScreen = new Home_Screen("starbackground.jpg", mainView, gameThread);
+	Home_Screen homeScreen; 
 	Tutorial_Screen tutorial =  new Tutorial_Screen("starbackground.jpg", mainView);
 	High_Score_Screen highScoreScreen = new High_Score_Screen("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
 
@@ -24,6 +24,20 @@ public class Game {
 	SimpleAudioPlayer musicPlayer;
 	
 	public Game() {
+		
+		try
+	    {
+	    	System.out.println("test");
+	        musicPlayer = new SimpleAudioPlayer();
+			musicPlayer.pause();
+	        //musicPlayer.play(); 
+	    } 
+	    catch (Exception ex) 
+	    {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+		}
+		homeScreen = new Home_Screen("starbackground.jpg", mainView, gameThread, musicPlayer);
 		this.createGame();
 	}
 
@@ -37,17 +51,7 @@ public class Game {
 		frame.setSize(600, 600);
 
 		//add sound to the frame
-		try
-	    {
-	    	System.out.println("test");
-	        musicPlayer = new SimpleAudioPlayer();
-	        musicPlayer.play(); 
-	    } 
-	    catch (Exception ex) 
-	    {
-	        System.out.println("Error with playing sound.");
-	        ex.printStackTrace();
-		}
+		
 		
 		
 		//add cards to the card panel, the string is used to identify what card we want to show

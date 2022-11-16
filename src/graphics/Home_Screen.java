@@ -8,6 +8,8 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import Audio.SimpleAudioPlayer;
+
 
 
 public class Home_Screen extends GUI_Panel_Class {
@@ -15,8 +17,9 @@ public class Home_Screen extends GUI_Panel_Class {
 	JButton tutorial;
 	JButton highScore;
 	JPanel mainView;
-	
-	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn) { //Pass in the name of the background image
+	SimpleAudioPlayer musicPlayer;
+
+	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn, SimpleAudioPlayer musicPlayer) { //Pass in the name of the background image
 		super(backgroundIn);
 		this.mainView = mainViewIn;
 		//Set the desired layout
@@ -32,7 +35,7 @@ public class Home_Screen extends GUI_Panel_Class {
 		this.addVerticalSpacing();
 		tutorial = this.addButton("TUTORIAL");
 		this.addVerticalSpacing();
-		
+		this.musicPlayer = musicPlayer;
 		//register buttons with action listener
 		newGame.addActionListener(new ButtonListener(threadIn));
 		tutorial.addActionListener(new ButtonListener(threadIn));
@@ -63,6 +66,7 @@ public class Home_Screen extends GUI_Panel_Class {
 			else if (source.equals(newGame)) {
 				CardLayout temp = (CardLayout)(mainView.getLayout());
 				temp.show(mainView, "GAME");
+				musicPlayer.play();
 				this.gameThread.start();
 			}
 			
