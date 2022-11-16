@@ -28,8 +28,10 @@ import java.lang.Math;
 public class Space_Game {
 	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
-	public final static int playerHeight = 300;
+	public final static int playerHeight = 400;
+	public boolean testFlag; //this is used to indicated whether we are running a test or not
 	private boolean nukeFlag;
+
 	
 	Space_Gui curGraphics;
 	PlayerShip player;
@@ -53,6 +55,7 @@ public class Space_Game {
 		this.curGraphics = curGraphics;
 		currentlyModifying = false;
 		nukeFlag = false;
+		testFlag = false;
 
 				
 	}
@@ -101,6 +104,10 @@ public class Space_Game {
 				Thread.sleep(5);
 			}catch(InterruptedException e) {
 				e.printStackTrace();
+			}
+			if (this.testFlag) {
+				//only want to run once if test
+				return;
 			}
 		}
 			
@@ -231,7 +238,7 @@ public class Space_Game {
 			}
 		}
 	}
-	public Ship getPlayerShip() {
+	public PlayerShip getPlayerShip() {
 		return player;
 	}
 	public LinkedList<EnemyShip> getEnemyShips() {
