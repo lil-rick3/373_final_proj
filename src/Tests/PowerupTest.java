@@ -63,7 +63,7 @@ public class PowerupTest {
         System.out.println(" ");
         System.out.println("TEST 2: PLAYER PICKS UP A NUKE POWERUP");
 
-        listPowerups.add(new Nuke(100, 400, "src/graphicImages/Nuke.png"));
+        listPowerups.add(new Nuke(100, 200, "src/graphicImages/Nuke.png"));
 
         //create enemies
          e1 = new EnemyShip(m, 1,  "src/graphicImages/enemyship1.png");
@@ -97,7 +97,7 @@ public class PowerupTest {
         System.out.println("TEST 3: PLAYER PICKS UP A HEALTHUP POWERUP");
 
         System.out.println("Player health: " + aGame.getPlayerShip().getHealth());
-        listPowerups.add(new HealthUp(100, 400, "src/graphicImages/HealthUp.png"));
+        listPowerups.add(new HealthUp(100, 200, "src/graphicImages/HealthUp.png"));
         aGame.runGame();
         System.out.println("After powerup, player health: " + aGame.getPlayerShip().getHealth());
 
@@ -106,10 +106,10 @@ public class PowerupTest {
         System.out.println("TEST 4: PLAYER PICKS UP A WEAPONUP POWERUP");
 
         System.out.println("Player weapon: " + aGame.getPlayerShip().getWeapon());
-        listPowerups.add(new WeaponUp(100, 400, "src/graphicImages/WeaponUp.png"));
+        listPowerups.add(new WeaponUp(100, 200, "src/graphicImages/WeaponUp.png"));
         aGame.runGame();
         System.out.println("After 1 upgrade, player weapon: " + aGame.getPlayerShip().getWeapon());
-        listPowerups.add(new WeaponUp(100, 400, "src/graphicImages/WeaponUp.png"));
+        listPowerups.add(new WeaponUp(100, 200, "src/graphicImages/WeaponUp.png"));
         aGame.runGame();
         System.out.println("After 2 upgrades, player weapon: " + aGame.getPlayerShip().getWeapon());
         }

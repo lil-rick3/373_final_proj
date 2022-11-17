@@ -172,17 +172,34 @@ public class Space_Game {
 	private void generatePowerup(double xloc, double yloc) {
 		int ranNum = (int) (Math.random() * 2000.0);
 
-		if (ranNum <= 100) { //5% chance
-			//generate healthup
-			powerups.add(new HealthUp(xloc, yloc,"src/graphicImages/HealthUp.png"));
+		if (!testFlag) {
+			if (ranNum <= 100) { //5% chance
+				//generate healthup
+				powerups.add(new HealthUp(xloc, yloc,"src/graphicImages/HealthUp.png"));
+			}
+			else if (ranNum > 100 && ranNum <= 200) { //5% chance
+				//generate weapon upgrade
+				powerups.add(new WeaponUp(xloc, yloc, "src/graphicImages/WeaponUp.png"));
+			}
+			else if (ranNum > 200 && ranNum <= 250) { //1% chance
+				//generate nuke
+				powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
+			}
 		}
-		else if (ranNum > 100 && ranNum <= 200) { //5% chance
-			//generate weapon upgrade
-			powerups.add(new WeaponUp(xloc, yloc, "src/graphicImages/WeaponUp.png"));
-		}
-		else if (ranNum > 200 && ranNum <= 250) { //1% chance
-			//generate nuke
-			powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
+		//FOR TESTING
+		else {
+			if (ranNum % 3 == 0) {
+				//generate healthup
+				powerups.add(new HealthUp(xloc, yloc,"src/graphicImages/HealthUp.png"));
+			}
+			else if (ranNum % 3 == 1) {
+				//generate weapon upgrade
+				powerups.add(new WeaponUp(xloc, yloc, "src/graphicImages/WeaponUp.png"));
+			}
+			else {
+				//generate nuke
+				powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
+			}
 		}
 
 	}
