@@ -13,7 +13,7 @@ public abstract class Ship extends Entity{
 
 	
 	protected int health;
-	String projectileFilePath;
+	protected String projectileFilePath;
 	
 	
 	public Ship(String imagePath) {

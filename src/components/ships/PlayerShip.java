@@ -29,22 +29,22 @@ public class PlayerShip extends Ship{
 	
 	
 	
-	boolean upOn;
-	boolean downOn;
-	boolean rightOn;
-	boolean leftOn;
+	private boolean upOn;
+	private boolean downOn;
+	private boolean rightOn;
+	private boolean leftOn;
 	/*
 	 * These variables tell which buttons are currently being
 	 * pressed, so the move function can work properly
 	 */
-	boolean isShooting;
+	private boolean isShooting;
 	//tells if the user is currently pressing the shoot button, prevents keeping spacebar pressed
-	boolean shootOnLeft;
+	
 	private boolean willShoot;
 	//tells if the user has pressed spacebar this cycle, helps prevent 
 	//multithreading errors
 
-	boolean hasShot;
+	
 	Weapon weapon;
 
 	Space_Game curGame;
@@ -61,7 +61,7 @@ public class PlayerShip extends Ship{
 		leftOn = false;
 		weapon = new Singleshot();
 		isShooting = false;//says if the user has spacebard constantly pressed
-		shootOnLeft = true;
+		//shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will
 		// shoot a projectile 
 		projectileFilePath = "src/graphicImages/PlayerProjectile.png";

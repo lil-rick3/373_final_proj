@@ -116,9 +116,7 @@ public abstract class Entity {
 		return yloc;
 	}
 	public abstract void move();
-	public BufferedImage getImage() {
-		return projection;
-	}
+
 	
 	public boolean getToBeDestroyed(){
 		return toBeDestroyed;
