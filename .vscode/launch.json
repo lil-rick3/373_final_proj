@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch PlayerTest",
+            "request": "launch",
+            "mainClass": "Tests.PlayerTest",
+            "projectName": "373_final_proj_857f82fa"
+        },
+        {
+            "type": "java",
             "name": "Launch ProjectileTest",
             "request": "launch",
             "mainClass": "Tests.ProjectileTest",

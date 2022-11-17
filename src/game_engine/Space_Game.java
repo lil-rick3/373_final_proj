@@ -222,7 +222,7 @@ public class Space_Game {
 			aProj.checkBounds();
 		}
 	}
-	private void startMotion(char c) {
+	public void startMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(true);
 		}
@@ -264,7 +264,7 @@ public class Space_Game {
 	public LinkedList<Powerup> getPowerups() {
 		return powerups;
 	}
-	private void stopMotion(char c) {
+	public void stopMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(false);
 		}
