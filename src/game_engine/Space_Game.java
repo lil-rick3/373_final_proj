@@ -28,7 +28,7 @@ import java.lang.Math;
 public class Space_Game {
 	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
-	public final static int playerHeight = 400;
+	public final static int playerHeight = 200;
 	public boolean testFlag; //this is used to indicated whether we are running a test or not
 	private boolean nukeFlag;
 
@@ -41,7 +41,7 @@ public class Space_Game {
 	private LinkedList<Powerup> powerups;
 	private MovementPattern moveStuff;
 	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
-	
+	private int score;	
 
 	public Space_Game(Space_Gui curGraphics) {
 		
@@ -56,7 +56,7 @@ public class Space_Game {
 		currentlyModifying = false;
 		nukeFlag = false;
 		testFlag = false;
-
+		score = 0;
 				
 	}
 	
@@ -151,6 +151,7 @@ public class Space_Game {
 		while(enemyIterator.hasNext()){
 			EnemyShip tempEnemy = enemyIterator.next();
 			if(tempEnemy.getToBeDestroyed()){
+				score+=100;
 				enemyIterator.remove();
 				generatePowerup(tempEnemy.getxloc(), tempEnemy.getyloc());
 			}
@@ -183,7 +184,9 @@ public class Space_Game {
 		}
 
 	}
-
+	public int getScore(){
+		return score;
+	}
 	private void NukeEnemies() {
 		for (EnemyShip aEnemyShip: enemies) {
 			aEnemyShip.setToBeDestroyed(true);

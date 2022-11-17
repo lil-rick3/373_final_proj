@@ -102,7 +102,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 		PlayerShip player = currentGame.getPlayerShip();
 
 		g.setColor(Color.black);
-		String statusStr = "Lives: " + player.getLives();
+		String statusStr = "Lives: " + player.getLives() + "     Score: " + currentGame.getScore();
 		g.drawString(statusStr, 0, 550);
 
 	}
