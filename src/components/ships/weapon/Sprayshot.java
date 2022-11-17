@@ -5,12 +5,12 @@ import java.util.LinkedList;
 import components.projectile.Projectile;
 
 public class Sprayshot extends Weapon {
-    private boolean shootOnLeft;
+   
 
 
     public Sprayshot() {
         this.speed = 4;
-        this.shootOnLeft = true;
+        
     }
 
     public LinkedList<Projectile> shoot(double xloc, double yloc,String ImageFilePath) {
