@@ -46,7 +46,7 @@ public abstract class Entity {
 	 */
 	public static boolean CheckCollision(Entity e1, Entity e2) {
 
-		if(checkIntersection(e1,e2)){
+		if(checkForOverlap(e1,e2)){
 			System.out.println("collision");
 			e1.collisionAction(e2);
 			e2.collisionAction(e1);
@@ -60,41 +60,34 @@ public abstract class Entity {
 	 * @param inner
 	 * @return
 	 */
-	private static boolean checkIntersection(Entity outer, Entity inner){
-		
+	private static boolean checkForOverlap(Entity e1, Entity e2){
 
-		double xLower = inner.xloc;
-		double xUpper = inner.xloc + (double)inner.width;
-		double yLower = inner.yloc;
-		double yUpper = inner.yloc + (double)inner.height;
+		double lowerXbound1 = e1.getxloc();
+		double upperXbound1 = e1.getxloc()+e1.width;
+		double lowerYbound1 = e1.getyloc();
+		double upperYbound1 = e1.getyloc()+e1.height;
 		
-		if(checkPoint(xLower, yLower, outer)){
+		double lowerXbound2 = e2.getxloc();
+		double upperXbound2 = e2.getxloc()+e2.width;
+		double lowerYbound2 = e2.getyloc();
+		double upperYbound2 = e2.getyloc()+e2.height;
 
-			return true;
+		
+		//e2 xloc is in between the xloc of e1
+		if((lowerXbound2 >= lowerYbound1) && (lowerXbound2 <= upperXbound1)) {
+			//e2 yloc is in between the yloc of e1
+			if((lowerYbound2 >= lowerYbound1) && (lowerYbound2 <= upperYbound1)){
+				return true;
+			}
 		}
-		else if(checkPoint(xLower, yUpper, outer)){
-			return true;
+		//e1 xloc is in between the xloc of e2
+		else if((e1.getxloc() >= e2.getxloc()) && (e1.getxloc() <= (e2.getxloc()+e2.width))){
+			//e1 yloc is in between the yloc of e2
+			if((e1.getyloc() >= e2.getyloc()) && (e1.getyloc() <= (e2.getyloc()+e2.height))){
+				return true;
+			}
 		}
-		else if(checkPoint(xUpper, yLower, outer)){
-			return true;
-		}
-		else if(checkPoint(xUpper, yUpper, outer)){
-			return true;
-		}
-		else{
 			return false;
-		}
-	}
-	private static boolean checkPoint(double pointx, double pointy, Entity outer){
-		double xLowerBound = outer.xloc;
-		double xUpperBound = outer.xloc + (double)outer.width;
-		double yLowerBound = outer.yloc;
-		double yUpperBound = outer.yloc + (double)outer.height;
-
-		return (((pointx >= xLowerBound) && (pointx <= xUpperBound)) && ((pointy >= yLowerBound) && (pointy <= yUpperBound)));
-
-		
-
 	}
 
 	protected abstract void collisionAction(Entity crashedInto);
