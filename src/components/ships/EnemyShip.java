@@ -10,7 +10,7 @@ public class EnemyShip extends Ship {
 
 	
 
-	MovementPattern howToMove;
+	private MovementPattern howToMove;
 	private int id;
 	private int health;
 	

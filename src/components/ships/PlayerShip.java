@@ -45,9 +45,9 @@ public class PlayerShip extends Ship{
 	//multithreading errors
 
 	
-	Weapon weapon;
+	private Weapon weapon;
 
-	Space_Game curGame;
+	private Space_Game curGame;
 	public PlayerShip(double xloc, double yloc, String imagePath, Space_Game curGame) {
 		
 		super(imagePath);

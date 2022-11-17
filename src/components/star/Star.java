@@ -4,7 +4,7 @@ import components.Entity;
 
 public class Star extends Entity {
 
-    int speed;
+    double speed;
 
     Star(int xloc, int yloc, int type, String filePath){
         super(filePath);
