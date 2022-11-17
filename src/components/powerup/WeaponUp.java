@@ -15,5 +15,10 @@ public class WeaponUp extends Powerup{
 		}
 		
 	}
+
+	@Override
+    public String toString() {
+        return "WeaponUp";
+    }
     
 }

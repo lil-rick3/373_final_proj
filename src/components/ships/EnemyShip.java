@@ -57,6 +57,9 @@ public class EnemyShip extends Ship {
 		this.yloc = yloc;
 		
 	}
+	public int getHealth() {
+		return health;
+	}
 
 	@Override
 	protected void collisionAction(Entity crashedInto) {
@@ -70,6 +73,11 @@ public class EnemyShip extends Ship {
 			}
 		}
 	}
+
+	@Override
+    public String toString() {
+        return "Enemy number" + id;
+    }
 	
 	
 }

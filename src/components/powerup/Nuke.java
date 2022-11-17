@@ -15,4 +15,8 @@ public class Nuke extends Powerup {
 		}
     }
 		
+    @Override
+    public String toString() {
+        return "Nuke";
+    }
 }

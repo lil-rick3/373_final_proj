@@ -22,4 +22,9 @@ public class Sprayshot extends Weapon {
         projList.add(new Projectile(true, false, false, this.getSpeed(), xloc + 18, yloc,ImageFilePath));
         return projList;
     }
+
+    @Override
+    public String toString() {
+        return "SprayShot";
+    }
 }
