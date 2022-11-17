@@ -144,38 +144,6 @@ public class PlayerShip extends Ship{
 		this.leftOn = leftOn;
 	}
 
-
-	public void startMotion(char c) {
-		if(c == 'd') {
-			rightOn = true;
-		}
-		else if(c == 'a') {
-			leftOn = true;
-		}
-		else if(c == 'w') {
-			upOn = true;
-		}
-		else if(c == 's') {
-			downOn = true;
-		}
-	}
-
-	public void stopMotion(char c) {
-		if(c == 'd') {
-			rightOn = false;
-		}
-		else if(c == 'a') {
-			leftOn = false;
-		}
-		else if(c == 'w') {
-			upOn = false;
-		}
-		else if(c == 's') {
-			downOn = false;
-		}
-	}
-
-
 	@Override
 	protected void collisionAction(Entity crashedInto) {
 		// TODO Auto-generated method stub

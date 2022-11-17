@@ -91,9 +91,7 @@ public abstract class Entity {
 		double yLowerBound = outer.yloc;
 		double yUpperBound = outer.yloc + (double)outer.height;
 
-		return (((pointx > xLowerBound) && (pointx < xUpperBound)) && ((pointy > yLowerBound) && (pointy < yUpperBound)));
-
-		
+		return (((pointx >= xLowerBound) && (pointx <= xUpperBound)) && ((pointy >= yLowerBound) && (pointy <= yUpperBound)));
 
 	}
 

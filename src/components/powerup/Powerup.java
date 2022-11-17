@@ -34,6 +34,7 @@ public abstract class Powerup extends Entity{
         return this.speed;
     }
 
+    
    
 
 

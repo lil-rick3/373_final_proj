@@ -16,4 +16,9 @@ public class Doubleshot extends Weapon{
         return list;
 
     }
+    
+    @Override
+    public String toString() {
+        return "DoubleShot";
+    }
 }

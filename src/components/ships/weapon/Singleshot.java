@@ -29,4 +29,9 @@ public class Singleshot extends Weapon {
         }
         return list;
     }
+
+    @Override
+    public String toString() {
+        return "SingleShot";
+    }
 }

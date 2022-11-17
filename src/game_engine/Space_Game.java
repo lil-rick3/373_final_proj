@@ -64,7 +64,9 @@ public class Space_Game {
 		waitForTurn();
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
-		Round round = new Round(null, this, moveStuff);
+		if (!testFlag) {
+			Round round = new Round(null, this, moveStuff);
+		}
 		currentlyModifying = false;
 		while(true) {
 			//TODO organize this function into smaller sub functions
@@ -73,8 +75,8 @@ public class Space_Game {
 			moveStuff.increment();
 			waitForTurn();
 			currentlyModifying = true;
-			if(enemies.size() == 0){
-				round = new Round(null, this, moveStuff);
+			if(enemies.size() == 0 && !testFlag){
+				Round round = new Round(null, this, moveStuff);
 			}
 			tempProjList = player.shoot();
 			if(!tempProjList.isEmpty()) {
@@ -196,6 +198,9 @@ public class Space_Game {
 		nukeFlag = false;
 	}
 
+	public boolean getNukeFlag() {
+		return nukeFlag;
+	}
 	private void movePowerups() {
 		for(Powerup aPowerup: powerups) {
 			aPowerup.move();
@@ -217,7 +222,7 @@ public class Space_Game {
 			aProj.checkBounds();
 		}
 	}
-	private void startMotion(char c) {
+	public void startMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(true);
 		}
@@ -259,7 +264,7 @@ public class Space_Game {
 	public LinkedList<Powerup> getPowerups() {
 		return powerups;
 	}
-	private void stopMotion(char c) {
+	public void stopMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(false);
 		}
