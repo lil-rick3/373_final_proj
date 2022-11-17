@@ -11,10 +11,10 @@ import components.ships.EnemyShip;
  *Each ship is given a movement pattern which they ca then follow
  */
 public class MovementPattern {
-	int phaseInCycle;
-	int yOffSet;
-	int xOffSet;
-	boolean movingDown;
+	private int phaseInCycle;
+	private int yOffSet;
+	private int xOffSet;
+	private boolean movingDown;
 	
 	public MovementPattern(){
 		phaseInCycle = 0;

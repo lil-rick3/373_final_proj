@@ -33,14 +33,14 @@ public class Space_Game {
 	private boolean nukeFlag;
 
 	
-	Space_Gui curGraphics;
-	PlayerShip player;
-	LinkedList<EnemyShip> enemies;
-	LinkedList<Projectile> playerProjectiles;
-	LinkedList<Projectile> enemyProjectiles;
-	LinkedList<Powerup> powerups;
-	MovementPattern moveStuff;
-	boolean currentlyModifying = true;//used to determine if a list is being added/removed to
+	private Space_Gui curGraphics;
+	private PlayerShip player;
+	private LinkedList<EnemyShip> enemies;
+	private LinkedList<Projectile> playerProjectiles;
+	private LinkedList<Projectile> enemyProjectiles;
+	private LinkedList<Powerup> powerups;
+	private MovementPattern moveStuff;
+	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	
 
 	public Space_Game(Space_Gui curGraphics) {
@@ -112,7 +112,7 @@ public class Space_Game {
 		}
 			
 	}
-	public void detectCollisions(){
+	private void detectCollisions(){
 
 		for(Projectile aProj: enemyProjectiles){
 			Entity.CheckCollision(player, aProj);			
@@ -167,24 +167,24 @@ public class Space_Game {
 
 
 	private void generatePowerup(double xloc, double yloc) {
-		int ranNum = (int) (Math.random() * 1000.0);
+		int ranNum = (int) (Math.random() * 2000.0);
 
-		if (ranNum <= 150) { //5% chance
+		if (ranNum <= 100) { //5% chance
 			//generate healthup
 			powerups.add(new HealthUp(xloc, yloc,"src/graphicImages/HealthUp.png"));
 		}
-		else if (ranNum > 500) { //5% chance
+		else if (ranNum > 100 && ranNum <= 200) { //5% chance
 			//generate weapon upgrade
 			powerups.add(new WeaponUp(xloc, yloc, "src/graphicImages/WeaponUp.png"));
 		}
-		else if (ranNum > 150 && ranNum <= 500) { //1% chance
+		else if (ranNum > 200 && ranNum <= 250) { //1% chance
 			//generate nuke
 			powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
 		}
 
 	}
 
-	public void NukeEnemies() {
+	private void NukeEnemies() {
 		for (EnemyShip aEnemyShip: enemies) {
 			aEnemyShip.setToBeDestroyed(true);
 			
