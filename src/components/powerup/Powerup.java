@@ -10,8 +10,7 @@ import components.Entity;
 public abstract class Powerup extends Entity{
 
     protected double speed;
-
-    //TODO: graphics for powerups
+    
     public Powerup(double xloc, double yloc, String imagePath) {
 
         super(imagePath);

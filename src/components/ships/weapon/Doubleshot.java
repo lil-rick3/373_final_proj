@@ -5,8 +5,10 @@ import java.util.LinkedList;
 import components.projectile.Projectile;
 
 public class Doubleshot extends Weapon{
+    //this weapon class allows the user to shoot two projectiles simulatenously.
+    //this weapon upgrades into the spray shot weapon.
     public Doubleshot() {
-        this.speed = 3;
+        this.speed = 3; //projectile speed
     }
 
     public LinkedList<Projectile> shoot(double xloc, double yloc, String ImageFilePath) {

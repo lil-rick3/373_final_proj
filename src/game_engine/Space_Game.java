@@ -48,7 +48,7 @@ public class Space_Game {
 		Entity.setSize(gameWidth, gameHeight);
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
 		moveStuff = new MovementPattern();
-		enemies = new LinkedList<EnemyShip>(); //do we not need to individually construct each of the enemyships?
+		enemies = new LinkedList<EnemyShip>();
 		playerProjectiles = new LinkedList<Projectile>();
 		enemyProjectiles = new LinkedList<Projectile>();
 		powerups = new LinkedList<Powerup>();
