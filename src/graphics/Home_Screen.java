@@ -11,7 +11,10 @@ import javax.swing.JPanel;
 import Audio.AudioPlayer;
 
 
-
+/***
+* This is the home screen class. This has 3 buttons that re-direct to the other GUI elements. All GUI elements are created here, along with
+* triggering the main game thread and activating the music player.
+*/
 public class Home_Screen extends GUI_Panel_Class {
 	JButton newGame;
 	JButton tutorial;
@@ -19,6 +22,12 @@ public class Home_Screen extends GUI_Panel_Class {
 	JPanel mainView;
 	AudioPlayer musicPlayer;
 
+	/***
+	* This is the constuctor. The inputs are the main card layout (for switching between cards), the name of the background image file,
+	* the game thread, and the audioplayer.
+	* This calls all the functions to actually create the GUI panel. 
+	* It also passes the correct things to the action listener so we can initialize the game and music
+	*/
 	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn, AudioPlayer musicPlayer) { //Pass in the name of the background image
 		super(backgroundIn);
 		this.mainView = mainViewIn;
@@ -36,37 +45,53 @@ public class Home_Screen extends GUI_Panel_Class {
 		tutorial = this.addButton("TUTORIAL");
 		this.addVerticalSpacing();
 		this.musicPlayer = musicPlayer;
-		//register buttons with action listener
+
+		//Register buttons with action listener
 		newGame.addActionListener(new ButtonListener(threadIn));
 		tutorial.addActionListener(new ButtonListener(threadIn));
 		highScore.addActionListener(new ButtonListener(threadIn));
 	}
 	
+	/***
+	* This is the custom ButtonListener class. This listens for any of the buttons being clicked, and calls the corresponding function.
+	*/
 	private class ButtonListener implements ActionListener
 	{
 		private Thread gameThread;
 		
+		/***
+		* This is the constructor, just updates the inputed thread so we can actually start running the game
+		*/
+
 		public ButtonListener(Thread threadIn) {
 			this.gameThread = threadIn;
 		}
 		
+		/***
+		* Catches button click and flips to the corresponding card page, calling nescessary functions in the case of game start
+		*/
 		public void actionPerformed(ActionEvent e) //this is the method MenuListener must implement, as it comes from the ActionListener interface.
 		{
 			JButton source = (JButton)(e.getSource());
 			
 			if(source.equals(tutorial))
 			{
-			    CardLayout temp = (CardLayout)(mainView.getLayout());
+			    //Flip to the tutorial page
+				CardLayout temp = (CardLayout)(mainView.getLayout());
 			    temp.show(mainView, "TUTORIAL");
 			}
 			else if (source.equals(highScore)) {
+				//Flip to the high score page
 				CardLayout temp = (CardLayout)(mainView.getLayout());
 			    temp.show(mainView, "HIGHSCORE");
 			}
 			else if (source.equals(newGame)) {
+				//Flip to the active game panel
 				CardLayout temp = (CardLayout)(mainView.getLayout());
 				temp.show(mainView, "GAME");
+				//Start the music player
 				musicPlayer.play();
+				//Start the game thread running
 				this.gameThread.start();
 			}
 			
