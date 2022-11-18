@@ -3,10 +3,14 @@ package components.projectile;
 import components.Entity;
 import components.ships.Ship;
 
+/**
+ * class for the projectiles that ships can shoot
+ */
 public class Projectile extends Entity{
-	boolean isUp;
-	boolean isDiag;
-	boolean isLeft;
+	//TODO: use velocity vector instead
+	boolean isUp; //is projectile moving up
+	boolean isDiag; //is projectile moving diagonal
+	boolean isLeft; //is projectile coming from the left side of the ship
 	double speed;
 	private int damage;
 	
@@ -54,6 +58,11 @@ public class Projectile extends Entity{
 		}
 	}
 
+	
+	/** 
+	 * @param crashedInto
+	 * delete the projectile
+	 */
 	@Override
 	protected void collisionAction(Entity crashedInto) {
 		if(crashedInto instanceof Ship){

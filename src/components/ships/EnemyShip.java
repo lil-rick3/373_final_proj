@@ -6,12 +6,13 @@ import components.Entity;
 import components.projectile.Projectile;
 import game_engine.MovementPattern;
 
+/**
+ * this class is for the enemy ships
+ */
 public class EnemyShip extends Ship {
-
 	
-
-	private MovementPattern howToMove;
-	private int id;
+	private MovementPattern howToMove;//this tells how the ships should move during each iteration of the game
+	private int id; //every enemyship gets a unique ID
 	private int health;
 	
 	public EnemyShip(MovementPattern moveInstr, int id, String imagePath) {
@@ -30,15 +31,19 @@ public class EnemyShip extends Ship {
 	@Override
 	public void move() {
 		howToMove.moveShip(this);
-		
-		
 	}
 
+	
+	/** 
+	 * @return LinkedList<Projectile>
+	 * randomly determine if enemy should shoot a projectile downwards
+	 */
 	@Override
 	public LinkedList<Projectile> shoot() {
 		LinkedList<Projectile> list = new LinkedList<>();
 		
 		int ranNum = (int) (Math.random() * 1000.0);
+		//randomly determine if the ship should shoot
 		if(ranNum < 1) {
 			list.add(new Projectile(false, false, false, 1, xloc, yloc, projectileFilePath));
 			//System.out.println(xloc + " " + yloc);
@@ -47,7 +52,7 @@ public class EnemyShip extends Ship {
 	}
 
 	public void checkBoundsForRemoval(){
-		
+		//TODO: implement
 	}
 	public void setxloc(double xloc){
 		this.xloc = xloc;
@@ -61,6 +66,12 @@ public class EnemyShip extends Ship {
 		return health;
 	}
 
+	
+	/** 
+	 * @param crashedInto
+	 * if enemy collides with player projectile,
+	 * lose health
+	 */
 	@Override
 	protected void collisionAction(Entity crashedInto) {
 		// TODO Auto-generated method stub

@@ -26,17 +26,16 @@ import game_engine.Space_Game;
  */
 public class PlayerShip extends Ship{
 	
-	
-	
-	
-	private boolean upOn;
-	private boolean downOn;
-	private boolean rightOn;
-	private boolean leftOn;
+	private boolean upOn; 
+	private boolean downOn; 
+	private boolean rightOn; 
+	private boolean leftOn; 
+
 	/*
 	 * These variables tell which buttons are currently being
 	 * pressed, so the move function can work properly
 	 */
+
 	private boolean isShooting;
 	//tells if the user is currently pressing the shoot button, prevents keeping spacebar pressed
 	
@@ -44,7 +43,6 @@ public class PlayerShip extends Ship{
 	//tells if the user has pressed spacebar this cycle, helps prevent 
 	//multithreading errors
 
-	
 	private Weapon weapon;
 
 	private Space_Game curGame;
@@ -69,20 +67,22 @@ public class PlayerShip extends Ship{
 
 	}
 	
-	
 	public void setWillShoot(boolean input) {
 		willShoot = input;
 	}
+
 	public boolean isShooting() {
 		return isShooting;
 	}
-
 
 	public void setShooting(boolean isShooting) {
 		this.isShooting = isShooting;
 	}
 
 
+	/**
+	 * move player ship based on key input
+	 */
 	public void move() {
 		if(rightOn) {
 			xloc++;
@@ -96,6 +96,7 @@ public class PlayerShip extends Ship{
 		if(upOn) {
 			yloc --;
 		}
+		//check bounds
 		if(xloc < 0) {
 			xloc = 0;
 		}
@@ -110,6 +111,9 @@ public class PlayerShip extends Ship{
 		}
 	}
 	
+	/**
+	 * player shoots a projectile upwards
+	 */
 	public LinkedList<Projectile> shoot() {
 		LinkedList<Projectile> projList = new LinkedList<>();
 		if(willShoot) {
@@ -144,6 +148,15 @@ public class PlayerShip extends Ship{
 		this.leftOn = leftOn;
 	}
 
+	
+	/** 
+	 * @param crashedInto
+	 * carries out the action of each entity upon collision
+	 * healthup: player gains one health
+	 * weaponup: upgrade player weapon
+	 * nuke: wipe all enemies
+	 * projectile: remove one health
+	 */
 	@Override
 	protected void collisionAction(Entity crashedInto) {
 		// TODO Auto-generated method stub
@@ -154,6 +167,7 @@ public class PlayerShip extends Ship{
 			curGame.triggerNuke();
 		}
 		else if (crashedInto instanceof WeaponUp) {
+			//upgrade player weapon
 			if (weapon instanceof Singleshot) {
 				weapon = new Doubleshot();
 			}
@@ -162,6 +176,7 @@ public class PlayerShip extends Ship{
 			}
 		}
 		else if (crashedInto instanceof Projectile) {
+			//remove corresponding health from player health bar
 			Projectile crashedProjectile = (Projectile)crashedInto;
 			health -= crashedProjectile.getDamage();
 		}

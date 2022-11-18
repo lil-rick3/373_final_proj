@@ -24,13 +24,16 @@ import java.lang.Math;
  *
  *
  *This is the game that drives the whole thing
+ this class can be thought of as the game engine
  */
 public class Space_Game {
+
+
 	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
 	public final static int playerHeight = 200;
 	public boolean testFlag; //this is used to indicated whether we are running a test or not
-	private boolean nukeFlag;
+	private boolean nukeFlag; //this is used to indicate whether all enemies should be deleted
 
 	
 	private Space_Gui curGraphics;
@@ -39,16 +42,16 @@ public class Space_Game {
 	private LinkedList<Projectile> playerProjectiles;
 	private LinkedList<Projectile> enemyProjectiles;
 	private LinkedList<Powerup> powerups;
-	private MovementPattern moveStuff;
+	private MovementPattern moveStuff; //used to determine the movement pattern of the enemy ships
 	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	private int score;	
 
 	public Space_Game(Space_Gui curGraphics) {
 		
-		Entity.setSize(gameWidth, gameHeight);
+		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
 		moveStuff = new MovementPattern();
-		enemies = new LinkedList<EnemyShip>(); //do we not need to individually construct each of the enemyships?
+		enemies = new LinkedList<EnemyShip>();
 		playerProjectiles = new LinkedList<Projectile>();
 		enemyProjectiles = new LinkedList<Projectile>();
 		powerups = new LinkedList<Powerup>();
@@ -71,11 +74,14 @@ public class Space_Game {
 		while(true) {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
+			//move player
 			player.move();
+			//move enemies
 			moveStuff.increment();
 			waitForTurn();
 			currentlyModifying = true;
 			if(enemies.size() == 0 && !testFlag){
+				//start a new round
 				Round round = new Round(null, this, moveStuff);
 			}
 			tempProjList = player.shoot();
@@ -114,6 +120,10 @@ public class Space_Game {
 		}
 			
 	}
+	
+	/**
+	 * detect collisions between all possible entities
+	 */
 	private void detectCollisions(){
 
 		for(Projectile aProj: enemyProjectiles){
@@ -128,7 +138,7 @@ public class Space_Game {
 			Entity.CheckCollision(player, aPowerup);
 		}
 	}
-	/***
+	/**
 	 * all deletion of game entities should be done in here
 	 */
 	private void purgeComponents(){
@@ -169,6 +179,11 @@ public class Space_Game {
 	}
 
 
+	/**
+	 * @param xloc
+	 * @param yloc
+	 * generate a powerup upon enemy death
+	 */
 	private void generatePowerup(double xloc, double yloc) {
 		int ranNum = (int) (Math.random() * 2000.0);
 
@@ -218,6 +233,9 @@ public class Space_Game {
 	public boolean getNukeFlag() {
 		return nukeFlag;
 	}
+	/**
+	 * move powerups down the screen towards the user
+	 */
 	private void movePowerups() {
 		for(Powerup aPowerup: powerups) {
 			aPowerup.move();
@@ -228,6 +246,10 @@ public class Space_Game {
 			aPowerup.checkBounds();
 		}
 	}
+	/**
+	 * move player projectiles up the screen
+	 * move enemy projectiles down the screen
+	 */
 	private void moveProjectiles() {
 		// TODO Auto-generated method stub
 		for(Projectile aProj: playerProjectiles) {
@@ -239,6 +261,10 @@ public class Space_Game {
 			aProj.checkBounds();
 		}
 	}
+	/**
+	 * @param c
+	 * for the motion of the player
+	 */
 	public void startMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(true);
@@ -253,6 +279,9 @@ public class Space_Game {
 			player.setDownOn(true);
 		}
 	}
+	/**this is to avoid multithreading issues. When graphics are being repainted,
+	*doesn't allow modification to the entities
+	*/
 	private void waitForTurn(){
 		while(curGraphics.getCurrentlyPainting()){
 			try {
@@ -281,6 +310,11 @@ public class Space_Game {
 	public LinkedList<Powerup> getPowerups() {
 		return powerups;
 	}
+
+	/**
+	 * @param c
+	 * stop player motion
+	 */
 	public void stopMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(false);
@@ -304,6 +338,10 @@ public class Space_Game {
 		
 	}
 
+	/**
+	 * @param e
+	 * process any user input press
+	 */
 	public void processKeyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		char c = e.getKeyChar();
@@ -320,6 +358,10 @@ public class Space_Game {
 			
 	}
 
+	/**
+	 * @param e
+	 * process any user input release
+	 */
 	public void processKeyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 		char c = e.getKeyChar();
