@@ -11,18 +11,27 @@ import javax.swing.JPanel;
 import components.ships.PlayerShip;
 import components.ships.Ship;
 
+/**
+ * this class is the super class to essentially all moving/functional parts of the game
+ */
 public abstract class Entity {
-	
+
 	protected double xloc;
 	protected double yloc;
-	protected int width;
+	protected int width; 
 	protected int height;
+	//these variables are used for collision detection
 	protected BufferedImage projection;
-	protected boolean toBeDestroyed;
+	protected boolean toBeDestroyed; //entity will be deleted on the next game iteration
 	private static int XSIZE;
 	private static int YSIZE;
 	
-	
+	/**
+	 * reads in the file path used for the graphic of the entity and then
+	 *dynamically determines the width and height of the entity based
+	 *on how many pixels the .png file is
+	 * @param imagePath
+	 */
 	public Entity(String imagePath) {
 		toBeDestroyed = false;
 		try {
@@ -36,6 +45,11 @@ public abstract class Entity {
 		height = projection.getHeight();
 	}
 	
+	
+	/** 
+	 * @param g
+	 * @param spaceGui
+	 */
 	public void paintEntity(Graphics g, JPanel spaceGui){
 		g.drawImage(projection, (int)xloc, (int)yloc, spaceGui);		
 		
@@ -85,6 +99,13 @@ public abstract class Entity {
 			return false;
 		}
 	}
+	
+	/** 
+	 * @param pointx
+	 * @param pointy
+	 * @param outer
+	 * @return boolean
+	 */
 	private static boolean checkPoint(double pointx, double pointy, Entity outer){
 		double xLowerBound = outer.xloc;
 		double xUpperBound = outer.xloc + (double)outer.width;
@@ -107,22 +128,43 @@ public abstract class Entity {
 		}
 		
 	}
+	
+	/** 
+	 * @return double
+	 */
 	public double getxloc() {
 		return xloc;
 	}
+	
+	/** 
+	 * @return double
+	 */
 	public double getyloc() {
 		return yloc;
 	}
 	public abstract void move();
 
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getToBeDestroyed(){
 		return toBeDestroyed;
 	}
 
+	
+	/** 
+	 * @param destroy
+	 */
 	public void setToBeDestroyed(boolean destroy) {
 		toBeDestroyed = destroy;
 	}
+	/**
+	 * set the size of the game window
+	 * @param xsize
+	 * @param ysize
+	 */
 	public static void setSize(int xsize, int ysize){
 		XSIZE = xsize;
 		YSIZE = ysize;

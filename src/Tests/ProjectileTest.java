@@ -9,8 +9,9 @@ import game_engine.Space_Game;
 import graphics.Space_Gui;
 
 public class ProjectileTest {
-    //test if player projectile moves correctly
-    //test if enemy projectile moves correctly
+    /**test if player projectile moves correctly
+    *test if enemy projectile moves correctly
+    */
 
     public static void main(String[] args) {
         Space_Gui aGui = new Space_Gui();

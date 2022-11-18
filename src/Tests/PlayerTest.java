@@ -12,9 +12,10 @@ import java.util.LinkedList;
 import components.projectile.Projectile;
 
 public class PlayerTest {
-    //test for player shoot
-    //test for player movement
-    //test for player losing health
+    /**test for player shoot
+    *test for player movement
+    *test for player losing health
+    */
      public static void main(String[] args) {
         Space_Gui aGui = new Space_Gui();
         Space_Game aGame = new Space_Game(aGui);

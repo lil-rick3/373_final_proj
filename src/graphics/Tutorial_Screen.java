@@ -9,6 +9,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/***
+* This is the tutorial screen class. This makes the tutorial screen, and handles back button input
+*/
+
 
 public class Tutorial_Screen extends GUI_Panel_Class {
 	JPanel mainView;
@@ -16,7 +20,12 @@ public class Tutorial_Screen extends GUI_Panel_Class {
 	JLabel instructionsLabel1;
 	JLabel instructionsLabel2;
 	JButton backButton;
-	
+
+
+	/***
+	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
+	* This calls all the functions to actually create the GUI panel.
+	*/
 	public Tutorial_Screen(String stringIn, JPanel mainViewIn) {
 		super(stringIn);
 		this.mainView = mainViewIn;
@@ -39,9 +48,16 @@ public class Tutorial_Screen extends GUI_Panel_Class {
 		
 	}
 	
+	/***
+	* This is the custom ButtonListener class. This listens for the back button being clicked, and re-directs the user to the main menu.
+	*/
 	private class ButtonListener implements ActionListener
 	{
-		public void actionPerformed(ActionEvent e) //this is the method MenuListener must implement, as it comes from the ActionListener interface.
+
+		/***
+		* Catches button click and flips to the corresponding card page
+		*/
+		public void actionPerformed(ActionEvent e) 
 		{
 			JButton source = (JButton)(e.getSource());
 			
@@ -55,6 +71,3 @@ public class Tutorial_Screen extends GUI_Panel_Class {
 		
 	}
 }
-
-
-

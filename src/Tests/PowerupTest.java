@@ -12,10 +12,11 @@ import org.junit.Assert.*;
 import org.junit.Test;
 
 public class PowerupTest {
-    //test for if enemy drops a powerup after death
-    //test for nuke powerup action
-    //test for healthup powerup action
-    //test for weaponup powerup action
+    /**test for if enemy drops a powerup after death
+    *test for nuke powerup action
+    *test for healthup powerup action
+    *test for weaponup powerup action
+    */
 
     public static void main(String[] args) {
         Space_Gui aGui = new Space_Gui();
