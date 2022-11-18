@@ -12,18 +12,23 @@ import components.ships.PlayerShip;
 import components.ships.Ship;
 
 public abstract class Entity {
-	
+	//this class is the super class to essentially all moving/functional parts of the game
+
 	protected double xloc;
 	protected double yloc;
-	protected int width;
+	protected int width; 
 	protected int height;
+	//these variables are used for collision detection
 	protected BufferedImage projection;
-	protected boolean toBeDestroyed;
+	protected boolean toBeDestroyed; //entity will be deleted on the next game iteration
 	private static int XSIZE;
 	private static int YSIZE;
 	
 	
 	public Entity(String imagePath) {
+		//reads in the file path used for the graphic of the entity and then
+		//dynamically determines the width and height of the entity based
+		//on how many pixels the .png file is
 		toBeDestroyed = false;
 		try {
 			projection = ImageIO.read(new File(imagePath));
