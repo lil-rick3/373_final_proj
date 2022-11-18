@@ -7,11 +7,11 @@ import components.projectile.Projectile;
 import game_engine.MovementPattern;
 
 public class EnemyShip extends Ship {
-
+	//this class is for the enemy ships
 	
 
-	private MovementPattern howToMove;
-	private int id;
+	private MovementPattern howToMove;//this tells how the ships should move during each iteration of the game
+	private int id; //every enemyship gets a unique ID
 	private int health;
 	
 	public EnemyShip(MovementPattern moveInstr, int id, String imagePath) {
@@ -30,8 +30,6 @@ public class EnemyShip extends Ship {
 	@Override
 	public void move() {
 		howToMove.moveShip(this);
-		
-		
 	}
 
 	@Override
@@ -39,6 +37,7 @@ public class EnemyShip extends Ship {
 		LinkedList<Projectile> list = new LinkedList<>();
 		
 		int ranNum = (int) (Math.random() * 1000.0);
+		//randomly determine if the ship should shoot
 		if(ranNum < 1) {
 			list.add(new Projectile(false, false, false, 1, xloc, yloc, projectileFilePath));
 			//System.out.println(xloc + " " + yloc);
@@ -47,7 +46,7 @@ public class EnemyShip extends Ship {
 	}
 
 	public void checkBoundsForRemoval(){
-		
+		//TODO: implement
 	}
 	public void setxloc(double xloc){
 		this.xloc = xloc;

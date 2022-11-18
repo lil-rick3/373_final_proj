@@ -26,11 +26,13 @@ import java.lang.Math;
  *This is the game that drives the whole thing
  */
 public class Space_Game {
+	//this class can be thought of as the game engine
+
 	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
 	public final static int playerHeight = 200;
 	public boolean testFlag; //this is used to indicated whether we are running a test or not
-	private boolean nukeFlag;
+	private boolean nukeFlag; //this is used to indicate whether all enemies should be deleted
 
 	
 	private Space_Gui curGraphics;
@@ -39,13 +41,13 @@ public class Space_Game {
 	private LinkedList<Projectile> playerProjectiles;
 	private LinkedList<Projectile> enemyProjectiles;
 	private LinkedList<Powerup> powerups;
-	private MovementPattern moveStuff;
+	private MovementPattern moveStuff; //used to determine the movement pattern of the enemy ships
 	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	private int score;	
 
 	public Space_Game(Space_Gui curGraphics) {
 		
-		Entity.setSize(gameWidth, gameHeight);
+		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
 		moveStuff = new MovementPattern();
 		enemies = new LinkedList<EnemyShip>();
@@ -71,11 +73,14 @@ public class Space_Game {
 		while(true) {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
+			//move player
 			player.move();
+			//move enemies
 			moveStuff.increment();
 			waitForTurn();
 			currentlyModifying = true;
 			if(enemies.size() == 0 && !testFlag){
+				//start a new round
 				Round round = new Round(null, this, moveStuff);
 			}
 			tempProjList = player.shoot();
@@ -114,6 +119,7 @@ public class Space_Game {
 		}
 			
 	}
+	//detect collisions between all possibile entities
 	private void detectCollisions(){
 
 		for(Projectile aProj: enemyProjectiles){
@@ -203,6 +209,7 @@ public class Space_Game {
 		}
 
 	}
+	//current score of player
 	public int getScore(){
 		return score;
 	}
@@ -239,6 +246,7 @@ public class Space_Game {
 			aProj.checkBounds();
 		}
 	}
+	//for the motion of the player
 	public void startMotion(char c) {
 		if(c == 'd') {
 			player.setRightOn(true);
@@ -253,6 +261,8 @@ public class Space_Game {
 			player.setDownOn(true);
 		}
 	}
+	//this is to avoid multithreading issues. When graphics are being repainted,
+	//doesn't allow modification to the entities
 	private void waitForTurn(){
 		while(curGraphics.getCurrentlyPainting()){
 			try {
