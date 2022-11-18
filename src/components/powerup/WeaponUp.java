@@ -25,7 +25,11 @@ public class WeaponUp extends Powerup{
 		
 	}
 
-	@Override
+	
+    /** 
+     * @return String
+     */
+    @Override
     public String toString() {
         return "WeaponUp";
     }

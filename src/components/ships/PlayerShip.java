@@ -67,14 +67,26 @@ public class PlayerShip extends Ship{
 
 	}
 	
+	
+	/** 
+	 * @param input
+	 */
 	public void setWillShoot(boolean input) {
 		willShoot = input;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean isShooting() {
 		return isShooting;
 	}
 
+	
+	/** 
+	 * @param isShooting
+	 */
 	public void setShooting(boolean isShooting) {
 		this.isShooting = isShooting;
 	}
@@ -122,28 +134,52 @@ public class PlayerShip extends Ship{
 		return projList;
 	}
 
+	
+	/** 
+	 * @return int
+	 */
 	public int getLives(){
 		return health;
 	}
+	
+	/** 
+	 * @return Weapon
+	 */
 	public Weapon getWeapon() {
 		return this.weapon;
 	}
 	
+	
+	/** 
+	 * @param upOn
+	 */
 	public void setUpOn(boolean upOn) {
 		this.upOn = upOn;
 	}
 
 
+	
+	/** 
+	 * @param downOn
+	 */
 	public void setDownOn(boolean downOn) {
 		this.downOn = downOn;
 	}
 
 
+	
+	/** 
+	 * @param rightOn
+	 */
 	public void setRightOn(boolean rightOn) {
 		this.rightOn = rightOn;
 	}
 
 
+	
+	/** 
+	 * @param leftOn
+	 */
 	public void setLeftOn(boolean leftOn) {
 		this.leftOn = leftOn;
 	}

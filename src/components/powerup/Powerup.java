@@ -29,12 +29,24 @@ public abstract class Powerup extends Entity{
 		this.yloc += speed;
 	}
 
+    
+    /** 
+     * @return double
+     */
     public double getyLoc() {
         return this.yloc;
     }
+    
+    /** 
+     * @return double
+     */
     public double getxLoc() {
         return this.xloc;
     }
+    
+    /** 
+     * @return double
+     */
     public double getSpeed() {
         return this.speed;
     }

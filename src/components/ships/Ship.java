@@ -26,9 +26,17 @@ public abstract class Ship extends Entity{
 	public abstract LinkedList<Projectile> shoot();
 	
 	
+	
+	/** 
+	 * @param ahealth
+	 */
 	public void setHealth(int ahealth) {
 		this.health = ahealth;
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getHealth() {
 		return this.health;
 	}

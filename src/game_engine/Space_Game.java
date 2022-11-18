@@ -218,6 +218,10 @@ public class Space_Game {
 		}
 
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getScore(){
 		return score;
 	}
@@ -230,6 +234,10 @@ public class Space_Game {
 		nukeFlag = false;
 	}
 
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getNukeFlag() {
 		return nukeFlag;
 	}
@@ -292,21 +300,41 @@ public class Space_Game {
 			}
 		}
 	}
+	
+	/** 
+	 * @return PlayerShip
+	 */
 	public PlayerShip getPlayerShip() {
 		return player;
 	}
+	
+	/** 
+	 * @return LinkedList<EnemyShip>
+	 */
 	public LinkedList<EnemyShip> getEnemyShips() {
 		return enemies;
 	}
+	
+	/** 
+	 * @return LinkedList<Projectile>
+	 */
 	public LinkedList<Projectile> getPlayerProjectiles(){
 		return playerProjectiles;
 		
 	}
+	
+	/** 
+	 * @return LinkedList<Projectile>
+	 */
 	public LinkedList<Projectile> getEnemyProjectiles(){
 		return enemyProjectiles;
 		
 	}
 
+	
+	/** 
+	 * @return LinkedList<Powerup>
+	 */
 	public LinkedList<Powerup> getPowerups() {
 		return powerups;
 	}
@@ -333,6 +361,10 @@ public class Space_Game {
 	public void triggerNuke(){
 		nukeFlag = true;
 	}
+	
+	/** 
+	 * @param e
+	 */
 	public void processKeyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
 		
@@ -371,6 +403,10 @@ public class Space_Game {
 			player.setShooting(false);
 		}
 	}
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getCurrentlyModifying(){
 		return currentlyModifying;
 	}
