@@ -7,10 +7,13 @@ import javax.imageio.ImageIO;
 
 import components.Entity;
 
+/**
+ * Gives a bonus effect to player. Is potentially dropped by enemies upon death
+ */
 public abstract class Powerup extends Entity{
 
     protected double speed;
-    
+
     public Powerup(double xloc, double yloc, String imagePath) {
 
         super(imagePath);
@@ -19,6 +22,9 @@ public abstract class Powerup extends Entity{
         this.speed = 0.3;
     }
 
+    /**
+    *Move the powerup
+    */
     public void move() {
 		this.yloc += speed;
 	}

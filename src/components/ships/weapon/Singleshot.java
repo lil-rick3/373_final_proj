@@ -4,9 +4,12 @@ import java.util.LinkedList;
 
 import components.projectile.Projectile;
 
+/**
+ * this weapon class is what the player initially starts with. It shoots one projectile, alternating from the left and right
+ * side of the ship. This weapon upgrades into the double shot weapon
+ */
 public class Singleshot extends Weapon {
-    //this weapon class is what the player initially starts with. It shoots one projectile, alternating from the left and right
-    //side of the ship. This weapon upgrades into the double shot weapon
+    //
     private boolean shootOnLeft; //variable used to allow for alternation of where the projectile comes from on the ship graphic
 
     public Singleshot() {
@@ -15,6 +18,14 @@ public class Singleshot extends Weapon {
         this.shootOnLeft = true;
     }
 
+    
+    /** 
+     * @param xloc
+     * @param yloc
+     * @param ImageFilePath
+     * @return LinkedList<Projectile>
+     * Shoot one projectile at a time, alternating between right and left.
+     */
     public LinkedList<Projectile> shoot(double xloc, double yloc, String ImageFilePath) {
         LinkedList<Projectile> list = new LinkedList<>();
         Projectile tempProj;

@@ -3,7 +3,9 @@ package components.projectile;
 import components.Entity;
 import components.ships.Ship;
 
-//class for the projectiles that ships can shoot
+/**
+ * class for the projectiles that ships can shoot
+ */
 public class Projectile extends Entity{
 	//TODO: use velocity vector instead
 	boolean isUp; //is projectile moving up
@@ -56,8 +58,12 @@ public class Projectile extends Entity{
 		}
 	}
 
+	
+	/** 
+	 * @param crashedInto
+	 * delete the projectile
+	 */
 	@Override
-	//delete the projectile
 	protected void collisionAction(Entity crashedInto) {
 		if(crashedInto instanceof Ship){
 			toBeDestroyed = true;

@@ -6,10 +6,11 @@ import components.Entity;
 import components.projectile.Projectile;
 import game_engine.MovementPattern;
 
+/**
+ * this class is for the enemy ships
+ */
 public class EnemyShip extends Ship {
-	//this class is for the enemy ships
 	
-
 	private MovementPattern howToMove;//this tells how the ships should move during each iteration of the game
 	private int id; //every enemyship gets a unique ID
 	private int health;
@@ -32,6 +33,11 @@ public class EnemyShip extends Ship {
 		howToMove.moveShip(this);
 	}
 
+	
+	/** 
+	 * @return LinkedList<Projectile>
+	 * randomly determine if enemy should shoot a projectile downwards
+	 */
 	@Override
 	public LinkedList<Projectile> shoot() {
 		LinkedList<Projectile> list = new LinkedList<>();
@@ -60,6 +66,12 @@ public class EnemyShip extends Ship {
 		return health;
 	}
 
+	
+	/** 
+	 * @param crashedInto
+	 * if enemy collides with player projectile,
+	 * lose health
+	 */
 	@Override
 	protected void collisionAction(Entity crashedInto) {
 		// TODO Auto-generated method stub

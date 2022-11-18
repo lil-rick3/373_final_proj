@@ -11,8 +11,10 @@ import javax.swing.JPanel;
 import components.ships.PlayerShip;
 import components.ships.Ship;
 
+/**
+ * this class is the super class to essentially all moving/functional parts of the game
+ */
 public abstract class Entity {
-	//this class is the super class to essentially all moving/functional parts of the game
 
 	protected double xloc;
 	protected double yloc;
@@ -24,11 +26,13 @@ public abstract class Entity {
 	private static int XSIZE;
 	private static int YSIZE;
 	
-	
+	/**
+	 * reads in the file path used for the graphic of the entity and then
+	 *dynamically determines the width and height of the entity based
+	 *on how many pixels the .png file is
+	 * @param imagePath
+	 */
 	public Entity(String imagePath) {
-		//reads in the file path used for the graphic of the entity and then
-		//dynamically determines the width and height of the entity based
-		//on how many pixels the .png file is
 		toBeDestroyed = false;
 		try {
 			projection = ImageIO.read(new File(imagePath));
@@ -128,6 +132,11 @@ public abstract class Entity {
 	public void setToBeDestroyed(boolean destroy) {
 		toBeDestroyed = destroy;
 	}
+	/**
+	 * set the size of the game window
+	 * @param xsize
+	 * @param ysize
+	 */
 	public static void setSize(int xsize, int ysize){
 		XSIZE = xsize;
 		YSIZE = ysize;

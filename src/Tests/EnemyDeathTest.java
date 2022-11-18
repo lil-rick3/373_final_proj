@@ -11,7 +11,8 @@ import game_engine.Space_Game;
 import graphics.Space_Gui;
 
 public class EnemyDeathTest {
-    //test for if enemy dies after losing all health
+    /**test for if enemy dies after losing all health
+    */
     public static void main(String[] args) {
         Space_Gui aGui = new Space_Gui();
         Space_Game aGame = new Space_Game(aGui);

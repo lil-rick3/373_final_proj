@@ -80,6 +80,9 @@ public class PlayerShip extends Ship{
 	}
 
 
+	/**
+	 * move player ship based on key input
+	 */
 	public void move() {
 		if(rightOn) {
 			xloc++;
@@ -108,6 +111,9 @@ public class PlayerShip extends Ship{
 		}
 	}
 	
+	/**
+	 * player shoots a projectile upwards
+	 */
 	public LinkedList<Projectile> shoot() {
 		LinkedList<Projectile> projList = new LinkedList<>();
 		if(willShoot) {
@@ -142,6 +148,15 @@ public class PlayerShip extends Ship{
 		this.leftOn = leftOn;
 	}
 
+	
+	/** 
+	 * @param crashedInto
+	 * carries out the action of each entity upon collision
+	 * healthup: player gains one health
+	 * weaponup: upgrade player weapon
+	 * nuke: wipe all enemies
+	 * projectile: remove one health
+	 */
 	@Override
 	protected void collisionAction(Entity crashedInto) {
 		// TODO Auto-generated method stub

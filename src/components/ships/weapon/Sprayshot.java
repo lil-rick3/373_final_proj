@@ -4,15 +4,26 @@ import java.util.LinkedList;
 
 import components.projectile.Projectile;
 
+/**
+ * this weapon allows the player to shoot two projectiles simultaneously like the double shot but
+ * also two diagonal projectiles from either side of the ship. This is the final weapon upgrade
+ */
 public class Sprayshot extends Weapon {
-    //this weapon allows the player to shoot two projectiles simultaneously like the double shot but
-    //also two diagonal projectiles from either side of the ship. This is the final weapon upgrade
    
     public Sprayshot() {
         this.speed = 4;
         
     }
 
+    
+    /** 
+     * @param xloc
+     * @param yloc
+     * @param ImageFilePath
+     * @return LinkedList<Projectile>
+     * Shoot 4 projectiles simulatenously. Two diagonal projectiles from the left and right of the ship in
+     * addition to the double shot projectiles
+     */
     public LinkedList<Projectile> shoot(double xloc, double yloc,String ImageFilePath) {
         LinkedList<Projectile> projList = new LinkedList<>();
         
