@@ -26,6 +26,10 @@ public class HealthUp extends Powerup {
 		}
     }
 		
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "Healthup";

@@ -24,6 +24,10 @@ public class EnemyShip extends Ship {
 		health = 3;
 	}
 	
+	
+	/** 
+	 * @return int
+	 */
 	public int getId() {
 		return id;
 	}
@@ -54,14 +58,26 @@ public class EnemyShip extends Ship {
 	public void checkBoundsForRemoval(){
 		//TODO: implement
 	}
+	
+	/** 
+	 * @param xloc
+	 */
 	public void setxloc(double xloc){
 		this.xloc = xloc;
 		
 	}
+	
+	/** 
+	 * @param yloc
+	 */
 	public void setyloc(double yloc){
 		this.yloc = yloc;
 		
 	}
+	
+	/** 
+	 * @return int
+	 */
 	public int getHealth() {
 		return health;
 	}
@@ -85,6 +101,10 @@ public class EnemyShip extends Ship {
 		}
 	}
 
+	
+	/** 
+	 * @return String
+	 */
 	@Override
     public String toString() {
         return "Enemy number" + id;

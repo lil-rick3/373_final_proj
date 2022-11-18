@@ -14,6 +14,10 @@ public abstract class Weapon {
         speed = 0;
     }
 
+    
+    /** 
+     * @return int
+     */
     public int getSpeed() {
         return this.speed;
     }

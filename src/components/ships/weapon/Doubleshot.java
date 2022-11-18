@@ -32,6 +32,10 @@ public class Doubleshot extends Weapon{
 
     }
     
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "DoubleShot";

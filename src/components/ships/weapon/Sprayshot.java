@@ -38,6 +38,10 @@ public class Sprayshot extends Weapon {
         return projList;
     }
 
+    
+    /** 
+     * @return String
+     */
     @Override
     public String toString() {
         return "SprayShot";

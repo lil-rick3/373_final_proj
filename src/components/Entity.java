@@ -45,6 +45,11 @@ public abstract class Entity {
 		height = projection.getHeight();
 	}
 	
+	
+	/** 
+	 * @param g
+	 * @param spaceGui
+	 */
 	public void paintEntity(Graphics g, JPanel spaceGui){
 		g.drawImage(projection, (int)xloc, (int)yloc, spaceGui);		
 		
@@ -94,6 +99,13 @@ public abstract class Entity {
 			return false;
 		}
 	}
+	
+	/** 
+	 * @param pointx
+	 * @param pointy
+	 * @param outer
+	 * @return boolean
+	 */
 	private static boolean checkPoint(double pointx, double pointy, Entity outer){
 		double xLowerBound = outer.xloc;
 		double xUpperBound = outer.xloc + (double)outer.width;
@@ -116,19 +128,35 @@ public abstract class Entity {
 		}
 		
 	}
+	
+	/** 
+	 * @return double
+	 */
 	public double getxloc() {
 		return xloc;
 	}
+	
+	/** 
+	 * @return double
+	 */
 	public double getyloc() {
 		return yloc;
 	}
 	public abstract void move();
 
 	
+	
+	/** 
+	 * @return boolean
+	 */
 	public boolean getToBeDestroyed(){
 		return toBeDestroyed;
 	}
 
+	
+	/** 
+	 * @param destroy
+	 */
 	public void setToBeDestroyed(boolean destroy) {
 		toBeDestroyed = destroy;
 	}
