@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch space_main",
+            "request": "launch",
+            "mainClass": "main.space_main",
+            "projectName": "373_final_proj_ed9e51a5"
+        },
+        {
+            "type": "java",
             "name": "Launch PlayerTest",
             "request": "launch",
             "mainClass": "Tests.PlayerTest",
