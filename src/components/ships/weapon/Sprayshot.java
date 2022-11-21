@@ -3,6 +3,7 @@ package components.ships.weapon;
 import java.util.LinkedList;
 
 import components.projectile.Projectile;
+import components.ships.Ship;
 
 /**
  * this weapon allows the player to shoot two projectiles simultaneously like the double shot but
@@ -10,7 +11,8 @@ import components.projectile.Projectile;
  */
 public class Sprayshot extends Weapon {
    
-    public Sprayshot() {
+    public Sprayshot(Ship ship) {
+        super(ship);
         this.speed = 4;
         
     }
@@ -28,13 +30,13 @@ public class Sprayshot extends Weapon {
         LinkedList<Projectile> projList = new LinkedList<>();
         
         //shoot a right diagonal projectile
-        projList.add(new Projectile(true, true, false, this.getSpeed(), xloc + 18, yloc,ImageFilePath));
+        projList.add(new Projectile(0.25*this.speed, -1* this.speed,  xloc + 18, yloc,ImageFilePath));
         //shoot a left diagonal projectile
-        projList.add(new Projectile(true, true, true, this.getSpeed(), xloc, yloc,ImageFilePath));
+        projList.add(new Projectile(-0.25*this.speed, -1*this.speed, xloc, yloc,ImageFilePath));
         //shoot a straight projectile from left side
-        projList.add(new Projectile(true, false, false, this.getSpeed(), xloc, yloc,ImageFilePath));
+        projList.add(new Projectile(0, -1* this.speed, xloc, yloc,ImageFilePath));
         //shoot a straight projectile from right side
-        projList.add(new Projectile(true, false, false, this.getSpeed(), xloc + 18, yloc,ImageFilePath));
+        projList.add(new Projectile(0,-1*this.speed, xloc + 18, yloc,ImageFilePath));
         return projList;
     }
 

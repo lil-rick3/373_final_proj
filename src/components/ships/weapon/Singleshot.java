@@ -3,6 +3,7 @@ package components.ships.weapon;
 import java.util.LinkedList;
 
 import components.projectile.Projectile;
+import components.ships.Ship;
 
 /**
  * this weapon class is what the player initially starts with. It shoots one projectile, alternating from the left and right
@@ -12,8 +13,8 @@ public class Singleshot extends Weapon {
     //
     private boolean shootOnLeft; //variable used to allow for alternation of where the projectile comes from on the ship graphic
 
-    public Singleshot() {
-        super();
+    public Singleshot(Ship ship) {
+        super(ship);
         this.speed = 3;
         this.shootOnLeft = true;
     }
@@ -32,14 +33,14 @@ public class Singleshot extends Weapon {
         if(shootOnLeft) {
             //shoot from left side
             shootOnLeft = !shootOnLeft;
-            tempProj = new Projectile(true, false, false, this.getSpeed(), xloc, yloc, ImageFilePath);
+            tempProj = new Projectile(0,-1*this.getSpeed(), xloc, yloc, ImageFilePath);
             list.add(tempProj);
             
         }
         else {
             //shoot from right side
             shootOnLeft = !shootOnLeft;
-            tempProj = new Projectile(true, false, false, this.getSpeed(), xloc + 18, yloc, ImageFilePath);
+            tempProj = new Projectile(0,-1* this.speed, xloc + 18, yloc, ImageFilePath);
             list.add(tempProj);
         }
         return list;

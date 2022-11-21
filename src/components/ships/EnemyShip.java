@@ -49,7 +49,7 @@ public class EnemyShip extends Ship {
 		int ranNum = (int) (Math.random() * 1000.0);
 		//randomly determine if the ship should shoot
 		if(ranNum < 1) {
-			list.add(new Projectile(false, false, false, 1, xloc, yloc, projectileFilePath));
+			list.add(new Projectile(0, 1, xloc, yloc, projectileFilePath));
 			//System.out.println(xloc + " " + yloc);
 		}
 		return list;
