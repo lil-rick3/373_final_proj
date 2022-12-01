@@ -8,25 +8,34 @@ import components.ships.Ship;
  */
 public class Projectile extends Entity{
 	//TODO: use velocity vector instead
-	boolean isUp; //is projectile moving up
-	boolean isDiag; //is projectile moving diagonal
-	boolean isLeft; //is projectile coming from the left side of the ship
+	double xVel;
+	double yVel;
+	
 	double speed;
 	private int damage;
-	
-	public Projectile(boolean isUp, boolean isDiag, boolean isLeft, double speed, double xLoc, double yLoc , String imagePath) {
+	/**
+	 * 
+	 * @param xVel unit vector in x
+	 * @param yVel unit vector in y
+	 * @param xLoc
+	 * @param yLoc
+	 * @param imagePath
+	 * 
+	 */
+	public Projectile(double xVel, double yVel, double xLoc, double yLoc , String imagePath) {
+		
 		super(imagePath);
-		this.isUp = isUp;
-		this.isDiag = isDiag;
-		this.isLeft = isLeft;
-		this.speed = speed;
+		this.xVel = xVel;
+		this.yVel = yVel;
+		
+		
 		this.xloc = xLoc;
 		this.yloc = yLoc;
 		damage = 1;
 	}
 	
 	public void move() {
-		if(isUp) {
+		/*if(isUp) {
 			if(isDiag) {
 				if(isLeft) {
 					this.yloc -= speed;
@@ -55,7 +64,10 @@ public class Projectile extends Entity{
 			else {
 				this.yloc += speed;
 			}
-		}
+		}*/
+
+		this.yloc += yVel;
+		this.xloc += xVel;
 	}
 
 	

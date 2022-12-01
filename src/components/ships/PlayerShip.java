@@ -57,7 +57,7 @@ public class PlayerShip extends Ship{
 		downOn = false;
 		rightOn = false;
 		leftOn = false;
-		weapon = new Singleshot();
+		weapon = new Singleshot(this);
 		isShooting = false;//says if the user has spacebard constantly pressed
 		//shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will
@@ -205,10 +205,10 @@ public class PlayerShip extends Ship{
 		else if (crashedInto instanceof WeaponUp) {
 			//upgrade player weapon
 			if (weapon instanceof Singleshot) {
-				weapon = new Doubleshot();
+				weapon = new Doubleshot(this);
 			}
 			else if (weapon instanceof Doubleshot) {
-				weapon = new Sprayshot();
+				weapon = new Sprayshot(this);
 			}
 		}
 		else if (crashedInto instanceof Projectile) {
