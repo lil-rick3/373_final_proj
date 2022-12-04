@@ -5,10 +5,12 @@ import components.Entity;
 public class Star extends Entity {
 
     double speed;
-
-    Star(int xloc, int yloc, int type, String filePath){
-        super(filePath);
-        speed = type;
+    String filePath;
+    public Star(double xLoc, int type){        
+        super("src/graphicImages/star" + String.valueOf(type) +".png");
+        speed = type * 0.1;
+        this.xloc = xLoc;
+        this.yloc = 0;
 
     }
     
@@ -22,7 +24,7 @@ public class Star extends Entity {
 
     @Override
     public void move() {
-        // TODO Auto-generated method stub
+        yloc += speed;
         
     }
     

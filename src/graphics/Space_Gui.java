@@ -19,6 +19,7 @@ import components.projectile.Projectile;
 import components.ships.EnemyShip;
 import components.ships.PlayerShip;
 import components.ships.Ship;
+import components.star.Star;
 import game_engine.Space_Game;
 
 
@@ -71,6 +72,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 		}
 		currentlyPainting = true;	
 		paintBackground(g);
+		paintStars(g);
 		paintShip(g);
 		paintProjectiles(g);
 		paintPowerups(g);
@@ -79,6 +81,12 @@ public class Space_Gui extends JPanel implements KeyListener{
 		
 	}
 	
+	private void paintStars(Graphics g) {
+		LinkedList<Star> stars = currentGame.getStars();
+		for(Star aStar:stars){
+			aStar.paintEntity(g,this);
+		}
+	}
 	public void setNukeGraphics(){
 		nukeCounter = 1000;
 	}

@@ -13,6 +13,7 @@ import components.projectile.Projectile;
 import components.ships.EnemyShip;
 import components.ships.PlayerShip;
 import components.ships.Ship;
+import components.star.Star;
 import graphics.Space_Gui;
 import java.lang.Math;
 
@@ -42,10 +43,11 @@ public class Space_Game {
 	private LinkedList<Projectile> playerProjectiles;
 	private LinkedList<Projectile> enemyProjectiles;
 	private LinkedList<Powerup> powerups;
+	private LinkedList<Star> stars;
 	private MovementPattern moveStuff; //used to determine the movement pattern of the enemy ships
 	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	private int score;	
-
+	private double starSpawnRate;
 	public Space_Game(Space_Gui curGraphics) {
 		
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
@@ -55,14 +57,19 @@ public class Space_Game {
 		playerProjectiles = new LinkedList<Projectile>();
 		enemyProjectiles = new LinkedList<Projectile>();
 		powerups = new LinkedList<Powerup>();
+		stars = new LinkedList<Star>();
 		this.curGraphics = curGraphics;
 		currentlyModifying = false;
 		nukeFlag = false;
 		testFlag = false;
 		score = 0;
+		//spawnStars();
+		starSpawnRate = 0.05;
 				
 	}
 	
+	
+
 	public void runGame() {
 		waitForTurn();
 		currentlyModifying = true;
@@ -97,6 +104,7 @@ public class Space_Game {
 					enemyProjectiles.addAll(tempProjList);
 				}
 			}
+			createStars();
 			currentlyModifying = false;
 			detectCollisions();
 			waitForTurn();
@@ -106,8 +114,11 @@ public class Space_Game {
 			}
 			purgeComponents();
 			currentlyModifying = false;
+
+
 			moveProjectiles();
 			movePowerups();
+			moveStars();
 			try {
 				Thread.sleep(5);
 			}catch(InterruptedException e) {
@@ -120,7 +131,34 @@ public class Space_Game {
 		}
 			
 	}
-	
+
+
+	/*private void spawnStars() {
+		int type;
+		double xLoc;
+		for(int i = 0; i < 50; i++){
+			type = (int) ((Math.random() * 3) + 1);
+			xLoc = ((Math.random() * gameWidth));
+			//System.out.println(xLoc);
+			stars.add(new Star(xLoc, type));
+		}
+
+	}
+	*/
+	/***
+	 * creates a number of stars each round
+	 */
+	private void createStars() {
+		int type;
+		double xLoc;
+		if(Math.random()< starSpawnRate){
+			type = (int) ((Math.random() * 3) + 1);
+			xLoc = ((Math.random() * gameWidth));
+			//System.out.println(xLoc);
+			stars.add(new Star(xLoc, type));
+		}
+	}
+
 	/**
 	 * detect collisions between all possible entities
 	 */
@@ -173,6 +211,13 @@ public class Space_Game {
 			Powerup tempPowerup = powerupIterator.next();
 			if(tempPowerup.getToBeDestroyed()) {
 				powerupIterator.remove();
+			}
+		}
+		ListIterator<Star> starIterator = stars.listIterator();
+		while(starIterator.hasNext()) {
+			Star tempStar = starIterator.next();
+			if(tempStar.getToBeDestroyed()) {
+				starIterator.remove();
 			}
 		}
 
@@ -241,6 +286,13 @@ public class Space_Game {
 	public boolean getNukeFlag() {
 		return nukeFlag;
 	}
+
+	private void moveStars(){
+		for(Star aStar: stars) {
+			aStar.move();
+			aStar.checkBounds();
+		}
+	}
 	/**
 	 * move powerups down the screen towards the user
 	 */
@@ -249,10 +301,11 @@ public class Space_Game {
 			aPowerup.move();
 			aPowerup.checkBounds();
 		}
-		for(Powerup aPowerup: powerups) {
+		/*for(Powerup aPowerup: powerups) {
 			aPowerup.move();
 			aPowerup.checkBounds();
 		}
+		*/
 	}
 	/**
 	 * move player projectiles up the screen
@@ -301,6 +354,11 @@ public class Space_Game {
 		}
 	}
 	
+	public LinkedList<Star> getStars(){
+		return stars;
+	}
+
+
 	/** 
 	 * @return PlayerShip
 	 */

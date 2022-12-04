@@ -19,7 +19,7 @@ public abstract class Powerup extends Entity{
         super(imagePath);
         this.xloc = xloc;
         this.yloc = yloc;
-        this.speed = 0.3;
+        this.speed = 0.6;
     }
 
     /**
