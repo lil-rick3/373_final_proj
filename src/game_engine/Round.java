@@ -22,7 +22,7 @@ public class Round {
 		
 		for(int i = 0; i < 3; i ++) {
 			for(int j = 0; j < 10; j++) {
-				listEnemies.add(new EnemyShip(demMoves, (10 * i) + j, "src/graphicImages/enemyship1.png"));
+				listEnemies.add(new EnemyShip(demMoves, (10 * i) + j, "src/graphicImages/enemyship4.png"));
 			}
 		}
 		
