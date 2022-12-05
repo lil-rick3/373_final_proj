@@ -8,14 +8,16 @@ import java.util.LinkedList;
 
 import components.Entity;
 import components.projectile.Projectile;
+import components.ships.weapon.Weapon;
 
 public abstract class Ship extends Entity{
 
-	
+	protected Weapon weapon;
 	protected int health;
 	protected String projectileFilePath;
-	
-	
+	protected boolean isUp;
+	protected int projVelocity;
+
 	public Ship(String imagePath) {
 		super(imagePath);
 		
@@ -39,5 +41,8 @@ public abstract class Ship extends Entity{
 	 */
 	public int getHealth() {
 		return this.health;
+	}
+	public boolean getIsUp(){
+		return isUp;
 	}
 }

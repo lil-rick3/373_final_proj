@@ -6,6 +6,8 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import components.Entity;
+import components.ships.PlayerShip;
+import components.ships.Ship;
 
 /**
  * Gives a bonus effect to player. Is potentially dropped by enemies upon death
@@ -21,6 +23,14 @@ public abstract class Powerup extends Entity{
         this.yloc = yloc;
         this.speed = 0.6;
     }
+
+
+    protected void collisionAction(Entity crashedInto) {
+		if(crashedInto instanceof PlayerShip){
+			toBeDestroyed = true;
+		}
+    }
+
 
     /**
     *Move the powerup

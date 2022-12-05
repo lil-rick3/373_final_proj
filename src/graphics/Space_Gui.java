@@ -91,14 +91,19 @@ public class Space_Gui extends JPanel implements KeyListener{
 		nukeCounter = 1000;
 	}
 	private void paintBackground(Graphics g) {
+		int opacity = 255;
+		if(currentGame.getSlowCounter() > 0){
+			opacity = 40;
+		}
 		if(nukeCounter == 0){
-			g.setColor(new Color(0,0,0));
+			
+			g.setColor(new Color(0,0,0, opacity));
 			g.fillRect(0, 0, 600, 500);
 			
 		}
 		else{
 			g.setColor(new Color(nukeCounter/10,nukeCounter/10,
-			nukeCounter/10));
+			nukeCounter/10, opacity));
 			g.fillRect(0, 0, 600, 600);
 			nukeCounter--;
 		}

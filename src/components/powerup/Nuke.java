@@ -15,13 +15,14 @@ public class Nuke extends Powerup {
      * @param crashedInto
      * delete the powerup
      */
+    /*
     @Override
 	protected void collisionAction(Entity crashedInto) {
 		if(crashedInto instanceof Ship){
 			toBeDestroyed = true;
 		}
     }
-		
+		*/
     
     /** 
      * @return String

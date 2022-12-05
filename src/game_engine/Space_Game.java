@@ -8,6 +8,7 @@ import components.Entity;
 import components.powerup.HealthUp;
 import components.powerup.Nuke;
 import components.powerup.Powerup;
+import components.powerup.Slow;
 import components.powerup.WeaponUp;
 import components.projectile.Projectile;
 import components.ships.EnemyShip;
@@ -48,6 +49,8 @@ public class Space_Game {
 	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	private int score;	
 	private double starSpawnRate;
+	private int slowCounter;
+	private int timeDelay = 5;
 	public Space_Game(Space_Gui curGraphics) {
 		
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
@@ -62,6 +65,7 @@ public class Space_Game {
 		currentlyModifying = false;
 		nukeFlag = false;
 		testFlag = false;
+		slowCounter = 0;
 		score = 0;
 		//spawnStars();
 		starSpawnRate = 0.05;
@@ -120,7 +124,15 @@ public class Space_Game {
 			movePowerups();
 			moveStars();
 			try {
-				Thread.sleep(5);
+				
+				if(slowCounter <= 0){
+					Thread.sleep(timeDelay);
+				}
+				else{
+					Thread.sleep(timeDelay + timeDelay*slowCounter/2000);
+					slowCounter --;
+				}
+				
 			}catch(InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -245,6 +257,9 @@ public class Space_Game {
 				//generate nuke
 				powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
 			}
+			else if(ranNum > 250 && ranNum < 300){
+				powerups.add(new Slow(xloc, yloc, "src/graphicImages/Slow.png"));
+			}
 		}
 		//FOR TESTING
 		else {
@@ -285,6 +300,9 @@ public class Space_Game {
 	 */
 	public boolean getNukeFlag() {
 		return nukeFlag;
+	}
+	public int getSlowCounter(){
+		return slowCounter;
 	}
 
 	private void moveStars(){
@@ -419,6 +437,9 @@ public class Space_Game {
 	public void triggerNuke(){
 		nukeFlag = true;
 	}
+	public void triggerSlow() {
+		slowCounter = 2000;
+	}
 	
 	/** 
 	 * @param e
@@ -468,5 +489,9 @@ public class Space_Game {
 	public boolean getCurrentlyModifying(){
 		return currentlyModifying;
 	}
+
+
+
+	
 	
 }

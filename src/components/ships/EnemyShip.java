@@ -4,6 +4,9 @@ import java.util.LinkedList;
 
 import components.Entity;
 import components.projectile.Projectile;
+import components.ships.weapon.Doubleshot;
+import components.ships.weapon.Singleshot;
+import components.ships.weapon.Sprayshot;
 import game_engine.MovementPattern;
 
 /**
@@ -18,10 +21,13 @@ public class EnemyShip extends Ship {
 	public EnemyShip(MovementPattern moveInstr, int id, String imagePath) {
 		super(imagePath);
 		projectileFilePath = "src/graphicImages/EnemyProjectile.png";
+		isUp = false;
 		howToMove = moveInstr;
 		this.id = id;
 		move();
 		health = 3;
+		projVelocity = 1;
+		weapon = new Sprayshot(this, projVelocity);
 	}
 	
 	
@@ -44,15 +50,13 @@ public class EnemyShip extends Ship {
 	 */
 	@Override
 	public LinkedList<Projectile> shoot() {
-		LinkedList<Projectile> list = new LinkedList<>();
 		
+		LinkedList<Projectile> projList = new LinkedList<>();
 		int ranNum = (int) (Math.random() * 1000.0);
-		//randomly determine if the ship should shoot
 		if(ranNum < 1) {
-			list.add(new Projectile(0, 1, xloc, yloc, projectileFilePath));
-			//System.out.println(xloc + " " + yloc);
+			projList = this.weapon.shoot(xloc,yloc, projectileFilePath);
 		}
-		return list;
+		return projList;
 	}
 
 	public void checkBoundsForRemoval(){

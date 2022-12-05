@@ -169,5 +169,11 @@ public abstract class Entity {
 		XSIZE = xsize;
 		YSIZE = ysize;
 	}
+	public int getWidth(){
+		return width;
+	}
+	public int getHeight(){
+		return height;
+	}
 }
 

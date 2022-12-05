@@ -11,6 +11,7 @@ import components.Entity;
 import components.powerup.HealthUp;
 import components.powerup.Nuke;
 import components.powerup.Powerup;
+import components.powerup.Slow;
 import components.powerup.WeaponUp;
 import components.projectile.Projectile;
 import components.ships.weapon.*;
@@ -40,15 +41,17 @@ public class PlayerShip extends Ship{
 	//tells if the user is currently pressing the shoot button, prevents keeping spacebar pressed
 	
 	private boolean willShoot;
+	
 	//tells if the user has pressed spacebar this cycle, helps prevent 
 	//multithreading errors
-
-	private Weapon weapon;
+	
+	
 
 	private Space_Game curGame;
 	public PlayerShip(double xloc, double yloc, String imagePath, Space_Game curGame) {
 		
 		super(imagePath);
+		isUp = true;
 		health = 3;
 		this.xloc = xloc;
 		this.yloc = yloc;
@@ -57,7 +60,8 @@ public class PlayerShip extends Ship{
 		downOn = false;
 		rightOn = false;
 		leftOn = false;
-		weapon = new Singleshot(this);
+		projVelocity = 3;
+		weapon = new Singleshot(this, projVelocity);
 		isShooting = false;//says if the user has spacebard constantly pressed
 		//shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will
@@ -202,13 +206,16 @@ public class PlayerShip extends Ship{
 		else if (crashedInto instanceof Nuke) {
 			curGame.triggerNuke();
 		}
+		else if(crashedInto instanceof Slow){
+			curGame.triggerSlow();
+		}
 		else if (crashedInto instanceof WeaponUp) {
 			//upgrade player weapon
 			if (weapon instanceof Singleshot) {
-				weapon = new Doubleshot(this);
+				weapon = new Doubleshot(this,projVelocity);
 			}
 			else if (weapon instanceof Doubleshot) {
-				weapon = new Sprayshot(this);
+				weapon = new Sprayshot(this,projVelocity);
 			}
 		}
 		else if (crashedInto instanceof Projectile) {

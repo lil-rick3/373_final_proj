@@ -11,9 +11,18 @@ import components.ships.Ship;
 public abstract class Weapon {
     protected int speed;
     protected Ship ship;
-    public Weapon(Ship ship) {
+    protected int offset;
+    public Weapon(Ship ship, int scalar_speed) {
         this.ship = ship;
-        speed = 0;
+        this.speed = scalar_speed;
+        offset = ship.getWidth() - 2;
+        if(!ship.getIsUp()){
+            System.out.println("hi");
+            speed = speed * -1;
+            
+
+        }
+
     }
 
     

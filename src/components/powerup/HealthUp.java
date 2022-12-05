@@ -13,19 +13,7 @@ public class HealthUp extends Powerup {
         super(xLoc, yLoc, imagePath);
     }
 
-    
-    /** 
-     * @param crashedInto
-     * delete the powerup
-     */
-    @Override
-    
-	protected void collisionAction(Entity crashedInto) {
-		if(crashedInto instanceof Ship){
-			toBeDestroyed = true;
-		}
-    }
-		
+  
     
     /** 
      * @return String
