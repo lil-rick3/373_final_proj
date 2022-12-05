@@ -7,7 +7,7 @@ import components.projectile.Projectile;
 import components.ships.weapon.Doubleshot;
 import components.ships.weapon.Singleshot;
 import components.ships.weapon.Sprayshot;
-import game_engine.MovementPattern;
+import game_engine.Formations.MovementPattern;
 
 /**
  * this class is for the enemy ships
@@ -18,6 +18,7 @@ public class EnemyShip extends Ship {
 	private int id; //every enemyship gets a unique ID
 	private int health;
 	private int damage;
+	private double aggression;
 	public EnemyShip(MovementPattern moveInstr, int id, String imagePath) {
 		super(imagePath);
 		projectileFilePath = "src/graphicImages/EnemyProjectile.png";
@@ -29,6 +30,7 @@ public class EnemyShip extends Ship {
 		projVelocity = 1;
 		damage = 1;
 		weapon = new Sprayshot(this, projVelocity, damage);
+		aggression = 0.001;
 	}
 	
 	
@@ -53,8 +55,8 @@ public class EnemyShip extends Ship {
 	public LinkedList<Projectile> shoot() {
 		
 		LinkedList<Projectile> projList = new LinkedList<>();
-		int ranNum = (int) (Math.random() * 1000.0);
-		if(ranNum < 1) {
+		double ranNum =  Math.random();
+		if(ranNum < aggression) {
 			projList = this.weapon.shoot(xloc,yloc, projectileFilePath);
 		}
 		return projList;

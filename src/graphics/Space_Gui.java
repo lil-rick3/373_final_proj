@@ -93,7 +93,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 	private void paintBackground(Graphics g) {
 		int opacity = 255;
 		if(currentGame.getSlowCounter() > 0){
-			opacity = 40;
+			opacity = 30;
 		}
 		if(nukeCounter == 0){
 			

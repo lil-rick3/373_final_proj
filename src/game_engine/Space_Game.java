@@ -34,7 +34,7 @@ public class Space_Game {
 
 	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
-	public final static int playerHeight = 200;
+	public final static int playerHeight = 250;
 	public boolean testFlag; //this is used to indicated whether we are running a test or not
 	private boolean nukeFlag; //this is used to indicate whether all enemies should be deleted
 
@@ -46,17 +46,18 @@ public class Space_Game {
 	private LinkedList<Projectile> enemyProjectiles;
 	private LinkedList<Powerup> powerups;
 	private LinkedList<Star> stars;
-	private MovementPattern moveStuff; //used to determine the movement pattern of the enemy ships
+	//private MovementPattern moveStuff; //used to determine the movement pattern of the enemy ships
 	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	private int score;	
 	private double starSpawnRate;
 	private int slowCounter;
 	private int timeDelay = 5;
+	private Round curRound;
 	public Space_Game(Space_Gui curGraphics) {
 		
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
-		moveStuff = new MovementPattern();
+		//moveStuff = new MovementPattern();
 		enemies = new LinkedList<EnemyShip>();
 		playerProjectiles = new LinkedList<Projectile>();
 		enemyProjectiles = new LinkedList<Projectile>();
@@ -80,7 +81,7 @@ public class Space_Game {
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
 		if (!testFlag) {
-			Round round = new Round(null, this, moveStuff);
+			curRound = new Round(null, this);
 		}
 		currentlyModifying = false;
 		while(true) {
@@ -89,12 +90,12 @@ public class Space_Game {
 			//move player
 			player.move();
 			//move enemies
-			moveStuff.increment();
+			curRound.increment();
 			waitForTurn();
 			currentlyModifying = true;
 			if(enemies.size() == 0 && !testFlag){
 				//start a new round
-				Round round = new Round(null, this, moveStuff);
+				curRound = new Round(null, this);
 			}
 			tempProjList = player.shoot();
 			if(!tempProjList.isEmpty()) {
@@ -261,7 +262,7 @@ public class Space_Game {
 			else if(ranNum > 250 && ranNum <= 300){
 				powerups.add(new Slow(xloc, yloc));
 			}
-			else if(ranNum > 300 && ranNum < 310){
+			else if(ranNum > 300 && ranNum <= 310){
 				powerups.add(new DamageUp(xloc, yloc));
 			}
 		}

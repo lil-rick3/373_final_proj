@@ -6,8 +6,8 @@ import java.util.LinkedList;
 
 import components.projectile.Projectile;
 import components.ships.EnemyShip;
-import game_engine.MovementPattern;
 import game_engine.Space_Game;
+import game_engine.Formations.MovementPattern;
 import graphics.Space_Gui;
 
 public class EnemyDeathTest {

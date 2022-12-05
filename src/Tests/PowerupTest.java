@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 import components.ships.*;
 import components.powerup.*;
-import game_engine.MovementPattern;
 import game_engine.Space_Game;
+import game_engine.Formations.MovementPattern;
 import graphics.Space_Gui;
 import org.junit.Assert.*;
 import org.junit.Test;
