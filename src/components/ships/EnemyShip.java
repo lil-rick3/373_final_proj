@@ -29,8 +29,8 @@ public class EnemyShip extends Ship {
 		health = 3;
 		projVelocity = 1;
 		damage = 1;
-		weapon = new Sprayshot(this, projVelocity, damage);
-		aggression = 0.001;
+		weapon = new Singleshot(this, projVelocity, damage);
+		aggression = 0.01;
 	}
 	
 	
