@@ -3,8 +3,8 @@ package components.powerup;
 
 public class Slow extends Powerup{
 
-    public Slow(double xloc, double yloc, String imagePath) {
-        super(xloc, yloc, imagePath);
+    public Slow(double xloc, double yloc) {
+        super(xloc, yloc,"src/graphicImages/Slow.png");
         //TODO Auto-generated constructor stub
     }
 

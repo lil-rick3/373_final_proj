@@ -6,8 +6,8 @@ import components.ships.Ship;
  * nuke powerup wipes all enemies when picked up
  */
 public class Nuke extends Powerup {
-    public Nuke(double xLoc, double yLoc, String imagePath) {
-        super(xLoc, yLoc, imagePath);
+    public Nuke(double xLoc, double yLoc) {
+        super(xLoc, yLoc, "src/graphicImages/Nuke.png");
     }
 
     

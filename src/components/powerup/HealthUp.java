@@ -9,8 +9,8 @@ import components.ships.Ship;
  */
 public class HealthUp extends Powerup {
 
-    public HealthUp(double xLoc, double yLoc, String imagePath) {
-        super(xLoc, yLoc, imagePath);
+    public HealthUp(double xLoc, double yLoc) {
+        super(xLoc, yLoc, "src/graphicImages/HealthUp.png");
     }
 
   

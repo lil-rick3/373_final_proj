@@ -8,22 +8,12 @@ import components.ships.Ship;
  * singleshot > doubleshot > sprayshot
  */
 public class WeaponUp extends Powerup{
-    public WeaponUp(double xLoc, double yLoc, String imagePath) {
-        super(xLoc, yLoc, imagePath);
+    public WeaponUp(double xLoc, double yLoc) {
+        super(xLoc, yLoc, "src/graphicImages/WeaponUp.png");
     }
     
     
-    /** 
-     * @param crashedInto
-     * Delete the Powerup
-     */
-    @Override
-	protected void collisionAction(Entity crashedInto) {
-		if(crashedInto instanceof Ship){
-			toBeDestroyed = true;
-		}
-		
-	}
+   
 
 	
     /** 

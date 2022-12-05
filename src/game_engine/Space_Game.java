@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 
 import components.Entity;
+import components.powerup.DamageUp;
 import components.powerup.HealthUp;
 import components.powerup.Nuke;
 import components.powerup.Powerup;
@@ -247,33 +248,36 @@ public class Space_Game {
 		if (!testFlag) {
 			if (ranNum <= 100) { //5% chance
 				//generate healthup
-				powerups.add(new HealthUp(xloc, yloc,"src/graphicImages/HealthUp.png"));
+				powerups.add(new HealthUp(xloc, yloc));
 			}
 			else if (ranNum > 100 && ranNum <= 200) { //5% chance
 				//generate weapon upgrade
-				powerups.add(new WeaponUp(xloc, yloc, "src/graphicImages/WeaponUp.png"));
+				powerups.add(new WeaponUp(xloc, yloc));
 			}
 			else if (ranNum > 200 && ranNum <= 250) { //1% chance
 				//generate nuke
-				powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
+				powerups.add(new Nuke(xloc, yloc));
 			}
-			else if(ranNum > 250 && ranNum < 300){
-				powerups.add(new Slow(xloc, yloc, "src/graphicImages/Slow.png"));
+			else if(ranNum > 250 && ranNum <= 300){
+				powerups.add(new Slow(xloc, yloc));
+			}
+			else if(ranNum > 300 && ranNum < 310){
+				powerups.add(new DamageUp(xloc, yloc));
 			}
 		}
 		//FOR TESTING
 		else {
 			if (ranNum % 3 == 0) {
 				//generate healthup
-				powerups.add(new HealthUp(xloc, yloc,"src/graphicImages/HealthUp.png"));
+				powerups.add(new HealthUp(xloc, yloc));
 			}
 			else if (ranNum % 3 == 1) {
 				//generate weapon upgrade
-				powerups.add(new WeaponUp(xloc, yloc, "src/graphicImages/WeaponUp.png"));
+				powerups.add(new WeaponUp(xloc, yloc));
 			}
 			else {
 				//generate nuke
-				powerups.add(new Nuke(xloc, yloc, "src/graphicImages/Nuke.png"));
+				powerups.add(new Nuke(xloc, yloc));
 			}
 		}
 

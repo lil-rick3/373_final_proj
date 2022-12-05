@@ -12,9 +12,11 @@ public abstract class Weapon {
     protected int speed;
     protected Ship ship;
     protected int offset;
-    public Weapon(Ship ship, int scalar_speed) {
+    protected int weaponDamage;
+    public Weapon(Ship ship, int scalar_speed, int damage) {
         this.ship = ship;
         this.speed = scalar_speed;
+        this.weaponDamage = damage;
         offset = ship.getWidth() - 2;
         if(!ship.getIsUp()){
             System.out.println("hi");
@@ -31,6 +33,10 @@ public abstract class Weapon {
      */
     public int getSpeed() {
         return this.speed;
+    }
+
+    public void increaseDamage(){
+        weaponDamage++;
     }
     public abstract LinkedList<Projectile> shoot(double xloc, double yloc, String ImageFilePath);
 }

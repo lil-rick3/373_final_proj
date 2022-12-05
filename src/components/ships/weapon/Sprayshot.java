@@ -11,8 +11,8 @@ import components.ships.Ship;
  */
 public class Sprayshot extends Weapon {
    
-    public Sprayshot(Ship ship, int speed) {
-        super(ship,speed);
+    public Sprayshot(Ship ship, int speed, int damage) {
+        super(ship,speed, damage);
         //this.speed = 4;
         
     }
@@ -30,13 +30,13 @@ public class Sprayshot extends Weapon {
         LinkedList<Projectile> projList = new LinkedList<>();
         
         //shoot a right diagonal projectile
-        projList.add(new Projectile(Math.abs(0.25*this.speed), -1* this.speed,  xloc + offset, yloc,ImageFilePath));
+        projList.add(new Projectile(Math.abs(0.25*this.speed), -1* this.speed,  xloc + offset, yloc,weaponDamage,ImageFilePath));
         //shoot a left diagonal projectile
-        projList.add(new Projectile(Math.abs(-0.25*this.speed) * -1, -1*this.speed, xloc, yloc,ImageFilePath));
+        projList.add(new Projectile(Math.abs(-0.25*this.speed) * -1, -1*this.speed, xloc, yloc,weaponDamage,ImageFilePath));
         //shoot a straight projectile from left side
-        projList.add(new Projectile(0, -1* this.speed, xloc, yloc,ImageFilePath));
+        projList.add(new Projectile(0, -1* this.speed, xloc, yloc,weaponDamage,ImageFilePath));
         //shoot a straight projectile from right side
-        projList.add(new Projectile(0,-1*this.speed, xloc + offset, yloc,ImageFilePath));
+        projList.add(new Projectile(0,-1*this.speed, xloc + offset, yloc,weaponDamage,ImageFilePath));
         return projList;
     }
 

@@ -13,8 +13,8 @@ public class Singleshot extends Weapon {
     //
     private boolean shootOnLeft; //variable used to allow for alternation of where the projectile comes from on the ship graphic
 
-    public Singleshot(Ship ship, int speed) {
-        super(ship, speed);
+    public Singleshot(Ship ship, int speed, int damage) {
+        super(ship, speed, damage);
         //this.speed = 3;
         this.shootOnLeft = true;
         //System.out.println(this.speed);
@@ -34,14 +34,14 @@ public class Singleshot extends Weapon {
         if(shootOnLeft) {
             //shoot from left side
             shootOnLeft = !shootOnLeft;
-            tempProj = new Projectile(0,-1*this.speed, xloc, yloc, ImageFilePath);
+            tempProj = new Projectile(0,-1*this.speed, xloc, yloc, weaponDamage,ImageFilePath);
             list.add(tempProj);
             
         }
         else {
             //shoot from right side
             shootOnLeft = !shootOnLeft;
-            tempProj = new Projectile(0,-1* this.speed, xloc + offset, yloc, ImageFilePath);
+            tempProj = new Projectile(0,-1* this.speed, xloc + offset, yloc, weaponDamage ,ImageFilePath);
             list.add(tempProj);
         }
         return list;

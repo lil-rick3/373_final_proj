@@ -10,8 +10,8 @@ import components.ships.Ship;
     this weapon upgrades into the spray shot weapon.
  */
 public class Doubleshot extends Weapon{
-    public Doubleshot(Ship ship, int speed) {
-        super(ship,speed);
+    public Doubleshot(Ship ship, int speed, int damage) {
+        super(ship,speed, damage);
         //this.speed = 3; //projectile speed
     }
 
@@ -27,9 +27,9 @@ public class Doubleshot extends Weapon{
     public LinkedList<Projectile> shoot(double xloc, double yloc, String ImageFilePath) {
         LinkedList<Projectile> list = new LinkedList<>();
         //shoot from left side 
-        list.add(new Projectile(0,-1 * this.speed, xloc, yloc, ImageFilePath));
+        list.add(new Projectile(0,-1 * this.speed, xloc, yloc,weaponDamage, ImageFilePath));
         //shoot from right side
-        list.add(new Projectile(0, -1 * this.speed, xloc + offset, yloc, ImageFilePath));
+        list.add(new Projectile(0, -1 * this.speed, xloc + offset, yloc,weaponDamage ,ImageFilePath));
         return list;
     }
 

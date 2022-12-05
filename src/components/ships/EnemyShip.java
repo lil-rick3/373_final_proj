@@ -17,7 +17,7 @@ public class EnemyShip extends Ship {
 	private MovementPattern howToMove;//this tells how the ships should move during each iteration of the game
 	private int id; //every enemyship gets a unique ID
 	private int health;
-	
+	private int damage;
 	public EnemyShip(MovementPattern moveInstr, int id, String imagePath) {
 		super(imagePath);
 		projectileFilePath = "src/graphicImages/EnemyProjectile.png";
@@ -27,7 +27,8 @@ public class EnemyShip extends Ship {
 		move();
 		health = 3;
 		projVelocity = 1;
-		weapon = new Sprayshot(this, projVelocity);
+		damage = 1;
+		weapon = new Sprayshot(this, projVelocity, damage);
 	}
 	
 	

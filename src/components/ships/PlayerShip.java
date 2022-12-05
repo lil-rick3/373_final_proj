@@ -8,6 +8,7 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 
 import components.Entity;
+import components.powerup.DamageUp;
 import components.powerup.HealthUp;
 import components.powerup.Nuke;
 import components.powerup.Powerup;
@@ -45,12 +46,13 @@ public class PlayerShip extends Ship{
 	//tells if the user has pressed spacebar this cycle, helps prevent 
 	//multithreading errors
 	
-	
+	private int damage;
 
 	private Space_Game curGame;
 	public PlayerShip(double xloc, double yloc, String imagePath, Space_Game curGame) {
 		
 		super(imagePath);
+		
 		isUp = true;
 		health = 3;
 		this.xloc = xloc;
@@ -61,7 +63,8 @@ public class PlayerShip extends Ship{
 		rightOn = false;
 		leftOn = false;
 		projVelocity = 3;
-		weapon = new Singleshot(this, projVelocity);
+		damage = 1;
+		weapon = new Singleshot(this, projVelocity, damage);
 		isShooting = false;//says if the user has spacebard constantly pressed
 		//shootOnLeft = true;
 		willShoot = false;// says that during next game cycle, the player will
@@ -212,11 +215,15 @@ public class PlayerShip extends Ship{
 		else if (crashedInto instanceof WeaponUp) {
 			//upgrade player weapon
 			if (weapon instanceof Singleshot) {
-				weapon = new Doubleshot(this,projVelocity);
+				weapon = new Doubleshot(this,projVelocity,damage);
 			}
 			else if (weapon instanceof Doubleshot) {
-				weapon = new Sprayshot(this,projVelocity);
+				weapon = new Sprayshot(this,projVelocity,damage);
 			}
+		}
+		else if (crashedInto instanceof DamageUp){
+			damage++;
+			weapon.increaseDamage();
 		}
 		else if (crashedInto instanceof Projectile) {
 			//remove corresponding health from player health bar

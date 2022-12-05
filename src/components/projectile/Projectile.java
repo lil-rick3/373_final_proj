@@ -22,7 +22,7 @@ public class Projectile extends Entity{
 	 * @param imagePath
 	 * 
 	 */
-	public Projectile(double xVel, double yVel, double xLoc, double yLoc , String imagePath) {
+	public Projectile(double xVel, double yVel, double xLoc, double yLoc , int damage, String imagePath) {
 		
 		super(imagePath);
 		this.xVel = xVel;
@@ -31,7 +31,7 @@ public class Projectile extends Entity{
 		
 		this.xloc = xLoc;
 		this.yloc = yLoc;
-		damage = 1;
+		this.damage = damage;
 	}
 	
 	public void move() {
