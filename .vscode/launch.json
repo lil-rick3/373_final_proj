@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch EnemyDeathTest",
+            "request": "launch",
+            "mainClass": "Tests.EnemyDeathTest",
+            "projectName": "373_final_proj_e39dc637"
+        },
+        {
+            "type": "java",
             "name": "Launch space_main",
             "request": "launch",
             "mainClass": "main.space_main",

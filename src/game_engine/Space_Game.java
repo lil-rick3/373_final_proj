@@ -125,6 +125,9 @@ public class Space_Game {
 			moveProjectiles();
 			movePowerups();
 			moveStars();
+			if(player.getHealth() <= 0){
+				break;
+			}
 			try {
 				
 				if(slowCounter <= 0){

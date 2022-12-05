@@ -1,8 +1,5 @@
 package components.powerup;
 
-import components.Entity;
-import components.ships.PlayerShip;
-import components.ships.Ship;
 
 /**
  * Healthup restores 1 health for player when picked up
