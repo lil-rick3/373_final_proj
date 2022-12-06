@@ -26,7 +26,7 @@ import game_engine.Space_Game;
 
 public class Space_Gui extends JPanel implements KeyListener{
 	
-	
+	private BufferedImage pauseBar;
 
 	
 	Space_Game currentGame;
@@ -36,6 +36,14 @@ public class Space_Gui extends JPanel implements KeyListener{
 	public Space_Gui(){
 		nukeCounter = 0;
 		this.currentGame = new Space_Game(this);
+
+		try {
+			pauseBar = ImageIO.read(new File("src/graphicImages/pause_bar.png"));
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		//JFrame  graphic = new JFrame("space Game");
 		
@@ -77,10 +85,16 @@ public class Space_Gui extends JPanel implements KeyListener{
 		paintProjectiles(g);
 		paintPowerups(g);
 		paintDetails(g);
+		paintPauseBar(g);
 		currentlyPainting = false;
 		
 	}
 	
+	private void paintPauseBar(Graphics g) {
+		if(currentGame.getPauseState()){
+			g.drawImage(pauseBar, 0, 200, this);
+		}
+	}
 	private void paintStars(Graphics g) {
 		LinkedList<Star> stars = currentGame.getStars();
 		for(Star aStar:stars){
