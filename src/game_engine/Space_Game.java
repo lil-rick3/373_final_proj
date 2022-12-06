@@ -104,7 +104,7 @@ public class Space_Game {
 			if(enemies.size() == 0 && !testFlag){
 				curRound = allRounds.getNextRound();
 				if(curRound == null){
-					return;
+					break;
 				}
 				enemies = curRound.startRound();
 			}
