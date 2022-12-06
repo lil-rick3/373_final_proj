@@ -16,6 +16,8 @@ import components.ships.EnemyShip;
 import components.ships.PlayerShip;
 import components.ships.Ship;
 import components.star.Star;
+import game_engine.RoundComp.Round;
+import game_engine.RoundComp.RoundDriver;
 import graphics.Space_Gui;
 import java.lang.Math;
 
@@ -53,6 +55,7 @@ public class Space_Game {
 	private int slowCounter;
 	private int timeDelay = 5;
 	private Round curRound;
+	private RoundDriver allRounds;
 	public Space_Game(Space_Gui curGraphics) {
 		
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
@@ -71,6 +74,7 @@ public class Space_Game {
 		score = 0;
 		//spawnStars();
 		starSpawnRate = 0.05;
+		allRounds = new RoundDriver();
 				
 	}
 	
@@ -81,7 +85,11 @@ public class Space_Game {
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
 		if (!testFlag) {
-			curRound = new Round(null, this);
+			curRound = allRounds.getNextRound();
+			if(curRound == null){
+				return;
+			}
+			enemies = curRound.startRound();
 		}
 		currentlyModifying = false;
 		while(true) {
@@ -94,9 +102,14 @@ public class Space_Game {
 			waitForTurn();
 			currentlyModifying = true;
 			if(enemies.size() == 0 && !testFlag){
-				//start a new round
-				curRound = new Round(null, this);
+				curRound = allRounds.getNextRound();
+				if(curRound == null){
+					return;
+				}
+				enemies = curRound.startRound();
 			}
+				
+			
 			tempProjList = player.shoot();
 			if(!tempProjList.isEmpty()) {
 				playerProjectiles.addAll(tempProjList);
@@ -148,6 +161,12 @@ public class Space_Game {
 		}
 			
 	}
+
+
+	private void startNextRound() {
+		enemies = curRound.startRound();
+	}
+
 
 
 	/*private void spawnStars() {

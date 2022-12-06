@@ -19,21 +19,41 @@ public class EnemyShip extends Ship {
 	private int health;
 	private int damage;
 	private double aggression;
-	public EnemyShip(MovementPattern moveInstr, int id, String imagePath) {
+	public EnemyShip(MovementPattern moveInstr, int id, String imagePath, int health, int weapontype) {
 		super(imagePath);
 		projectileFilePath = "src/graphicImages/EnemyProjectile.png";
 		isUp = false;
 		howToMove = moveInstr;
 		this.id = id;
 		move();
-		health = 3;
+		this.health = health;
 		projVelocity = 1;
 		damage = 1;
 		weapon = new Singleshot(this, projVelocity, damage);
-		aggression = 0.01;
+		aggression = 0.001;
+		chooseWeapon(weapontype);
 	}
 	
-	
+	private void chooseWeapon(int inp){
+		
+		switch(inp){
+			case 0:
+				weapon = new Singleshot(this, projVelocity, damage);
+			break;
+			case 1:
+				weapon = new Doubleshot(this, projVelocity, damage);
+			break;
+			case 2:
+				weapon = new Sprayshot(this, projVelocity, damage);
+			break;
+			default:
+				weapon = new Singleshot(this, projVelocity, damage);
+
+
+
+
+		}
+	}
 	/** 
 	 * @return int
 	 */
