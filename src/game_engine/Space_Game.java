@@ -394,7 +394,7 @@ public class Space_Game {
 				//generate weapon upgrade
 				powerups.add(new WeaponUp(xloc, yloc));
 			}
-			else if (ranNum > 200 && ranNum <= 250) { //1% chance
+			else if ((ranNum > 200 && ranNum <= 250)) { //1% chance
 				//generate nuke
 				powerups.add(new Nuke(xloc, yloc));
 			}
