@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import Audio.AudioPlayer;
 import components.Entity;
 import components.Explosion;
@@ -107,7 +110,18 @@ public class Space_Game {
 	
 
 	public void runGame() {
-		audio.play();
+		try {
+			audio.play(0);
+		} catch (UnsupportedAudioFileException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		waitForTurn();
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
@@ -166,7 +180,18 @@ public class Space_Game {
 				curRound = allRounds.getNextRound();
 				if(curRound == null){
 					finalScore = score;
-					audio.pause();
+					try {
+						audio.play(1);
+					} catch (UnsupportedAudioFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (LineUnavailableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					controller.winScreen();
 					break;
 				}
@@ -182,7 +207,18 @@ public class Space_Game {
 			
 			if(player.getHealth() <= 0){
 				finalScore = score;
-				audio.pause();
+				try {
+					audio.play(2);
+				} catch (UnsupportedAudioFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (LineUnavailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				this.controller.loseScreen();
 				break;
 			}

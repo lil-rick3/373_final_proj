@@ -50,6 +50,30 @@ public class AudioPlayer
 
    
  // Method to play the audio
+ private void resetmusic(int type) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+    String audioPath = null;
+    if(type == 0){
+        audioPath = "src/music/musicfile2.wav";
+    }
+    else if(type == 1){
+        audioPath = "src/music/rainbowRoad.wav";
+    }
+    else if(type == 2){
+        audioPath = "src/music/pokemon.wav";
+    }
+    
+    
+    audioInputStream = 
+             AudioSystem.getAudioInputStream(new File(audioPath));
+       
+     // create clip reference
+     clip = AudioSystem.getClip();
+       
+     // open audioInputStream to the clip
+     clip.open(audioInputStream);
+       
+     clip.loop(Clip.LOOP_CONTINUOUSLY);
+ }
  public void play() 
  {
      //start the clip
@@ -61,6 +85,16 @@ public class AudioPlayer
      
  }
    
+
+ public void play(int type) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
+    
+        stop();
+        resetmusic(type);
+        play();
+
+    
+
+ }
  // Method to pause the audio
  public void pause() 
  {
