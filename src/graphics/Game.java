@@ -13,7 +13,7 @@ import Audio.AudioPlayer;
  */
 
 public class Game {
-
+	JFrame frame = new JFrame("GALACTIC PEACEMAKER"); //main frame
 	//Highscore object, for managing highscores
 	High_Scores_Object HSObject = new High_Scores_Object();
 	
@@ -26,7 +26,7 @@ public class Game {
 	High_Score_Screen highScoreScreen = new High_Score_Screen("starbackground.jpg", mainView, HSObject); //inherits form GUI_Panel_Class
 	Game_Over gameOverScreen = new Game_Over("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
 	You_Win youWinScreen = new You_Win("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
-	Set_High_Score setScore = new Set_High_Score("starbackground.jpg", mainView, HSObject);
+	Set_High_Score setScore = new Set_High_Score("starbackground.jpg", mainView, HSObject, frame);
 
 	//Sound player
 	AudioPlayer musicPlayer;
@@ -63,7 +63,7 @@ public class Game {
 	public void createGame() {
 		
 		//create main game frame
-		JFrame frame = new JFrame("GALACTIC PEACEMAKER");
+	
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(600, 600);
