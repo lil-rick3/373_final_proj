@@ -56,6 +56,11 @@ public class Space_Game {
 	private int timeDelay = 5;
 	private Round curRound;
 	private RoundDriver allRounds;
+	private boolean isPaused;
+	private boolean winFlag;
+	private boolean loseFlag;
+
+
 	public Space_Game(Space_Gui curGraphics) {
 		
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
@@ -70,8 +75,11 @@ public class Space_Game {
 		currentlyModifying = false;
 		nukeFlag = false;
 		testFlag = false;
+		winFlag = false;
+		loseFlag = false;
 		slowCounter = 0;
 		score = 0;
+		isPaused = false;
 		//spawnStars();
 		starSpawnRate = 0.05;
 		allRounds = new RoundDriver();
@@ -84,11 +92,12 @@ public class Space_Game {
 		waitForTurn();
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
-		curRound = allRounds.getNextRound();
-		if(curRound == null){
-			return;
-		}
-		if(!testFlag) {
+		if (!testFlag) {
+			curRound = allRounds.getNextRound();
+			if(curRound == null){
+				winFlag = true;
+				return;
+			}
 			enemies = curRound.startRound();
 		}
 		currentlyModifying = false;
@@ -101,13 +110,7 @@ public class Space_Game {
 			curRound.increment();
 			waitForTurn();
 			currentlyModifying = true;
-			if(enemies.size() == 0 && !testFlag){
-				curRound = allRounds.getNextRound();
-				if(curRound == null){
-					return;
-				}
-				enemies = curRound.startRound();
-			}
+			
 				
 			
 			tempProjList = player.shoot();
@@ -132,6 +135,16 @@ public class Space_Game {
 				NukeEnemies();
 			}
 			purgeComponents();
+
+
+			if(enemies.size() == 0 && !testFlag){
+				curRound = allRounds.getNextRound();
+				if(curRound == null){
+					winFlag = true;
+					break;
+				}
+				enemies = curRound.startRound();
+			}
 			currentlyModifying = false;
 
 
@@ -139,6 +152,7 @@ public class Space_Game {
 			movePowerups();
 			moveStars();
 			if(player.getHealth() <= 0){
+				loseFlag = true;
 				break;
 			}
 			try {
@@ -157,6 +171,15 @@ public class Space_Game {
 			if (this.testFlag) {
 				//only want to run once if test
 				return;
+			}
+			while(isPaused){
+				curGraphics.repaint();
+				try {
+					Thread.sleep(0, 1);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 			
@@ -493,6 +516,9 @@ public class Space_Game {
 				
 			}
 		}
+		if((c == 'p')){
+			isPaused = !isPaused;
+		}
 			
 	}
 
@@ -517,8 +543,15 @@ public class Space_Game {
 		return currentlyModifying;
 	}
 
+	public boolean getPauseState(){
+		return isPaused;
+	}
 
-
-	
+	public boolean getWinFlag(){
+		return winFlag;
+	}
+	public boolean getLoseFlag(){
+		return loseFlag;
+	}
 	
 }

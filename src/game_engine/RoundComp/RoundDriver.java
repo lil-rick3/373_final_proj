@@ -12,7 +12,7 @@ public class RoundDriver{
         int weapon= 0;
         int health;
         
-        for(int shipType = 1; shipType <= 7 ;shipType++){
+        for(int shipType = 1; shipType <= 3 ;shipType++){
             for(int formation = 0; formation < 3; formation ++){
             if(shipType < 3)
                 weapon = 0;
