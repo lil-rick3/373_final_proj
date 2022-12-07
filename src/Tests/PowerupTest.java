@@ -9,8 +9,12 @@ import components.powerup.*;
 import game_engine.Space_Game;
 import game_engine.Formations.MovementPattern;
 import game_engine.Formations.StandardFormation;
+import graphics.Game;
 import graphics.Space_Gui;
 import org.junit.Assert.*;
+
+import Audio.AudioPlayer;
+
 import org.junit.Test;
 
 public class PowerupTest {
@@ -21,10 +25,23 @@ public class PowerupTest {
     *test for slow powerup action
     *test for damageup powerup action
     */
-
+    static AudioPlayer audio;
     public static void main(String[] args) {
-        Space_Gui aGui = new Space_Gui();
-        Space_Game aGame = new Space_Game(aGui);
+        try
+	    {
+	    	System.out.println("test");
+	        audio = new AudioPlayer();
+			audio.pause();
+	    } 
+	    catch (Exception ex) 
+	    {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+        }
+		
+        Game game = new Game();
+        Space_Gui aGui = new Space_Gui(game, audio);
+        Space_Game aGame = new Space_Game(aGui, game, audio);
         aGame.testFlag = true;
         //TEST: ENEMY DROPS A POWERUP
 
@@ -68,7 +85,7 @@ public class PowerupTest {
         System.out.println(" ");
         System.out.println("TEST 2: PLAYER PICKS UP A NUKE POWERUP");
 
-        listPowerups.add(new Nuke(100, 250));
+        listPowerups.add(new Nuke(300, 300));
 
         //create enemies
          e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png", 3, 0);
@@ -102,7 +119,7 @@ public class PowerupTest {
         System.out.println("TEST 3: PLAYER PICKS UP A HEALTHUP POWERUP");
 
         System.out.println("Player health: " + aGame.getPlayerShip().getHealth());
-        listPowerups.add(new HealthUp(100, 250));
+        listPowerups.add(new HealthUp(300, 300));
         aGame.runGame();
         System.out.println("After powerup, player health: " + aGame.getPlayerShip().getHealth());
 
@@ -111,10 +128,10 @@ public class PowerupTest {
         System.out.println("TEST 4: PLAYER PICKS UP A WEAPONUP POWERUP");
 
         System.out.println("Player weapon: " + aGame.getPlayerShip().getWeapon());
-        listPowerups.add(new WeaponUp(100, 250));
+        listPowerups.add(new WeaponUp(300, 300));
         aGame.runGame();
         System.out.println("After 1 upgrade, player weapon: " + aGame.getPlayerShip().getWeapon());
-        listPowerups.add(new WeaponUp(100, 250));
+        listPowerups.add(new WeaponUp(300, 300));
         aGame.runGame();
         System.out.println("After 2 upgrades, player weapon: " + aGame.getPlayerShip().getWeapon());
 
@@ -125,7 +142,7 @@ public class PowerupTest {
         System.out.println("TEST 5: PLAYER PICKS UP A SLOW POWERUP");
 
         System.out.println("Slow Counter: " + aGame.getSlowCounter());
-        listPowerups.add(new Slow(100, 250));
+        listPowerups.add(new Slow(300, 300));
         aGame.runGame();
         System.out.println("After powerup, slow counter: " + aGame.getSlowCounter());
 
@@ -135,7 +152,7 @@ public class PowerupTest {
         System.out.println("TEST 6: PLAYER PICKS UP A DAMAGE UPGRADE POWERUP");
 
         System.out.println("Player weapon damage: " + aGame.getPlayerShip().getWeapon().getWeaponDamage());
-        listPowerups.add(new DamageUp(100, 250));
+        listPowerups.add(new DamageUp(300, 300));
         aGame.runGame();
         System.out.println("Player weapon damage: " + aGame.getPlayerShip().getWeapon().getWeaponDamage());
 

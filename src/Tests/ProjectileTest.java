@@ -4,18 +4,34 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedList;
 
+import Audio.AudioPlayer;
 import components.projectile.Projectile;
 import game_engine.Space_Game;
+import graphics.Game;
 import graphics.Space_Gui;
 
 public class ProjectileTest {
     /**test if player projectile moves correctly
     *test if enemy projectile moves correctly
     */
+    static AudioPlayer audio;
 
     public static void main(String[] args) {
-        Space_Gui aGui = new Space_Gui();
-        Space_Game aGame = new Space_Game(aGui);
+        try
+	    {
+	    	System.out.println("test");
+	        audio = new AudioPlayer();
+			audio.pause();
+	    } 
+	    catch (Exception ex) 
+	    {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+        }
+		
+        Game game = new Game();
+        Space_Gui aGui = new Space_Gui(game, audio);
+        Space_Game aGame = new Space_Game(aGui, game, audio);
         aGame.testFlag = true;
         //TEST1: CHECK IF ENEMY PROJECTILE MOVES 
 

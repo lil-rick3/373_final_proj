@@ -4,19 +4,36 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.LinkedList;
 
+import Audio.AudioPlayer;
 import components.projectile.Projectile;
 import components.ships.EnemyShip;
 import game_engine.Space_Game;
 import game_engine.Formations.MovementPattern;
 import game_engine.Formations.StandardFormation;
+import graphics.Game;
 import graphics.Space_Gui;
 
 public class EnemyDeathTest {
     /**test for if enemy dies after losing all health
     */
+    static AudioPlayer audio;
+    
     public static void main(String[] args) {
-        Space_Gui aGui = new Space_Gui();
-        Space_Game aGame = new Space_Game(aGui);
+        try
+	    {
+	    	System.out.println("test");
+	        audio = new AudioPlayer();
+			audio.pause();
+	    } 
+	    catch (Exception ex) 
+	    {
+	        System.out.println("Error with playing sound.");
+	        ex.printStackTrace();
+        }
+		
+        Game game = new Game();
+        Space_Gui aGui = new Space_Gui(game, audio);
+        Space_Game aGame = new Space_Game(aGui, game, audio);
         aGame.testFlag = true;
         //TEST: ENEMY DIES AFTER LOSING ALL HEALTH
 
