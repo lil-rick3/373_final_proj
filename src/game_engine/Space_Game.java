@@ -1,10 +1,12 @@
 package game_engine;
 
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
 import components.Entity;
+import components.Explosion;
 import components.powerup.DamageUp;
 import components.powerup.HealthUp;
 import components.powerup.Nuke;
@@ -49,17 +51,20 @@ public class Space_Game {
 	private LinkedList<Projectile> enemyProjectiles;
 	private LinkedList<Powerup> powerups;
 	private LinkedList<Star> stars;
+	private LinkedList<Explosion> explosions;
 	//private MovementPattern moveStuff; //used to determine the movement pattern of the enemy ships
 	private boolean currentlyModifying = true;//used to determine if a list is being added/removed to
 	private int score;	
 	private double starSpawnRate;
 	private int slowCounter;
-	private int timeDelay = 5;
+	private int timeDelay = 6;
 	private Round curRound;
 	private RoundDriver allRounds;
 	private boolean isPaused;
 	private boolean winFlag;
 	private boolean loseFlag;
+	private long lastFrame;
+	private long currentFrame;
 
 	private Game controller;
 
@@ -74,6 +79,13 @@ public class Space_Game {
 		enemyProjectiles = new LinkedList<Projectile>();
 		powerups = new LinkedList<Powerup>();
 		stars = new LinkedList<Star>();
+		explosions = new LinkedList<Explosion>();
+		try {
+			Explosion.setImageForAll();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.curGraphics = curGraphics;
 		currentlyModifying = false;
 		nukeFlag = false;
@@ -106,6 +118,7 @@ public class Space_Game {
 			enemies = curRound.startRound();
 		}
 		currentlyModifying = false;
+		lastFrame = System.currentTimeMillis();
 		while(true) {
 			//TODO organize this function into smaller sub functions
 			curGraphics.repaint();
@@ -156,19 +169,32 @@ public class Space_Game {
 			moveProjectiles();
 			movePowerups();
 			moveStars();
+			moveExplosions();
+			
 			if(player.getHealth() <= 0){
 				this.controller.loseScreen();
 				break;
 			}
 			try {
 				
+
+
 				if(slowCounter <= 0){
-					Thread.sleep(timeDelay);
+					
+					while(System.currentTimeMillis() - lastFrame < timeDelay){
+						
+						Thread.sleep(0, 1);
+					}
+
+					
 				}
 				else{
-					Thread.sleep(timeDelay + timeDelay*slowCounter/2000);
+					while(System.currentTimeMillis() - lastFrame < (timeDelay*2)){
+						Thread.sleep(0, 1);
+					}
 					slowCounter --;
 				}
+				lastFrame = System.currentTimeMillis();
 				
 			}catch(InterruptedException e) {
 				e.printStackTrace();
@@ -189,6 +215,8 @@ public class Space_Game {
 		}
 			
 	}
+
+
 
 
 	private void startNextRound() {
@@ -266,6 +294,7 @@ public class Space_Game {
 			EnemyShip tempEnemy = enemyIterator.next();
 			if(tempEnemy.getToBeDestroyed()){
 				score+=100;
+				explosions.add(new Explosion(tempEnemy.getxloc(), tempEnemy.getyloc()));
 				enemyIterator.remove();
 				generatePowerup(tempEnemy.getxloc(), tempEnemy.getyloc());
 			}
@@ -282,6 +311,13 @@ public class Space_Game {
 			Star tempStar = starIterator.next();
 			if(tempStar.getToBeDestroyed()) {
 				starIterator.remove();
+			}
+		}
+		ListIterator<Explosion> exploIterator = explosions.listIterator();
+		while(exploIterator.hasNext()) {
+			Explosion tempExplo = exploIterator.next();
+			if(tempExplo.getToBeDestroyed()) {
+				exploIterator.remove();
 			}
 		}
 
@@ -358,6 +394,14 @@ public class Space_Game {
 	}
 	public int getSlowCounter(){
 		return slowCounter;
+	}
+
+
+	
+	private void moveExplosions() {
+		for(Explosion aExplosion:explosions){
+			aExplosion.move();
+		}
 	}
 
 	private void moveStars(){
@@ -462,6 +506,10 @@ public class Space_Game {
 		
 	}
 
+	public LinkedList<Explosion> getExplosions(){
+		return explosions;
+	}
+
 	
 	/** 
 	 * @return LinkedList<Powerup>
@@ -517,7 +565,7 @@ public class Space_Game {
 			if(!player.isShooting()) {
 				player.setShooting(true);
 				player.setWillShoot(true);
-				System.out.println(playerProjectiles.size());
+				//System.out.println(playerProjectiles.size());
 				
 			}
 		}

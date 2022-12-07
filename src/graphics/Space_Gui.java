@@ -13,7 +13,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
+import components.Explosion;
 import components.powerup.Powerup;
 import components.projectile.Projectile;
 import components.ships.EnemyShip;
@@ -82,7 +82,9 @@ public class Space_Gui extends JPanel implements KeyListener{
 		paintBackground(g);
 		paintStars(g);
 		paintShip(g);
+		
 		paintProjectiles(g);
+		paintExplosions(g);
 		paintPowerups(g);
 		paintDetails(g);
 		paintPauseBar(g);
@@ -147,6 +149,12 @@ public class Space_Gui extends JPanel implements KeyListener{
 		}
 	}
 	
+	private void paintExplosions(Graphics g){
+		for(Explosion aExplosion: currentGame.getExplosions()){
+			aExplosion.paintEntity(g, this);
+		}
+	}
+
 	private void paintProjectiles(Graphics g) {
 		LinkedList<Projectile> playerProjectiles = currentGame.getPlayerProjectiles();
 		
