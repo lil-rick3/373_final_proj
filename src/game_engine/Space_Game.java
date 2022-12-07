@@ -118,6 +118,7 @@ public class Space_Game {
 			curRound = allRounds.getNextRound();
 			if(curRound == null){
 				finalScore = score;
+				audio.pause();
 				controller.winScreen();
 				return;
 			}
@@ -165,6 +166,7 @@ public class Space_Game {
 				curRound = allRounds.getNextRound();
 				if(curRound == null){
 					finalScore = score;
+					audio.pause();
 					controller.winScreen();
 					break;
 				}
@@ -180,6 +182,7 @@ public class Space_Game {
 			
 			if(player.getHealth() <= 0){
 				finalScore = score;
+				audio.pause();
 				this.controller.loseScreen();
 				break;
 			}
