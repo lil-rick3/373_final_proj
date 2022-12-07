@@ -9,9 +9,11 @@ import java.io.ObjectInputStream;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /***
@@ -22,25 +24,38 @@ public class Set_High_Score extends GUI_Panel_Class {
 	JButton submitButton;
 	JLabel placeHolder;
 	JPanel mainView;
-    JTextField nameEntrySpace;
+    JTextArea nameEntrySpace;
 	
 	/***
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
 	* This calls all the functions to actually create the GUI panel.
 	*/
-	public Set_High_Score(String stringIn, JPanel mainViewIn, High_Scores_Object HsIn) {
+	public Set_High_Score(String stringIn, JPanel mainViewIn, High_Scores_Object HsIn, JFrame frameIn) {
 		super(stringIn);
 		this.mainView = mainViewIn;
 		//Uses the BoxLayout so we have all elements displayed vertically
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
+		this.addTextElement(" ");
+		this.addTextElement("GIVE ME YOUR NAME");
+		this.addTextElement(" ");
+		this.addTextElement(" ");
+		this.addTextElement(" ");
+		this.addTextElement(" ");
+
 		//Adding the name entry field to the created high score screen
-        nameEntrySpace = new JTextField("GIVE ME YOUR NAME"); 
+        nameEntrySpace = new JTextArea(5, 5);
 		//Add all of the desired GUI elements
-		this.addVerticalSpacing();
-		submitButton = this.addButton("SUBMIT");
+		this.addTextElement(" ");
 		this.getPanel().add(nameEntrySpace);
+		this.addTextElement(" ");
+		this.addTextElement(" ");
+		this.addTextElement(" ");
+		this.addTextElement(" ");
+		submitButton = this.addButton("SUBMIT");
+		this.addTextElement(" ");
+		this.addVerticalSpacing();
 		//Add a new button listener to detect button clicks
-		submitButton.addActionListener(new ButtonListener(this.mainView, HsIn));
+		submitButton.addActionListener(new ButtonListener(this.mainView, HsIn, frameIn));
 	}
 
 
@@ -52,9 +67,11 @@ public class Set_High_Score extends GUI_Panel_Class {
 	{
 		JPanel mainView;
 		High_Scores_Object HSO;
-		ButtonListener(JPanel mainViewIn, High_Scores_Object HSO) {
+		JFrame frame;
+		ButtonListener(JPanel mainViewIn, High_Scores_Object HSO, JFrame frameIn) {
 			this.mainView = mainViewIn;
 			this.HSO = HSO;
+			this.frame = frameIn;
 		}
 		/***
 		* Catches button click and flips to the corresponding card page
@@ -82,7 +99,7 @@ public class Set_High_Score extends GUI_Panel_Class {
 
 		private boolean validateNameEntry(String nameIn) { //Validates the user inputed name. If it's valid, returns true. If it's invalid, returns false
 			if (nameIn.length() == 0 || nameIn.length() > 15) {
-				JOptionPane.showMessageDialog(this.mainView, "Invalid entry. Must be between 0 and 15 characters.");
+				JOptionPane.showMessageDialog(this.frame, "Invalid entry. Must be between 0 and 15 characters.");
 				return false;
 			}
 			else {
