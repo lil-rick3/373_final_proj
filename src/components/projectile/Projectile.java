@@ -1,6 +1,7 @@
 package components.projectile;
 
 import components.Entity;
+import components.ships.PlayerShip;
 import components.ships.Ship;
 
 /**
@@ -12,6 +13,7 @@ public class Projectile extends Entity{
 	double yVel;
 	
 	double speed;
+	public boolean generateExplosion = false;
 	private int damage;
 	/**
 	 * 
@@ -79,6 +81,9 @@ public class Projectile extends Entity{
 	protected void collisionAction(Entity crashedInto) {
 		if(crashedInto instanceof Ship){
 			toBeDestroyed = true;
+		}
+		if(crashedInto instanceof PlayerShip){
+			generateExplosion = true;
 		}
 		
 	}

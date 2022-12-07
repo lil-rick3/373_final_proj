@@ -328,6 +328,9 @@ public class Space_Game {
 			
 			Projectile tempProj = projIterator.next();
 			if(tempProj.getToBeDestroyed()) {
+				if(tempProj.generateExplosion){
+					explosions.add(new Explosion(tempProj.getxloc() - 10, tempProj.getyloc()));
+				}
 				projIterator.remove();			
 			}
 		}
