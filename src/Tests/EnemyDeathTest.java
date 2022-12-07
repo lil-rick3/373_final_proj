@@ -8,6 +8,7 @@ import components.projectile.Projectile;
 import components.ships.EnemyShip;
 import game_engine.Space_Game;
 import game_engine.Formations.MovementPattern;
+import game_engine.Formations.StandardFormation;
 import graphics.Space_Gui;
 
 public class EnemyDeathTest {
@@ -23,11 +24,11 @@ public class EnemyDeathTest {
         System.out.println("TEST 1: ENEMY DIES AFTER LOSING ALL HEALTH");
     
         //a movement pattern
-        MovementPattern m = new MovementPattern();
+        MovementPattern m = new StandardFormation();
     
     
         //create enemies
-        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png");
+        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png",3, 2);
 
         //add enemies to game
         LinkedList<EnemyShip> listEnemies = aGame.getEnemyShips();
@@ -38,19 +39,19 @@ public class EnemyDeathTest {
         System.out.println("Beginning enemy health: " + e1.getHealth());
 
         LinkedList<Projectile> listProjectiles = aGame.getPlayerProjectiles();
-        listProjectiles.add(new Projectile(true, false, false, 1, 60, 30, "src/graphicImages/PlayerProjectile.png"));
+        listProjectiles.add(new Projectile(0, -1, 60, -170, 1, "src/graphicImages/PlayerProjectile.png"));
 
         aGame.runGame();
 
         System.out.println("After projectile collision, enemy health: " + e1.getHealth());
 
-        listProjectiles.add(new Projectile(true, false, false, 1, 60, 30, "src/graphicImages/PlayerProjectile.png"));
+        listProjectiles.add(new Projectile(0, -1, 60, -170, 1, "src/graphicImages/PlayerProjectile.png"));
 
         aGame.runGame();
 
         System.out.println("After 2 projectile collisions, enemy health: " + e1.getHealth());
 
-        listProjectiles.add(new Projectile(true, false, false, 1, 60, 30, "src/graphicImages/PlayerProjectile.png"));
+        listProjectiles.add(new Projectile(0, -1, 60, -170, 1, "src/graphicImages/PlayerProjectile.png"));
 
         aGame.runGame();
 

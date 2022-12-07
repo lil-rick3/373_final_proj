@@ -19,7 +19,6 @@ public abstract class Weapon {
         this.weaponDamage = damage;
         offset = ship.getWidth() - 2;
         if(!ship.getIsUp()){
-            System.out.println("hi");
             speed = speed * -1;
             
 
@@ -37,6 +36,9 @@ public abstract class Weapon {
 
     public void increaseDamage(){
         weaponDamage++;
+    }
+    public int getWeaponDamage() {
+        return this.weaponDamage;
     }
     public abstract LinkedList<Projectile> shoot(double xloc, double yloc, String ImageFilePath);
 }

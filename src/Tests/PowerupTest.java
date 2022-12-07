@@ -4,9 +4,11 @@ import static org.junit.Assert.assertEquals;
 import java.util.LinkedList;
 
 import components.ships.*;
+import components.ships.weapon.Singleshot;
 import components.powerup.*;
 import game_engine.Space_Game;
 import game_engine.Formations.MovementPattern;
+import game_engine.Formations.StandardFormation;
 import graphics.Space_Gui;
 import org.junit.Assert.*;
 import org.junit.Test;
@@ -16,6 +18,8 @@ public class PowerupTest {
     *test for nuke powerup action
     *test for healthup powerup action
     *test for weaponup powerup action
+    *test for slow powerup action
+    *test for damageup powerup action
     */
 
     public static void main(String[] args) {
@@ -28,14 +32,14 @@ public class PowerupTest {
         System.out.println("TEST 1: ENEMY DROPS POWERUP AFTER DEATH");
     
         //a movement pattern
-        MovementPattern m = new MovementPattern();
+        MovementPattern m = new StandardFormation();
     
     
         //create enemies
-        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png");
-        EnemyShip e2 = new EnemyShip(m, 2, "src/graphicImages/enemyship1.png");
-        EnemyShip e3 = new EnemyShip(m, 3, "src/graphicImages/enemyship1.png");
-        EnemyShip e4 = new EnemyShip(m, 4, "src/graphicImages/enemyship1.png");
+        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png", 3, 0);
+        EnemyShip e3 = new EnemyShip(m, 2, "src/graphicImages/enemyship1.png", 3, 0);
+        EnemyShip e2 = new EnemyShip(m, 3, "src/graphicImages/enemyship1.png", 3, 0);
+        EnemyShip e4 = new EnemyShip(m, 4, "src/graphicImages/enemyship1.png", 3, 0);
 
         //add enemies to game
         LinkedList<EnemyShip> listEnemies = aGame.getEnemyShips();
@@ -64,13 +68,13 @@ public class PowerupTest {
         System.out.println(" ");
         System.out.println("TEST 2: PLAYER PICKS UP A NUKE POWERUP");
 
-        listPowerups.add(new Nuke(100, 200, "src/graphicImages/Nuke.png"));
+        listPowerups.add(new Nuke(100, 250));
 
         //create enemies
-         e1 = new EnemyShip(m, 1,  "src/graphicImages/enemyship1.png");
-         e2 = new EnemyShip(m, 2,  "src/graphicImages/enemyship1.png");
-         e3 = new EnemyShip(m, 3,  "src/graphicImages/enemyship1.png");
-         e4 = new EnemyShip(m, 4,  "src/graphicImages/enemyship1.png");
+         e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png", 3, 0);
+         e2 = new EnemyShip(m, 2, "src/graphicImages/enemyship1.png", 3, 0);
+         e3 = new EnemyShip(m, 3, "src/graphicImages/enemyship1.png", 3, 0);
+         e4 = new EnemyShip(m, 4, "src/graphicImages/enemyship1.png", 3, 0);
 
         //add enemies to game
         listEnemies.add(e1);
@@ -98,7 +102,7 @@ public class PowerupTest {
         System.out.println("TEST 3: PLAYER PICKS UP A HEALTHUP POWERUP");
 
         System.out.println("Player health: " + aGame.getPlayerShip().getHealth());
-        listPowerups.add(new HealthUp(100, 200, "src/graphicImages/HealthUp.png"));
+        listPowerups.add(new HealthUp(100, 250));
         aGame.runGame();
         System.out.println("After powerup, player health: " + aGame.getPlayerShip().getHealth());
 
@@ -107,11 +111,36 @@ public class PowerupTest {
         System.out.println("TEST 4: PLAYER PICKS UP A WEAPONUP POWERUP");
 
         System.out.println("Player weapon: " + aGame.getPlayerShip().getWeapon());
-        listPowerups.add(new WeaponUp(100, 200, "src/graphicImages/WeaponUp.png"));
+        listPowerups.add(new WeaponUp(100, 250));
         aGame.runGame();
         System.out.println("After 1 upgrade, player weapon: " + aGame.getPlayerShip().getWeapon());
-        listPowerups.add(new WeaponUp(100, 200, "src/graphicImages/WeaponUp.png"));
+        listPowerups.add(new WeaponUp(100, 250));
         aGame.runGame();
         System.out.println("After 2 upgrades, player weapon: " + aGame.getPlayerShip().getWeapon());
+
+
+        //TEST: PLAYER PICKS UP A SLOW POWERUP
+
+        System.out.println(" ");
+        System.out.println("TEST 5: PLAYER PICKS UP A SLOW POWERUP");
+
+        System.out.println("Slow Counter: " + aGame.getSlowCounter());
+        listPowerups.add(new Slow(100, 250));
+        aGame.runGame();
+        System.out.println("After powerup, slow counter: " + aGame.getSlowCounter());
+
+        //TEST: PLAYER PICKS UP A DAMAGE UPGRADE POWERUP
+
+        System.out.println(" ");
+        System.out.println("TEST 6: PLAYER PICKS UP A DAMAGE UPGRADE POWERUP");
+
+        System.out.println("Player weapon damage: " + aGame.getPlayerShip().getWeapon().getWeaponDamage());
+        listPowerups.add(new DamageUp(100, 250));
+        aGame.runGame();
+        System.out.println("Player weapon damage: " + aGame.getPlayerShip().getWeapon().getWeaponDamage());
+
+
+
+
         }
 }

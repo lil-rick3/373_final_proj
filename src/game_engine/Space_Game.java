@@ -92,7 +92,10 @@ public class Space_Game {
 		waitForTurn();
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
-		if (!testFlag) {
+		if(testFlag) {
+			curRound = new Round(allRounds.getRoundList().getFirst());
+		}
+		if(!testFlag) {
 			curRound = allRounds.getNextRound();
 			if(curRound == null){
 				winFlag = true;

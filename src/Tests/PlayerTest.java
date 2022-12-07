@@ -40,7 +40,7 @@ public class PlayerTest {
         System.out.println("TEST 2: PLAYER MOVES");
         System.out.println("Current player position: " + "x = " + aGame.getPlayerShip().getxloc() + ", y = " + aGame.getPlayerShip().getyloc());
         assertEquals(100.0, aGame.getPlayerShip().getxloc(), 0.0001);
-        assertEquals(200.0, aGame.getPlayerShip().getyloc(), 0.0001);
+        assertEquals(250.0, aGame.getPlayerShip().getyloc(), 0.0001);
 
         System.out.println("Move down");
         aGame.startMotion('s');
@@ -48,7 +48,7 @@ public class PlayerTest {
 
         System.out.println("Current player position: " + "x = " + aGame.getPlayerShip().getxloc() + ", y = " + aGame.getPlayerShip().getyloc());
         assertEquals(100.0, aGame.getPlayerShip().getxloc(), 0.0001);
-        assertEquals(201.0, aGame.getPlayerShip().getyloc(), 0.0001);
+        assertEquals(251.0, aGame.getPlayerShip().getyloc(), 0.0001);
 
         aGame.stopMotion('s');
         aGame.runGame();
@@ -59,7 +59,7 @@ public class PlayerTest {
 
         System.out.println("Current player position: " + "x = " + aGame.getPlayerShip().getxloc() + ", y = " + aGame.getPlayerShip().getyloc());
         assertEquals(101.0, aGame.getPlayerShip().getxloc(), 0.0001);
-        assertEquals(201.0, aGame.getPlayerShip().getyloc(), 0.0001);
+        assertEquals(251.0, aGame.getPlayerShip().getyloc(), 0.0001);
 
         aGame.stopMotion('d');
         aGame.runGame();
@@ -70,7 +70,7 @@ public class PlayerTest {
 
         System.out.println("Current player position: " + "x = " + aGame.getPlayerShip().getxloc() + ", y = " + aGame.getPlayerShip().getyloc());
         assertEquals(100.0, aGame.getPlayerShip().getxloc(), 0.0001);
-        assertEquals(201.0, aGame.getPlayerShip().getyloc(), 0.0001);
+        assertEquals(251.0, aGame.getPlayerShip().getyloc(), 0.0001);
 
         aGame.stopMotion('a');
         aGame.runGame();
@@ -81,7 +81,7 @@ public class PlayerTest {
 
         System.out.println("Current player position: " + "x = " + aGame.getPlayerShip().getxloc() + ", y = " + aGame.getPlayerShip().getyloc());
         assertEquals(100.0, aGame.getPlayerShip().getxloc(), 0.0001);
-        assertEquals(200.0, aGame.getPlayerShip().getyloc(), 0.0001);
+        assertEquals(250.0, aGame.getPlayerShip().getyloc(), 0.0001);
 
         aGame.stopMotion('w');
         aGame.runGame();
@@ -91,7 +91,7 @@ public class PlayerTest {
         System.out.println("TEST 3: PLAYER TAKES DAMAGE");
 
         LinkedList<Projectile> elistProjectiles = aGame.getEnemyProjectiles();
-        elistProjectiles.add(new Projectile(false, false, false, 1, 100, 200, "src/graphicImages/EnemyProjectile.png"));
+        elistProjectiles.add(new Projectile(0, 1, 100, 250, 1, "src/graphicImages/EnemyProjectile.png"));
 
         System.out.println("Current player health: " + aGame.getPlayerShip().getHealth());
         assertEquals(3, aGame.getPlayerShip().getHealth());

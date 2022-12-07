@@ -23,7 +23,7 @@ public class ProjectileTest {
         System.out.println("TEST 1: CHECK FOR ENEMY PROJECTILE MOVEVEMENT");
 
         LinkedList<Projectile> elistProjectiles = aGame.getEnemyProjectiles();
-        Projectile p1 = new Projectile(false, false, false, 1, 60, 30, "src/graphicImages/EnemyProjectile.png");
+        Projectile p1 = new Projectile(0, 1, 60, 30, 1, "src/graphicImages/EnemyProjectile.png");
         elistProjectiles.add(p1);
 
         System.out.println("Initial enemy projectile location: " + "x = " + p1.getxloc() + " y = " + p1.getyloc());
@@ -52,7 +52,7 @@ public class ProjectileTest {
         System.out.println("TEST 2: CHECK FOR PLAYER PROJECTILE MOVEVEMENT");
 
         LinkedList<Projectile> plistProjectiles = aGame.getPlayerProjectiles();
-        Projectile p2 = new Projectile(true, false, false, 1, 100, 100, "src/graphicImages/PlayerProjectile.png");
+        Projectile p2 = new Projectile(0, -1, 100, 100, 1, "src/graphicImages/PlayerProjectile.png");
         plistProjectiles.add(p2);
 
         System.out.println("Initial player projectile location: " + "x = " + p2.getxloc() + " y = " + p2.getyloc());
