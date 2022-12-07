@@ -31,6 +31,9 @@ public class Game {
 
 	//Sound player
 	AudioPlayer musicPlayer;
+
+	//Flags for detecting game over and not over
+	
 	
 	public Game() {
 		

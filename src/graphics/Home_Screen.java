@@ -101,7 +101,7 @@ public class Home_Screen extends GUI_Panel_Class {
 				CardLayout temp = (CardLayout)(mainView.getLayout());
 				temp.show(mainView, "GAME");
 				//Start the music player
-				// musicPlayer.play();
+				musicPlayer.play();
 				//Start the game thread running
 				this.gameThread.start();
 				this.delayThread.start();
