@@ -16,7 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /***
-* This is the high score screen class. This makes the high score screen, and will handle high score logic in the future.
+* This is the high score screen class. This makes the high score screen, and handles some highscore logic.
 */
 
 public class High_Score_Screen extends GUI_Panel_Class {
@@ -31,7 +31,8 @@ public class High_Score_Screen extends GUI_Panel_Class {
 	
 	/***
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
-	* This calls all the functions to actually create the GUI panel.
+	* This calls all the functions to actually create the GUI panel. It also is passed the custom high score object for interfacing/
+	* populating the highscores.
 	*/
 
 	public High_Score_Screen(String stringIn, JPanel mainViewIn, High_Scores_Object HSOIn) {

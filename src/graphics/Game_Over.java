@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /***
-* This is the game over screen class
+* This is the game over screen class.
 */
 
 public class Game_Over extends GUI_Panel_Class {

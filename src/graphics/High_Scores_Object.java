@@ -10,19 +10,26 @@ import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+/***
+ *This is the highscore object. It contains logic for saving and fetching high scores, to be displayed on the highscore screen.
+ */
+
 public class High_Scores_Object{
     private ArrayList<String> list =  new ArrayList<String>();
     private int highScore = 0;
 
-
+    //Method for setting the current highscore from inside the game loop logic
     public void setHighScore(int hsIn) {
         this.highScore = hsIn;
     }
 
+    //Method for returning the highscore
     public int getHighScore() {
         return this.highScore;
     }
     
+    //Returns the highest 5 elements from the de-serialzed object
     public ArrayList<String> getTop5Elements() { //Note, strings saved as SCORE:NAME
         this.updateList();
         ArrayList<String> outStrings = new ArrayList<String>();
@@ -37,21 +44,6 @@ public class High_Scores_Object{
         int i, j;
         int n = scoreValues.size();
         System.out.println(this.list);
-
-
-
-        // for (int i = 0; i < n-1; i++) { //sort order of schedule time while also changing order of course occurence
-		// 	for (int j = 0; j < n-i-1; j++) {
-		// 		if (scheduleValues.get(j)> scheduleValues.get(j+1)) {
-		// 			Integer tempInt = scheduleValues.get(j);
-		// 			Course tempCourse = courseValues.get(j);
-		// 			scheduleValues.set(j, scheduleValues.get(j+1));
-		// 			scheduleValues.set(j+1, tempInt);
-		// 			courseValues.set(j, courseValues.get(j+1));
-		// 			courseValues.set(j+1, tempCourse);
-		// 		}
-		// 	}
-
 
         for (i = 0; i < n - 1; i++){
             for (j = 0; j < n - i - 1; j++) {
@@ -72,6 +64,7 @@ public class High_Scores_Object{
         return outStrings;
     }
 
+    //This method adds a new highscore to the object and then serializes it to save it.
     public void addAndSave(String inString) {
         //Import the object
         try
@@ -109,6 +102,7 @@ public class High_Scores_Object{
         }
     }
 
+    //This method updates the current highscore list to reflect the one that's saved
     public void updateList() {
         try
 		{

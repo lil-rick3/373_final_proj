@@ -17,7 +17,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /***
-* This is the high score screen class. This makes the high score screen, and will handle high score logic in the future.
+* This is the screen that is used to set the highscores. Where hte player enters their name. THis is called after the win screen or game over
+* screen if the user chooses to save their score.
 */
 
 public class Set_High_Score extends GUI_Panel_Class {
@@ -28,7 +29,8 @@ public class Set_High_Score extends GUI_Panel_Class {
 	
 	/***
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
-	* This calls all the functions to actually create the GUI panel.
+	* This calls all the functions to actually create the GUI panel. It is also passed in the frame and highscore object, the frame for
+	* making exceptions, and hte highscore object for actually updating saved values.
 	*/
 	public Set_High_Score(String stringIn, JPanel mainViewIn, High_Scores_Object HsIn, JFrame frameIn) {
 		super(stringIn);
@@ -97,6 +99,7 @@ public class Set_High_Score extends GUI_Panel_Class {
 			}		
 		}
 
+		// This method is used to validate the entered name, and handle if it's invalid.
 		private boolean validateNameEntry(String nameIn) { //Validates the user inputed name. If it's valid, returns true. If it's invalid, returns false
 			if (nameIn.length() == 0 || nameIn.length() > 15) {
 				JOptionPane.showMessageDialog(this.frame, "Invalid entry. Must be between 1 and 15 characters.");
