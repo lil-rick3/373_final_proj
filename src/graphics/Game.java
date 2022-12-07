@@ -90,7 +90,7 @@ public class Game {
 	//Handling for launching the game. Done up here to not have to pass tons of variables down
 	public void startGame() {
 		this.game = new Space_Gui(this, this.musicPlayer);
-		//this.musicPlayer.play();
+		// this.musicPlayer.play();
 		mainView.add(game, "GAME");
 		CardLayout temp = (CardLayout)(mainView.getLayout());
 		temp.show(mainView, "GAME");
@@ -107,7 +107,7 @@ public class Game {
 
 	public void winScreen() {
 		CardLayout temp = (CardLayout)(mainView.getLayout());
-		this.score = this.game.currentGame.getScore();
+		this.HSObject.setHighScore(this.game.currentGame.getScore());
 		temp.show(mainView, "WIN");
 	}
 

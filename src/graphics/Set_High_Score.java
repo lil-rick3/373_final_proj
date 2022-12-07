@@ -37,8 +37,10 @@ public class Set_High_Score extends GUI_Panel_Class {
         nameEntrySpace = new JTextField("GIVE ME YOUR NAME"); 
 		//Add all of the desired GUI elements
 		this.addVerticalSpacing();
-		submitButton = this.addButton("SUBMIT");
 		this.getPanel().add(nameEntrySpace);
+		this.addVerticalSpacing();
+		submitButton = this.addButton("SUBMIT");
+		this.addVerticalSpacing();
 		//Add a new button listener to detect button clicks
 		submitButton.addActionListener(new ButtonListener(this.mainView, HsIn));
 	}
