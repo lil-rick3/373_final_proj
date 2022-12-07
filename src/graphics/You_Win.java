@@ -61,7 +61,8 @@ public class You_Win extends GUI_Panel_Class {
 			}
             if (source.equals(setHighScore)) 
             {
-
+				CardLayout temp = (CardLayout)(mainView.getLayout());
+				temp.show(mainView, "SET");
             }
 			
 		}

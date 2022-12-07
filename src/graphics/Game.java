@@ -30,6 +30,8 @@ public class Game {
 
 	//Sound player
 	AudioPlayer musicPlayer;
+	Space_Gui game;
+	int score = 0;
 
 
 	
@@ -87,7 +89,7 @@ public class Game {
 
 	//Handling for launching the game. Done up here to not have to pass tons of variables down
 	public void startGame() {
-		Space_Gui game = new Space_Gui(this);
+		this.game = new Space_Gui(this, this.musicPlayer);
 		//this.musicPlayer.play();
 		mainView.add(game, "GAME");
 		CardLayout temp = (CardLayout)(mainView.getLayout());
@@ -99,12 +101,18 @@ public class Game {
 
 	public void loseScreen() {
 		CardLayout temp = (CardLayout)(mainView.getLayout());
+		this.HSObject.setHighScore(this.game.currentGame.getScore());
 		temp.show(mainView, "OVER");
 	}
 
 	public void winScreen() {
 		CardLayout temp = (CardLayout)(mainView.getLayout());
+		this.score = this.game.currentGame.getScore();
 		temp.show(mainView, "WIN");
+	}
+
+	public void updateHighScores() {
+		this.highScoreScreen.makeHighScore();
 	}
 
 }

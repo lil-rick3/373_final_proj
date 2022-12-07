@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import Audio.AudioPlayer;
 import components.Entity;
 import components.Explosion;
 import components.powerup.DamageUp;
@@ -65,11 +66,13 @@ public class Space_Game {
 	private boolean loseFlag;
 	private long lastFrame;
 	private long currentFrame;
+	private AudioPlayer audio;
 
 	private Game controller;
 
 
-	public Space_Game(Space_Gui curGraphics, Game controllerIn) {
+	public Space_Game(Space_Gui curGraphics, Game controllerIn, AudioPlayer aIn) {
+		this.audio = aIn;
 		this.controller = controllerIn;
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
@@ -376,6 +379,7 @@ public class Space_Game {
 	public int getScore(){
 		return score;
 	}
+	
 	private void NukeEnemies() {
 		for (EnemyShip aEnemyShip: enemies) {
 			aEnemyShip.setToBeDestroyed(true);

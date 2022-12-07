@@ -6,12 +6,22 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.IntBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class High_Scores_Object{
     private ArrayList<String> list =  new ArrayList<String>();
+    private int highScore = 0;
 
+
+    public void setHighScore(int hsIn) {
+        this.highScore = hsIn;
+    }
+
+    public int getHighScore() {
+        return this.highScore;
+    }
     
     public ArrayList<String> getTop5Elements() { //Note, strings saved as SCORE:NAME
         this.updateList();

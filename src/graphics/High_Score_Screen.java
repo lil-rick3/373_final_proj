@@ -33,11 +33,19 @@ public class High_Score_Screen extends GUI_Panel_Class {
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
 	* This calls all the functions to actually create the GUI panel.
 	*/
+
 	public High_Score_Screen(String stringIn, JPanel mainViewIn, High_Scores_Object HSOIn) {
 		super(stringIn);
 		this.HSObject = HSOIn;
 		this.mainView = mainViewIn;
+		this.makeHighScore();
+	}
+
+	public void makeHighScore() {
 		//Uses the BoxLayout so we have all elements displayed vertically
+		this.mainPanel.removeAll();
+		this.mainPanel.revalidate();
+		this.mainPanel.repaint();
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 		
 		//Add all of the desired GUI elements
@@ -56,8 +64,11 @@ public class High_Score_Screen extends GUI_Panel_Class {
 		this.addVerticalSpacing();
 		//Add a new button listener to detect button clicks
 		backButton.addActionListener(new ButtonListener());
+		this.mainPanel.revalidate();
+		this.mainPanel.repaint();
 		
 	}
+
 	/***
 	* This is the custom ButtonListener class. This listens for the back button being clicked, and re-directs the user to the main menu.
 	*/

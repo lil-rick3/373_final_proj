@@ -23,7 +23,6 @@ public class Set_High_Score extends GUI_Panel_Class {
 	JLabel placeHolder;
 	JPanel mainView;
     JTextField nameEntrySpace;
-	High_Scores_Object HSO;
 	
 	/***
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
@@ -31,7 +30,6 @@ public class Set_High_Score extends GUI_Panel_Class {
 	*/
 	public Set_High_Score(String stringIn, JPanel mainViewIn, High_Scores_Object HsIn) {
 		super(stringIn);
-		this.HSO = HsIn;
 		this.mainView = mainViewIn;
 		//Uses the BoxLayout so we have all elements displayed vertically
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
@@ -42,7 +40,7 @@ public class Set_High_Score extends GUI_Panel_Class {
 		submitButton = this.addButton("SUBMIT");
 		this.getPanel().add(nameEntrySpace);
 		//Add a new button listener to detect button clicks
-		submitButton.addActionListener(new ButtonListener(this.mainView));
+		submitButton.addActionListener(new ButtonListener(this.mainView, HsIn));
 	}
 
 
@@ -53,8 +51,10 @@ public class Set_High_Score extends GUI_Panel_Class {
 	private class ButtonListener implements ActionListener
 	{
 		JPanel mainView;
-		ButtonListener(JPanel mainViewIn) {
+		High_Scores_Object HSO;
+		ButtonListener(JPanel mainViewIn, High_Scores_Object HSO) {
 			this.mainView = mainViewIn;
+			this.HSO = HSO;
 		}
 		/***
 		* Catches button click and flips to the corresponding card page
@@ -65,19 +65,18 @@ public class Set_High_Score extends GUI_Panel_Class {
 			
 			if(source.equals(submitButton))
 			{
+				String text = nameEntrySpace.getText();
 				//Do exception handling/error validation on entry
-				if (!this.validateNameEntry(nameEntrySpace.getText())) {
+				if (!this.validateNameEntry(text)) {
 
 				}
 				else {
 					//Add the inputed values to the array list
-                    // this.HSO.
-
-
+                    String tempString = String.valueOf(this.HSO.getHighScore()) + ":" + text;
+					this.HSO.addAndSave(tempString);
 					CardLayout temp = (CardLayout)(mainView.getLayout());
 					temp.show(mainView, "HOME");
 				}
-
 			}		
 		}
 
