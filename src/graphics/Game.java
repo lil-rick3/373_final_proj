@@ -17,13 +17,15 @@ public class Game {
 	JPanel mainView = new JPanel(new CardLayout());
 	
 	//Creates the game. A seperate thread class is used so we don't run into garbage collection issues when running the game from child classes
-	Space_GUI_Thread game = new Space_GUI_Thread();
+	Space_GUI_Thread game = new Space_GUI_Thread(this);
 	Thread gameThread = new Thread(game);
 
 	//Creates the GUI Pages
 	Home_Screen homeScreen; 
 	Tutorial_Screen tutorial =  new Tutorial_Screen("starbackground.jpg", mainView);
 	High_Score_Screen highScoreScreen = new High_Score_Screen("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
+	Game_Over gameOverScreen = new Game_Over("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
+	You_Win youWinScreen = new You_Win("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
 
 	//Sound player
 	AudioPlayer musicPlayer;
@@ -44,7 +46,7 @@ public class Game {
 		}
 
 		//Create the main home_screen panel
-		homeScreen = new Home_Screen("starbackground.jpg", mainView, gameThread, musicPlayer);
+		homeScreen = new Home_Screen("starbackground.jpg", mainView, gameThread, musicPlayer, game, this);
 		//Call the rest of the GUI startup functions
 		this.createGame();
 	}
@@ -66,11 +68,27 @@ public class Game {
 		mainView.add(tutorial.getPanel(), "TUTORIAL");
 		mainView.add(highScoreScreen.getPanel(), "HIGHSCORE");
 		mainView.add(this.game.getPanel(), "GAME");
+
+		mainView.add(gameOverScreen.getPanel(), "OVER");
+		mainView.add(youWinScreen.getPanel(), "WIN");
 		
 		//add card panel to the frame
 		frame.add(mainView);
 		
 		//make frame visible
 		frame.setVisible(true);
+
+	}
+
+	// frame.getContentPane().removeAll();
+	// frame.repaint();
+
+	    
+	public void gameThreadMonitoring() {
+		// while(true) {
+		// 	CardLayout temp = (CardLayout)(mainView.getLayout());
+		// 	temp.show(mainView, "GAME");
+		// }
 	}
 }
+

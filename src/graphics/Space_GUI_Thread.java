@@ -7,14 +7,20 @@ package graphics;
 
 public class Space_GUI_Thread implements Runnable {
     private Space_Gui panel;
+    private Game gameAbove;
     
     /***
     *This is the constructor, creates the new Space_Gui, which contains a Space_Game which handles all of the game logic
     */
-    public Space_GUI_Thread(){
-        this.panel = new Space_Gui(); //temporary placeholder for display
+    public Space_GUI_Thread(Game gameIn){
+        this.gameAbove = gameIn;
+        this.initNewGame();
     }
 
+
+    public void initNewGame() { //Constructs a new game, letting us start over from the defeat main menu
+        this.panel = new Space_Gui(); //temporary placeholder for display
+    }
     /***
     *Getter method to get the panel to add to the card layout display
     */

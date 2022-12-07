@@ -20,6 +20,7 @@ public class Home_Screen extends GUI_Panel_Class {
 	JButton tutorial;
 	JButton highScore;
 	JPanel mainView;
+	JPanel highScoreScreen;
 	AudioPlayer musicPlayer;
 
 	/***
@@ -28,7 +29,7 @@ public class Home_Screen extends GUI_Panel_Class {
 	* This calls all the functions to actually create the GUI panel. 
 	* It also passes the correct things to the action listener so we can initialize the game and music
 	*/
-	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn, AudioPlayer musicPlayer) { //Pass in the name of the background image
+	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn, AudioPlayer musicPlayer, Space_GUI_Thread spaceGameIn, Game gameIn) { //Pass in the name of the background image
 		super(backgroundIn);
 		this.mainView = mainViewIn;
 		//Set the desired layout
@@ -47,9 +48,9 @@ public class Home_Screen extends GUI_Panel_Class {
 		this.musicPlayer = musicPlayer;
 
 		//Register buttons with action listener
-		newGame.addActionListener(new ButtonListener(threadIn));
-		tutorial.addActionListener(new ButtonListener(threadIn));
-		highScore.addActionListener(new ButtonListener(threadIn));
+		newGame.addActionListener(new ButtonListener(threadIn, spaceGameIn, gameIn));
+		tutorial.addActionListener(new ButtonListener(threadIn, spaceGameIn, gameIn));
+		highScore.addActionListener(new ButtonListener(threadIn, spaceGameIn, gameIn));
 	}
 	
 	/***
@@ -58,13 +59,17 @@ public class Home_Screen extends GUI_Panel_Class {
 	private class ButtonListener implements ActionListener
 	{
 		private Thread gameThread;
+		private Space_GUI_Thread game;
+		private Game gameAbove;
 		
 		/***
 		* This is the constructor, just updates the inputed thread so we can actually start running the game
 		*/
 
-		public ButtonListener(Thread threadIn) {
+		public ButtonListener(Thread threadIn, Space_GUI_Thread spaceIn, Game gameIn) {
 			this.gameThread = threadIn;
+			this.game = spaceIn;
+			this.gameAbove = gameIn;
 		}
 		
 		/***
@@ -86,17 +91,19 @@ public class Home_Screen extends GUI_Panel_Class {
 			    temp.show(mainView, "HIGHSCORE");
 			}
 			else if (source.equals(newGame)) {
+				//Init the new game
+				this.game.initNewGame();
+				//Add it to the main layout
+				mainView.add(this.game.getPanel(), "GAME");
 				//Flip to the active game panel
 				CardLayout temp = (CardLayout)(mainView.getLayout());
 				temp.show(mainView, "GAME");
 				//Start the music player
-				musicPlayer.play();
+				// musicPlayer.play();
 				//Start the game thread running
 				this.gameThread.start();
+				// this.gameAbove.gameThreadMonitoring();
 			}
-			
 		}
-		
 	}
-
 }
