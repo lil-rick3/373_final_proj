@@ -41,6 +41,7 @@ public class Space_Game {
 	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
 	public final static int playerHeight = 250;
+	public static int finalScore;
 	public boolean testFlag; //this is used to indicated whether we are running a test or not
 	private boolean nukeFlag; //this is used to indicate whether all enemies should be deleted
 
@@ -75,7 +76,7 @@ public class Space_Game {
 		this.audio = aIn;
 		this.controller = controllerIn;
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
-		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
+		player = new PlayerShip((double)300,(double)300,"src/graphicImages/ship2.png", this);
 		//moveStuff = new MovementPattern();
 		enemies = new LinkedList<EnemyShip>();
 		playerProjectiles = new LinkedList<Projectile>();
@@ -106,6 +107,7 @@ public class Space_Game {
 	
 
 	public void runGame() {
+		audio.play();
 		waitForTurn();
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
@@ -115,6 +117,7 @@ public class Space_Game {
 		if(!testFlag) {
 			curRound = allRounds.getNextRound();
 			if(curRound == null){
+				finalScore = score;
 				controller.winScreen();
 				return;
 			}
@@ -161,6 +164,7 @@ public class Space_Game {
 			if(enemies.size() == 0 && !testFlag){
 				curRound = allRounds.getNextRound();
 				if(curRound == null){
+					finalScore = score;
 					controller.winScreen();
 					break;
 				}
@@ -175,6 +179,7 @@ public class Space_Game {
 			moveExplosions();
 			
 			if(player.getHealth() <= 0){
+				finalScore = score;
 				this.controller.loseScreen();
 				break;
 			}
@@ -574,7 +579,14 @@ public class Space_Game {
 			}
 		}
 		if((c == 'p')){
+
 			isPaused = !isPaused;
+			if(isPaused){
+				audio.pause();
+			}
+			else{
+				audio.play();
+			}
 		}
 			
 	}
