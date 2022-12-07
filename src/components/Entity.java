@@ -46,6 +46,14 @@ public abstract class Entity {
 	}
 	
 	
+	public Entity(BufferedImage image) {
+		projection = image;
+		width = projection.getWidth();
+		height = projection.getHeight();
+	}
+	
+
+
 	/** 
 	 * @param g
 	 * @param spaceGui
