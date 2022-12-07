@@ -33,7 +33,7 @@ public class You_Win extends GUI_Panel_Class {
 		this.addVerticalSpacing();
 		titleLabel = this.addTextElement("YOU WIN!!!");
 		this.addVerticalSpacing();
-        setHighScore = this.addButton("ADD HIGH SCORE");
+        setHighScore = this.addButton("ADD SCORE");
 		this.addVerticalSpacing();
         backButton = this.addButton("BACK");
 		this.addVerticalSpacing();

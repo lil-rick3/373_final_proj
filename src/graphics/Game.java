@@ -14,18 +14,19 @@ import Audio.AudioPlayer;
 
 public class Game {
 
-	//Flags for detecting game over and not over
-	private boolean playerLose;
-	private boolean playerWin;
+	//Highscore object, for managing highscores
+	High_Scores_Object HSObject = new High_Scores_Object();
+	
 
 	//Create the main GUI control panel
 	JPanel mainView = new JPanel(new CardLayout());
 	//Creates the GUI Pages
 	Home_Screen homeScreen; 
 	Tutorial_Screen tutorial =  new Tutorial_Screen("starbackground.jpg", mainView);
-	High_Score_Screen highScoreScreen = new High_Score_Screen("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
+	High_Score_Screen highScoreScreen = new High_Score_Screen("starbackground.jpg", mainView, HSObject); //inherits form GUI_Panel_Class
 	Game_Over gameOverScreen = new Game_Over("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
 	You_Win youWinScreen = new You_Win("starbackground.jpg", mainView); //inherits form GUI_Panel_Class
+	Set_High_Score setScore = new Set_High_Score("starbackground.jpg", mainView, HSObject);
 
 	//Sound player
 	AudioPlayer musicPlayer;
@@ -74,6 +75,7 @@ public class Game {
 
 		mainView.add(gameOverScreen.getPanel(), "OVER");
 		mainView.add(youWinScreen.getPanel(), "WIN");
+		mainView.add(setScore.getPanel(), "SET");
 		
 		//add card panel to the frame
 		frame.add(mainView);

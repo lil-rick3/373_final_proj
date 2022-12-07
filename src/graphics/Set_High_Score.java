@@ -23,25 +23,26 @@ public class Set_High_Score extends GUI_Panel_Class {
 	JLabel placeHolder;
 	JPanel mainView;
     JTextField nameEntrySpace;
+	High_Scores_Object HSO;
 	
 	/***
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
 	* This calls all the functions to actually create the GUI panel.
 	*/
-	public Set_High_Score(String stringIn, JPanel mainViewIn) {
+	public Set_High_Score(String stringIn, JPanel mainViewIn, High_Scores_Object HsIn) {
 		super(stringIn);
+		this.HSO = HsIn;
 		this.mainView = mainViewIn;
 		//Uses the BoxLayout so we have all elements displayed vertically
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 		//Adding the name entry field to the created high score screen
         nameEntrySpace = new JTextField("GIVE ME YOUR NAME"); 
-        this.mainView.add(nameEntrySpace);
 		//Add all of the desired GUI elements
 		this.addVerticalSpacing();
 		submitButton = this.addButton("SUBMIT");
+		this.getPanel().add(nameEntrySpace);
 		//Add a new button listener to detect button clicks
 		submitButton.addActionListener(new ButtonListener(this.mainView));
-        
 	}
 
 
@@ -70,7 +71,7 @@ public class Set_High_Score extends GUI_Panel_Class {
 				}
 				else {
 					//Add the inputed values to the array list
-                    this.addNameToList(nameEntrySpace.getText());
+                    // this.HSO.
 
 
 					CardLayout temp = (CardLayout)(mainView.getLayout());
@@ -89,25 +90,6 @@ public class Set_High_Score extends GUI_Panel_Class {
 				return true;
 			}
 		}
-
-        private void addNameToList(String nameIn) {
-
-            //Import the scores from a deserialized object
-
-        //     try
-        //     {
-        //         FileOutputStream fos = new FileOutputStream("highscores");
-        //         ObjectOutputStream oos = new ObjectOutputStream(fos);
-        //         oos.writeObject(scores);
-        //         oos.close();
-        //         fos.close();
-        //     } 
-        //     catch (IOException ioe) 
-        //     {
-        //         ioe.printStackTrace();
-		// }
-        }
-		
 	}
 
 

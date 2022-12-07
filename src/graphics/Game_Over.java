@@ -34,7 +34,7 @@ public class Game_Over extends GUI_Panel_Class {
 		titleLabel = this.addTextElement("GAME OVER.");
 		titleLabel = this.addTextElement("It's okay, we all can't be winners.");
 		this.addVerticalSpacing();
-        setHighScore = this.addButton("ADD HIGH SCORE");
+        setHighScore = this.addButton("ADD SCORE");
 		this.addVerticalSpacing();
         backButton = this.addButton("BACK");
 		this.addVerticalSpacing();
@@ -62,7 +62,8 @@ public class Game_Over extends GUI_Panel_Class {
 			}
             if (source.equals(setHighScore)) 
             {
-
+				CardLayout temp = (CardLayout)(mainView.getLayout());
+				temp.show(mainView, "SET");
             }
 			
 		}
