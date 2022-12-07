@@ -33,6 +33,10 @@ public class RoundDriver{
 
     }
 
+    public LinkedList<RoundData> getRoundList() {
+        return this.roundList;
+    }
+
     public Round getNextRound(){
         if(roundList.size() == 0){
             return null;
