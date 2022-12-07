@@ -85,13 +85,24 @@ public class Game {
 
 	//Handling for launching the game. Done up here to not have to pass tons of variables down
 	public void startGame() {
-		Space_Gui game = new Space_Gui();
+		Space_Gui game = new Space_Gui(this);
+		//this.musicPlayer.play();
 		mainView.add(game, "GAME");
 		CardLayout temp = (CardLayout)(mainView.getLayout());
 		temp.show(mainView, "GAME");
 		Delay_Thread delayThread = new Delay_Thread(game);
 		delayThread.start();
 		game.requestFocusInWindow();
+	}
+
+	public void loseScreen() {
+		CardLayout temp = (CardLayout)(mainView.getLayout());
+		temp.show(mainView, "OVER");
+	}
+
+	public void winScreen() {
+		CardLayout temp = (CardLayout)(mainView.getLayout());
+		temp.show(mainView, "WIN");
 	}
 
 }

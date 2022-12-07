@@ -30,11 +30,14 @@ public class Game_Over extends GUI_Panel_Class {
 		//Uses the BoxLayout so we have all elements displayed vertically
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 		//Add all of the desired GUI elements
-		titleLabel = this.addTextElement("GAME OVER");
+		this.addVerticalSpacing();
+		titleLabel = this.addTextElement("GAME OVER.");
+		titleLabel = this.addTextElement("It's okay, we all can't be winners.");
 		this.addVerticalSpacing();
         setHighScore = this.addButton("ADD HIGH SCORE");
 		this.addVerticalSpacing();
         backButton = this.addButton("BACK");
+		this.addVerticalSpacing();
 		//Add a new button listener to detect button clicks
 		backButton.addActionListener(new ButtonListener());
         setHighScore.addActionListener(new ButtonListener());

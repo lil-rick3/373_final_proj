@@ -30,11 +30,13 @@ public class You_Win extends GUI_Panel_Class {
 		//Uses the BoxLayout so we have all elements displayed vertically
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 		//Add all of the desired GUI elements
+		this.addVerticalSpacing();
 		titleLabel = this.addTextElement("YOU WIN!!!");
 		this.addVerticalSpacing();
         setHighScore = this.addButton("ADD HIGH SCORE");
 		this.addVerticalSpacing();
         backButton = this.addButton("BACK");
+		this.addVerticalSpacing();
 		//Add a new button listener to detect button clicks
 		backButton.addActionListener(new ButtonListener());
         setHighScore.addActionListener(new ButtonListener());

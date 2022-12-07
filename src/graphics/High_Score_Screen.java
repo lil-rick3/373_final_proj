@@ -47,8 +47,9 @@ public class High_Score_Screen extends GUI_Panel_Class {
 		// {
 		// 	FileInputStream file = new FileInputStream("highscores.ser");
 		// 	ObjectInputStream object = new ObjectInputStream(file);
-		// 	// this.scores = 
-		// 	// object.close();
+		// 	this.scores = (ArrayList<String>) object.readObject();
+		// 	// emp = (Employee) objIn.readObject();
+		// 	object.close();
 		// 	file.close();
 		// } 
 		// catch (IOException ioe) 
