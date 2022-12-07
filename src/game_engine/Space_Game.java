@@ -70,7 +70,10 @@ public class Space_Game {
 	private boolean loseFlag;
 	private long lastFrame;
 	private long currentFrame;
+
 	private AudioPlayer audio;
+
+main
 
 	private Game controller;
 
