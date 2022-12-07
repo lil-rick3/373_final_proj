@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch HighScoreReset",
+            "request": "launch",
+            "mainClass": "main.HighScoreReset",
+            "projectName": "373_final_proj_e39dc637"
+        },
+        {
+            "type": "java",
             "name": "Launch space_main",
             "request": "launch",
             "mainClass": "main.space_main",
