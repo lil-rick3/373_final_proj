@@ -11,27 +11,24 @@ public class RoundDriver{
         roundList = new LinkedList<RoundData>();
         int weapon= 0;
         int health;
-        
-        for(int shipType = 1; shipType <= 3 ;shipType++){
-            for(int formation = 0; formation < 3; formation ++){
-            if(shipType < 3)
-                weapon = 0;
-            else if(shipType < 5){
-                weapon = 1;
-            }
-            else
-                weapon = 2;
-            health = shipType + 2;
+        int shipType;
+        int formation;
+        for(int i = 0; i < 9 ; i++){
+            shipType = (i)%7 + 1;
+            weapon = i % 3;
+            formation = i % 3;
+            health = i + 2;
             RoundData tempRound = new RoundData(formation, health, shipType, weapon);
             roundList.add(tempRound);
-            
+        }
+       
 
-            }
+            
         }
         
         
 
-    }
+    
 
     public LinkedList<RoundData> getRoundList() {
         return this.roundList;
