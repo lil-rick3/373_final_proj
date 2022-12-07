@@ -29,7 +29,7 @@ public class Home_Screen extends GUI_Panel_Class {
 	* This calls all the functions to actually create the GUI panel. 
 	* It also passes the correct things to the action listener so we can initialize the game and music
 	*/
-	public Home_Screen(String backgroundIn,  JPanel mainViewIn, Thread threadIn, AudioPlayer musicPlayer, Space_GUI_Thread spaceGameIn, Game gameIn, Delay_Thread delayThreadIn) { //Pass in the name of the background image
+	public Home_Screen(String backgroundIn,  JPanel mainViewIn,  AudioPlayer musicPlayer,  Game gameIn) { //Pass in the name of the background image
 		super(backgroundIn);
 		this.mainView = mainViewIn;
 		//Set the desired layout
@@ -48,9 +48,9 @@ public class Home_Screen extends GUI_Panel_Class {
 		this.musicPlayer = musicPlayer;
 
 		//Register buttons with action listener
-		newGame.addActionListener(new ButtonListener(threadIn, spaceGameIn, gameIn, delayThreadIn));
-		tutorial.addActionListener(new ButtonListener(threadIn, spaceGameIn, gameIn, delayThreadIn));
-		highScore.addActionListener(new ButtonListener(threadIn, spaceGameIn, gameIn, delayThreadIn));
+		newGame.addActionListener(new ButtonListener(gameIn));
+		tutorial.addActionListener(new ButtonListener(gameIn));
+		highScore.addActionListener(new ButtonListener(gameIn));
 	}
 	
 	/***
@@ -58,20 +58,14 @@ public class Home_Screen extends GUI_Panel_Class {
 	*/
 	private class ButtonListener implements ActionListener
 	{
-		private Thread gameThread;
-		private Space_GUI_Thread game;
-		private Game gameAbove;
-		private Delay_Thread delayThread;
+		Game game;
 		
 		/***
 		* This is the constructor, just updates the inputed thread so we can actually start running the game
 		*/
 
-		public ButtonListener(Thread threadIn, Space_GUI_Thread spaceIn, Game gameIn, Delay_Thread  delayThreadIn) {
-			this.gameThread = threadIn;
-			this.game = spaceIn;
-			this.gameAbove = gameIn;
-			this.delayThread = delayThreadIn;
+		public ButtonListener(Game gameIn) {
+			this.game = gameIn;
 		}
 		
 		/***
@@ -93,18 +87,7 @@ public class Home_Screen extends GUI_Panel_Class {
 			    temp.show(mainView, "HIGHSCORE");
 			}
 			else if (source.equals(newGame)) {
-				//Init the new game
-				this.game.initNewGame();
-				//Add it to the main layout
-				mainView.add(this.game.getPanel(), "GAME");
-				//Flip to the active game panel
-				CardLayout temp = (CardLayout)(mainView.getLayout());
-				temp.show(mainView, "GAME");
-				//Start the music player
-				musicPlayer.play();
-				//Start the game thread running
-				this.gameThread.start();
-				this.delayThread.start();
+				this.game.startGame();
 			}
 		}
 	}

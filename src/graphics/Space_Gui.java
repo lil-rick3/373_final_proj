@@ -33,9 +33,9 @@ public class Space_Gui extends JPanel implements KeyListener{
 	boolean currentlyPainting = false;
 	int nukeCounter;
 
-	public Space_Gui(){
+	public Space_Gui(Game game){
 		nukeCounter = 0;
-		
+		this.currentGame = new Space_Game(this, game);
 
 		try {
 			pauseBar = ImageIO.read(new File("src/graphicImages/pause_bar.png"));
@@ -65,10 +65,6 @@ public class Space_Gui extends JPanel implements KeyListener{
 		
 		
 	}
-	public void newSpaceGame() {
-		this.currentGame = new Space_Game(this);
-	}
-
 	public void run() {
 		currentGame.runGame();
 	}

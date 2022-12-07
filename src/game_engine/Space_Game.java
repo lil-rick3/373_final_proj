@@ -20,6 +20,7 @@ import components.ships.Ship;
 import components.star.Star;
 import game_engine.RoundComp.Round;
 import game_engine.RoundComp.RoundDriver;
+import graphics.Game;
 import graphics.Space_Gui;
 import java.lang.Math;
 
@@ -65,9 +66,11 @@ public class Space_Game {
 	private long lastFrame;
 	private long currentFrame;
 
+	private Game controller;
 
-	public Space_Game(Space_Gui curGraphics) {
-		
+
+	public Space_Game(Space_Gui curGraphics, Game controllerIn) {
+		this.controller = controllerIn;
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
 		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
 		//moveStuff = new MovementPattern();
@@ -94,8 +97,7 @@ public class Space_Game {
 		isPaused = false;
 		//spawnStars();
 		starSpawnRate = 0.05;
-		allRounds = new RoundDriver();
-				
+		allRounds = new RoundDriver();			
 	}
 	
 	
@@ -110,7 +112,7 @@ public class Space_Game {
 		if(!testFlag) {
 			curRound = allRounds.getNextRound();
 			if(curRound == null){
-				winFlag = true;
+				controller.winScreen();
 				return;
 			}
 			enemies = curRound.startRound();
@@ -156,7 +158,7 @@ public class Space_Game {
 			if(enemies.size() == 0 && !testFlag){
 				curRound = allRounds.getNextRound();
 				if(curRound == null){
-					winFlag = true;
+					controller.winScreen();
 					break;
 				}
 				enemies = curRound.startRound();
@@ -170,7 +172,7 @@ public class Space_Game {
 			moveExplosions();
 			
 			if(player.getHealth() <= 0){
-				loseFlag = true;
+				this.controller.loseScreen();
 				break;
 			}
 			try {

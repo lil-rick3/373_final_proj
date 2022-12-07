@@ -27,40 +27,29 @@ public class High_Score_Screen extends GUI_Panel_Class {
 	JLabel placeHolder;
 	JPanel mainView;
 	ArrayList<String> scores;
+	High_Scores_Object HSObject;
 	
 	/***
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
 	* This calls all the functions to actually create the GUI panel.
 	*/
-	public High_Score_Screen(String stringIn, JPanel mainViewIn) {
+	public High_Score_Screen(String stringIn, JPanel mainViewIn, High_Scores_Object HSOIn) {
 		super(stringIn);
+		this.HSObject = HSOIn;
 		this.mainView = mainViewIn;
 		//Uses the BoxLayout so we have all elements displayed vertically
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 		
 		//Add all of the desired GUI elements
-		titleLabel = this.addTextElement("HIGH SCORES");
+		titleLabel = this.addTextElement("TOP 5 HIGH SCORES");
 		this.addVerticalSpacing();
 
-		//Import the scores from a deserialized object
-		// try
-		// {
-		// 	FileInputStream file = new FileInputStream("highscores.ser");
-		// 	ObjectInputStream object = new ObjectInputStream(file);
-		// 	// this.scores = 
-		// 	// object.close();
-		// 	file.close();
-		// } 
-		// catch (IOException ioe) 
-		// {
-		// 	ioe.printStackTrace();
-		// }
-
 		//Add the scores to the list, when they are added we only let the top 5 be added
-		// for (String sItem:this.scores) {
-		// 	this.addTextElement(sItem);
-		// 	this.addVerticalSpacing();
-		// }
+		System.out.println(this.HSObject.getTop5Elements());
+		for (String sItem:this.HSObject.getTop5Elements()) {
+			this.addTextElement(sItem);
+			this.addVerticalSpacing();
+		}
 
 		this.addVerticalSpacing();
 		backButton = this.addButton("BACK");
