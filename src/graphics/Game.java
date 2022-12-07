@@ -13,15 +13,13 @@ import Audio.AudioPlayer;
  */
 
 public class Game {
+
+	//Flags for detecting game over and not over
+	private boolean playerLose;
+	private boolean playerWin;
+
 	//Create the main GUI control panel
 	JPanel mainView = new JPanel(new CardLayout());
-	//Create the delay thread
-	Delay_Thread delayThread = new Delay_Thread(this);
-	
-	//Creates the game. A seperate thread class is used so we don't run into garbage collection issues when running the game from child classes
-	Space_GUI_Thread game = new Space_GUI_Thread(this);
-	Thread gameThread = new Thread(game);
-
 	//Creates the GUI Pages
 	Home_Screen homeScreen; 
 	Tutorial_Screen tutorial =  new Tutorial_Screen("starbackground.jpg", mainView);
@@ -32,7 +30,7 @@ public class Game {
 	//Sound player
 	AudioPlayer musicPlayer;
 
-	//Flags for detecting game over and not over
+
 	
 	
 	public Game() {
@@ -51,7 +49,7 @@ public class Game {
 		}
 
 		//Create the main home_screen panel
-		homeScreen = new Home_Screen("starbackground.jpg", mainView, gameThread, musicPlayer, game, this, delayThread);
+		homeScreen = new Home_Screen("starbackground.jpg", mainView, musicPlayer,this);
 		//Call the rest of the GUI startup functions
 		this.createGame();
 	}
@@ -72,7 +70,7 @@ public class Game {
 		//The below panels were all created in the variable declerations
 		mainView.add(tutorial.getPanel(), "TUTORIAL");
 		mainView.add(highScoreScreen.getPanel(), "HIGHSCORE");
-		mainView.add(this.game.getPanel(), "GAME");
+	
 
 		mainView.add(gameOverScreen.getPanel(), "OVER");
 		mainView.add(youWinScreen.getPanel(), "WIN");
@@ -84,11 +82,17 @@ public class Game {
 		frame.setVisible(true);
 
 	}
-	    
-	public void gameThreadMonitoring() {
-		while(true) {
-			System.out.println("test");
-		}
+
+	//Handling for launching the game. Done up here to not have to pass tons of variables down
+	public void startGame() {
+		Space_Gui game = new Space_Gui();
+		mainView.add(game, "GAME");
+		CardLayout temp = (CardLayout)(mainView.getLayout());
+		temp.show(mainView, "GAME");
+		Delay_Thread delayThread = new Delay_Thread(game);
+		delayThread.start();
+		game.requestFocusInWindow();
 	}
+
 }
 

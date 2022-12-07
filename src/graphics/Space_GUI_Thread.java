@@ -8,6 +8,7 @@ package graphics;
 public class Space_GUI_Thread implements Runnable {
     private Space_Gui panel;
     private Game gameAbove;
+
     
     /***
     *This is the constructor, creates the new Space_Gui, which contains a Space_Game which handles all of the game logic
@@ -16,6 +17,7 @@ public class Space_GUI_Thread implements Runnable {
         this.panel = new Space_Gui(); //temporary placeholder for display
         this.gameAbove = gameIn;
         this.initNewGame();
+
     }
 
 
