@@ -5,6 +5,10 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+import Audio.AudioPlayer;
 import components.Entity;
 import components.Explosion;
 import components.powerup.DamageUp;
@@ -40,6 +44,7 @@ public class Space_Game {
 	public final static int gameHeight = 500;
 	public final static int gameWidth = 600;
 	public final static int playerHeight = 250;
+	public static int finalScore;
 	public boolean testFlag; //this is used to indicated whether we are running a test or not
 	private boolean nukeFlag; //this is used to indicate whether all enemies should be deleted
 
@@ -66,13 +71,18 @@ public class Space_Game {
 	private long lastFrame;
 	private long currentFrame;
 
+	private AudioPlayer audio;
+
+main
+
 	private Game controller;
 
 
-	public Space_Game(Space_Gui curGraphics, Game controllerIn) {
+	public Space_Game(Space_Gui curGraphics, Game controllerIn, AudioPlayer aIn) {
+		this.audio = aIn;
 		this.controller = controllerIn;
 		Entity.setSize(gameWidth, gameHeight); //set the dimensions for the game window
-		player = new PlayerShip((double)100,(double)100,"src/graphicImages/ship2.png", this);
+		player = new PlayerShip((double)300,(double)300,"src/graphicImages/ship2.png", this);
 		//moveStuff = new MovementPattern();
 		enemies = new LinkedList<EnemyShip>();
 		playerProjectiles = new LinkedList<Projectile>();
@@ -103,6 +113,18 @@ public class Space_Game {
 	
 
 	public void runGame() {
+		try {
+			audio.play(0);
+		} catch (UnsupportedAudioFileException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (LineUnavailableException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		waitForTurn();
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
@@ -112,6 +134,8 @@ public class Space_Game {
 		if(!testFlag) {
 			curRound = allRounds.getNextRound();
 			if(curRound == null){
+				finalScore = score;
+				audio.pause();
 				controller.winScreen();
 				return;
 			}
@@ -158,6 +182,19 @@ public class Space_Game {
 			if(enemies.size() == 0 && !testFlag){
 				curRound = allRounds.getNextRound();
 				if(curRound == null){
+					finalScore = score;
+					try {
+						audio.play(1);
+					} catch (UnsupportedAudioFileException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (LineUnavailableException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 					controller.winScreen();
 					break;
 				}
@@ -172,6 +209,19 @@ public class Space_Game {
 			moveExplosions();
 			
 			if(player.getHealth() <= 0){
+				finalScore = score;
+				try {
+					audio.play(2);
+				} catch (UnsupportedAudioFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (LineUnavailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				this.controller.loseScreen();
 				break;
 			}
@@ -376,6 +426,7 @@ public class Space_Game {
 	public int getScore(){
 		return score;
 	}
+	
 	private void NukeEnemies() {
 		for (EnemyShip aEnemyShip: enemies) {
 			aEnemyShip.setToBeDestroyed(true);
@@ -570,7 +621,14 @@ public class Space_Game {
 			}
 		}
 		if((c == 'p')){
+
 			isPaused = !isPaused;
+			if(isPaused){
+				audio.pause();
+			}
+			else{
+				audio.play();
+			}
 		}
 			
 	}

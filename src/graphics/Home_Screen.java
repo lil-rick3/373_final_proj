@@ -83,6 +83,7 @@ public class Home_Screen extends GUI_Panel_Class {
 			}
 			else if (source.equals(highScore)) {
 				//Flip to the high score page
+				this.game.updateHighScores();
 				CardLayout temp = (CardLayout)(mainView.getLayout());
 			    temp.show(mainView, "HIGHSCORE");
 			}

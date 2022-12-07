@@ -13,6 +13,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+import Audio.AudioPlayer;
+
+
 import components.Explosion;
 import components.powerup.Powerup;
 import components.projectile.Projectile;
@@ -33,9 +37,9 @@ public class Space_Gui extends JPanel implements KeyListener{
 	boolean currentlyPainting = false;
 	int nukeCounter;
 
-	public Space_Gui(Game game){
+	public Space_Gui(Game game, AudioPlayer aIn){
 		nukeCounter = 0;
-		this.currentGame = new Space_Game(this, game);
+		this.currentGame = new Space_Game(this, game, aIn);
 
 		try {
 			pauseBar = ImageIO.read(new File("src/graphicImages/pause_bar.png"));
@@ -131,6 +135,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 		PlayerShip player = currentGame.getPlayerShip();
 
 		g.setColor(Color.black);
+		g.setFont(new Font("Courier", Font.BOLD, 20));
 		String statusStr = "Lives: " + player.getLives() + "     Score: " + currentGame.getScore();
 		g.drawString(statusStr, 0, 550);
 

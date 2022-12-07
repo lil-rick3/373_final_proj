@@ -39,6 +39,8 @@ public class Tutorial_Screen extends GUI_Panel_Class {
 		this.addVerticalSpacing();
 		instructionsLabel2 = this.addTextElement("Spacebar to shoot!");
 		this.addVerticalSpacing();
+		this.addTextElement("Deliver peace to all the alien scum! :D");
+		this.addVerticalSpacing();
 		
 		backButton = this.addButton("BACK");
 		this.addVerticalSpacing();
