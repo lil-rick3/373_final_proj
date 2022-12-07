@@ -84,11 +84,11 @@ public class Space_Game {
 		waitForTurn();
 		currentlyModifying = true;
 		LinkedList<Projectile> tempProjList = new LinkedList<>();
-		if (!testFlag) {
-			curRound = allRounds.getNextRound();
-			if(curRound == null){
-				return;
-			}
+		curRound = allRounds.getNextRound();
+		if(curRound == null){
+			return;
+		}
+		if(!testFlag) {
 			enemies = curRound.startRound();
 		}
 		currentlyModifying = false;
