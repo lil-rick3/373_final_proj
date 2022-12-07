@@ -69,7 +69,7 @@ public abstract class Entity {
 	public static boolean CheckCollision(Entity e1, Entity e2) {
 
 		if(checkIntersection(e1,e2)){
-			System.out.println("collision");
+			//System.out.println("collision");
 			e1.collisionAction(e2);
 			e2.collisionAction(e1);
 			return true;
