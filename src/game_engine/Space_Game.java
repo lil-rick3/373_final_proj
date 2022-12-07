@@ -48,7 +48,7 @@ public class Space_Game {
 	public boolean testFlag; //this is used to indicated whether we are running a test or not
 	private boolean nukeFlag; //this is used to indicate whether all enemies should be deleted
 
-	
+	private int roundNo;
 	private Space_Gui curGraphics;
 	private PlayerShip player;
 	private LinkedList<EnemyShip> enemies;
@@ -90,6 +90,7 @@ public class Space_Game {
 		powerups = new LinkedList<Powerup>();
 		stars = new LinkedList<Star>();
 		explosions = new LinkedList<Explosion>();
+		roundNo = 1;
 		try {
 			Explosion.setImageForAll();
 		} catch (IOException e) {
@@ -183,6 +184,7 @@ public class Space_Game {
 				curRound = allRounds.getNextRound();
 				if(curRound != null){
 					enemies = curRound.startRound();
+					roundNo ++;
 				}
 				
 			}
@@ -668,6 +670,9 @@ public class Space_Game {
 	}
 	public boolean getLoseFlag(){
 		return loseFlag;
+	}
+	public int getRoundNo(){
+		return roundNo;
 	}
 	
 }

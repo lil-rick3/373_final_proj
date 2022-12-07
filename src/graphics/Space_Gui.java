@@ -136,7 +136,7 @@ public class Space_Gui extends JPanel implements KeyListener{
 
 		g.setColor(Color.black);
 		g.setFont(new Font("Courier", Font.BOLD, 20));
-		String statusStr = "Lives: " + player.getLives() + "     Score: " + currentGame.getScore();
+		String statusStr = "Lives: " + player.getLives() + "     Score: " + currentGame.getScore() + "    Round: " + currentGame.getRoundNo();
 		g.drawString(statusStr, 0, 550);
 
 	}
