@@ -181,24 +181,10 @@ public class Space_Game {
 
 			if(enemies.size() == 0 && !testFlag){
 				curRound = allRounds.getNextRound();
-				if(curRound == null){
-					finalScore = score;
-					try {
-						audio.play(1);
-					} catch (UnsupportedAudioFileException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (LineUnavailableException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-					controller.winScreen();
-					break;
+				if(curRound != null){
+					enemies = curRound.startRound();
 				}
-				enemies = curRound.startRound();
+				
 			}
 			currentlyModifying = false;
 
@@ -207,8 +193,24 @@ public class Space_Game {
 			movePowerups();
 			moveStars();
 			moveExplosions();
-			
-			if(player.getHealth() <= 0){
+			if(curRound == null){//win condition
+				finalScore = score;
+				try {
+					audio.play(1);
+				} catch (UnsupportedAudioFileException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (LineUnavailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				controller.winScreen();
+				break;
+			}
+			if(player.getHealth() <= 0){//lose condition
 				finalScore = score;
 				try {
 					audio.play(2);

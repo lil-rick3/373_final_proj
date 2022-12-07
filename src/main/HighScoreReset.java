@@ -18,7 +18,7 @@ public class HighScoreReset {
         list.add("99999:DR.MAREFAT");
         list.add("3000:DR.THARP");
         list.add("30:ELON MUSK");
-        list.add("2:UR MOM");
+        list.add("2:Kurt");
         list.add("1:bob");
         FileOutputStream fos = new FileOutputStream("highscores.ser");
         ObjectOutputStream oos = new ObjectOutputStream(fos);

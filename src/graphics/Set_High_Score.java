@@ -99,7 +99,7 @@ public class Set_High_Score extends GUI_Panel_Class {
 
 		private boolean validateNameEntry(String nameIn) { //Validates the user inputed name. If it's valid, returns true. If it's invalid, returns false
 			if (nameIn.length() == 0 || nameIn.length() > 15) {
-				JOptionPane.showMessageDialog(this.frame, "Invalid entry. Must be between 0 and 15 characters.");
+				JOptionPane.showMessageDialog(this.frame, "Invalid entry. Must be between 1 and 15 characters.");
 				return false;
 			}
 			else {
