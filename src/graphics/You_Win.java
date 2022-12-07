@@ -31,7 +31,7 @@ public class You_Win extends GUI_Panel_Class {
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
 		//Add all of the desired GUI elements
 		this.addVerticalSpacing();
-		titleLabel = this.addTextElement("YOU WIN!!!");
+		titleLabel = this.addTextElement("YOU BROUGHT PEACE TO THE GALAXY!");
 		this.addVerticalSpacing();
         setHighScore = this.addButton("ADD SCORE");
 		this.addVerticalSpacing();
