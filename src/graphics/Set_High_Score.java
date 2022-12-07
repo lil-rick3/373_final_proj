@@ -94,18 +94,18 @@ public class Set_High_Score extends GUI_Panel_Class {
 
             //Import the scores from a deserialized object
 
-            try
-            {
-                FileOutputStream fos = new FileOutputStream("highscores");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
-                oos.writeObject(scores);
-                oos.close();
-                fos.close();
-            } 
-            catch (IOException ioe) 
-            {
-                ioe.printStackTrace();
-		}
+        //     try
+        //     {
+        //         FileOutputStream fos = new FileOutputStream("highscores");
+        //         ObjectOutputStream oos = new ObjectOutputStream(fos);
+        //         oos.writeObject(scores);
+        //         oos.close();
+        //         fos.close();
+        //     } 
+        //     catch (IOException ioe) 
+        //     {
+        //         ioe.printStackTrace();
+		// }
         }
 		
 	}

@@ -43,24 +43,24 @@ public class High_Score_Screen extends GUI_Panel_Class {
 		this.addVerticalSpacing();
 
 		//Import the scores from a deserialized object
-		try
-		{
-			FileInputStream file = new FileInputStream("highscores.ser");
-			ObjectInputStream object = new ObjectInputStream(file);
-			this.scores = 
-			object.close();
-			file.close();
-		} 
-		catch (IOException ioe) 
-		{
-			ioe.printStackTrace();
-		}
+		// try
+		// {
+		// 	FileInputStream file = new FileInputStream("highscores.ser");
+		// 	ObjectInputStream object = new ObjectInputStream(file);
+		// 	// this.scores = 
+		// 	// object.close();
+		// 	file.close();
+		// } 
+		// catch (IOException ioe) 
+		// {
+		// 	ioe.printStackTrace();
+		// }
 
 		//Add the scores to the list, when they are added we only let the top 5 be added
-		for (String sItem:this.scores) {
-			this.addTextElement(sItem);
-			this.addVerticalSpacing();
-		}
+		// for (String sItem:this.scores) {
+		// 	this.addTextElement(sItem);
+		// 	this.addVerticalSpacing();
+		// }
 
 		this.addVerticalSpacing();
 		backButton = this.addButton("BACK");

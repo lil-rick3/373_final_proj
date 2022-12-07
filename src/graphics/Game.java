@@ -15,6 +15,8 @@ import Audio.AudioPlayer;
 public class Game {
 	//Create the main GUI control panel
 	JPanel mainView = new JPanel(new CardLayout());
+	//Create the delay thread
+	Delay_Thread delayThread = new Delay_Thread(this);
 	
 	//Creates the game. A seperate thread class is used so we don't run into garbage collection issues when running the game from child classes
 	Space_GUI_Thread game = new Space_GUI_Thread(this);
@@ -46,7 +48,7 @@ public class Game {
 		}
 
 		//Create the main home_screen panel
-		homeScreen = new Home_Screen("starbackground.jpg", mainView, gameThread, musicPlayer, game, this);
+		homeScreen = new Home_Screen("starbackground.jpg", mainView, gameThread, musicPlayer, game, this, delayThread);
 		//Call the rest of the GUI startup functions
 		this.createGame();
 	}
@@ -79,16 +81,11 @@ public class Game {
 		frame.setVisible(true);
 
 	}
-
-	// frame.getContentPane().removeAll();
-	// frame.repaint();
-
 	    
 	public void gameThreadMonitoring() {
-		// while(true) {
-		// 	CardLayout temp = (CardLayout)(mainView.getLayout());
-		// 	temp.show(mainView, "GAME");
-		// }
+		while(true) {
+			System.out.println("test");
+		}
 	}
 }
 
