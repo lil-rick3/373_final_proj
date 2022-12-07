@@ -3,12 +3,6 @@ package graphics;
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,57 +10,34 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /***
-* This is the high score screen class. This makes the high score screen, and will handle high score logic in the future.
+* This is the game over screen class
 */
 
-public class High_Score_Screen extends GUI_Panel_Class {
-	ArrayList<Integer> Scores = new ArrayList<Integer>(); //Stores the high score number, gets serialized and deserialized
-
+public class You_Win extends GUI_Panel_Class {
 	JLabel titleLabel;
 	JButton backButton;
+    JButton setHighScore;
 	JLabel placeHolder;
 	JPanel mainView;
-	ArrayList<String> scores;
 	
 	/***
 	* This is the constuctor. The inputs are the main card layout (for switching between cards), and the name of the background image file.
 	* This calls all the functions to actually create the GUI panel.
 	*/
-	public High_Score_Screen(String stringIn, JPanel mainViewIn) {
+	public You_Win(String stringIn, JPanel mainViewIn) {
 		super(stringIn);
 		this.mainView = mainViewIn;
 		//Uses the BoxLayout so we have all elements displayed vertically
 		this.mainPanel.setLayout(new BoxLayout(this.mainPanel, BoxLayout.Y_AXIS));
-		
 		//Add all of the desired GUI elements
-		titleLabel = this.addTextElement("HIGH SCORES");
+		titleLabel = this.addTextElement("YOU WIN!!!");
 		this.addVerticalSpacing();
-
-		//Import the scores from a deserialized object
-		// try
-		// {
-		// 	FileInputStream file = new FileInputStream("highscores.ser");
-		// 	ObjectInputStream object = new ObjectInputStream(file);
-		// 	// this.scores = 
-		// 	// object.close();
-		// 	file.close();
-		// } 
-		// catch (IOException ioe) 
-		// {
-		// 	ioe.printStackTrace();
-		// }
-
-		//Add the scores to the list, when they are added we only let the top 5 be added
-		// for (String sItem:this.scores) {
-		// 	this.addTextElement(sItem);
-		// 	this.addVerticalSpacing();
-		// }
-
+        setHighScore = this.addButton("ADD HIGH SCORE");
 		this.addVerticalSpacing();
-		backButton = this.addButton("BACK");
-		this.addVerticalSpacing();
+        backButton = this.addButton("BACK");
 		//Add a new button listener to detect button clicks
 		backButton.addActionListener(new ButtonListener());
+        setHighScore.addActionListener(new ButtonListener());
 		
 	}
 	/***
@@ -86,6 +57,10 @@ public class High_Score_Screen extends GUI_Panel_Class {
 				 CardLayout temp = (CardLayout)(mainView.getLayout());
 				 temp.show(mainView, "HOME");
 			}
+            if (source.equals(setHighScore)) 
+            {
+
+            }
 			
 		}
 		
