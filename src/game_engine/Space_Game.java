@@ -73,7 +73,7 @@ public class Space_Game {
 
 	private AudioPlayer audio;
 
-main
+
 
 	private Game controller;
 
