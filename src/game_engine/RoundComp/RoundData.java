@@ -1,5 +1,10 @@
 package game_engine.RoundComp;
 
+
+/***
+ * this is a struct used to store round data, allowing for this struct to 
+ * be passed as a parameter and nothing else
+ */
 public class RoundData {
     
     public int formation,health,shiptype,weapontype;

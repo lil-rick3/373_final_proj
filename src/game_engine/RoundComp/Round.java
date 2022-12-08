@@ -11,10 +11,10 @@ import game_engine.Formations.StandardFormation;
 
 /***
  * 
- * @author Jaret Rickel
+ * 
  *
- *this class will build the ships and movement pattern, before it gets destroyed
- *might be unnecessary
+ *this class creates a round, which builds the ships and adds the 
+ formation that the ships will be in
  *
  */
 public class Round {

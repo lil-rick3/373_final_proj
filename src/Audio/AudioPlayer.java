@@ -50,6 +50,9 @@ public class AudioPlayer
 
    
  // Method to play the audio
+ /***
+  * this method will take in an int, and play a song based on it
+  */
  private void resetmusic(int type) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
     String audioPath = null;
     if(type == 0){

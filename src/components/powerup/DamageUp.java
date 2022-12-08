@@ -1,5 +1,9 @@
 package components.powerup;
 
+
+/***
+ * when the powerup touches the player, the player will increment their damage by 1
+ */
 public class DamageUp extends Powerup{
 
     public DamageUp(double xloc, double yloc) {

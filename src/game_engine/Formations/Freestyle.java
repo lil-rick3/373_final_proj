@@ -3,10 +3,12 @@ package game_engine.Formations;
 import java.util.ArrayList;
 
 import components.ships.EnemyShip;
-//import components.ships.Ship;
 
 
 
+/***
+ * This moevement pattern is one where ships bounce off the walls
+ */
 public class Freestyle extends MovementPattern{
     private static final int XSIZE = 590;
     private static final int YArea = 200;

@@ -3,18 +3,22 @@ package game_engine.RoundComp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+
+/***
+ * This class generates a queue of rounds, that can then be called to
+ * get the next round
+ */
 public class RoundDriver{
     int numRounds = 21;
 
     private LinkedList<RoundData> roundList;
     public RoundDriver(){
         roundList = new LinkedList<RoundData>();
-        //int weapon= 0;
+        
         int health;
         double aggression;
         int i = 0;
-        //int shipType;
-        //int formation;
+      
         for(int shipType = 1; shipType <= 7 ; shipType++){
             for(int formation = 0; formation < 3; formation++){
                 for(int weapon = 0; weapon < 3; weapon ++){

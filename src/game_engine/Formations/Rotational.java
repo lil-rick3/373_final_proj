@@ -2,6 +2,9 @@ package game_engine.Formations;
 
 import components.ships.EnemyShip;
 
+/***
+ * produces three circles of rotating ships
+ */
 public class Rotational extends MovementPattern{
 
     int radius = 50;

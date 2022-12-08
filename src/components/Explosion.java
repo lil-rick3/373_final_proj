@@ -6,6 +6,10 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+/***
+ * this is the explosion that occurs when an enemy ship gets
+ * destroyed, or a projectile hits the friendly ship
+ */
 public class Explosion extends Entity{
     
     protected static BufferedImage image;
@@ -27,16 +31,7 @@ public class Explosion extends Entity{
         image = ImageIO.read(new File("src/graphicImages/explosion.png"));
     }
 
-   /* public void paintEntity(Graphics g, JPanel spaceGui){
-		g.drawImage(projection, (int)xloc, (int)yloc, spaceGui);
-        duration --;
-        
-        if(duration <= 0){
-            toBeDestroyed = true;
-        }		
-		
-	}
-    */
+   
     @Override
     protected void collisionAction(Entity crashedInto) {
         // TODO Auto-generated method stub

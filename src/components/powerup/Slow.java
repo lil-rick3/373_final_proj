@@ -1,6 +1,8 @@
 package components.powerup;
 
-
+/***
+ * powerup that when touched will cause everything to slow down
+ */
 public class Slow extends Powerup{
 
     public Slow(double xloc, double yloc) {
