@@ -24,7 +24,7 @@ public class Round {
 	int numShips;
 	int health;
 	int weaponType;
-
+	double aggression;
 	public Round (RoundData roundInfo){
 		//LinkedList<EnemyShip> listEnemies = theGame.getEnemyShips();
 		switch(roundInfo.formation){
@@ -51,6 +51,7 @@ public class Round {
 		health = roundInfo.health;
 		
 		weaponType = roundInfo.weapontype;
+		this.aggression = roundInfo.aggression;
 		/*for(int i = 0; i < 3; i ++) {
 			for(int j = 0; j < 10; j++) {
 				listEnemies.add(new EnemyShip(demMoves, (10 * i) + j, "src/graphicImages/enemyship3.png"));
@@ -65,7 +66,7 @@ public class Round {
 	public LinkedList<EnemyShip> startRound(){
 		LinkedList<EnemyShip> listEnemies = new LinkedList<EnemyShip>();
 		for(int i = 0; i < numShips; i++){
-			listEnemies.add(new EnemyShip(demMoves, i, imageString, health, weaponType));
+			listEnemies.add(new EnemyShip(demMoves, i, imageString, health, weaponType, aggression));
 		}
 		return listEnemies;
 	}

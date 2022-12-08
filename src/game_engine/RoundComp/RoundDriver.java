@@ -9,22 +9,31 @@ public class RoundDriver{
     private LinkedList<RoundData> roundList;
     public RoundDriver(){
         roundList = new LinkedList<RoundData>();
-        int weapon= 0;
+        //int weapon= 0;
         int health;
-        int shipType;
-        int formation;
-        for(int i = 0; i < 9 ; i++){
-            shipType = (i)%7 + 1;
-            weapon = i % 3;
-            formation = i % 3;
-            health = i + 2;
-            RoundData tempRound = new RoundData(formation, health, shipType, weapon);
-            roundList.add(tempRound);
+        double aggression;
+        int i = 0;
+        //int shipType;
+        //int formation;
+        for(int shipType = 1; shipType <= 7 ; shipType++){
+            for(int formation = 0; formation < 3; formation++){
+                for(int weapon = 0; weapon < 3; weapon ++){
+                    health = 3 + (i/3);
+                    aggression = 0.001 + 0.0001 * i;
+                    roundList.add(new RoundData(formation, health, shipType, weapon, aggression));
+
+                    i++;
+                }
+            }
+            
+
+        }
+          
         }
        
 
             
-        }
+        
         
         
 
