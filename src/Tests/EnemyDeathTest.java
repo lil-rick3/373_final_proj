@@ -45,7 +45,7 @@ public class EnemyDeathTest {
     
     
         //create enemies
-        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png",3, 2, 0.001);
+        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png",3, 2, 0);
 
         //add enemies to game
         LinkedList<EnemyShip> listEnemies = aGame.getEnemyShips();

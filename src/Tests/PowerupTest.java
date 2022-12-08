@@ -53,10 +53,10 @@ public class PowerupTest {
     
     
         //create enemies
-        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
-        EnemyShip e3 = new EnemyShip(m, 2, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
-        EnemyShip e2 = new EnemyShip(m, 3, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
-        EnemyShip e4 = new EnemyShip(m, 4, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
+        EnemyShip e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png", 3, 0, 0);
+        EnemyShip e3 = new EnemyShip(m, 2, "src/graphicImages/enemyship1.png", 3, 0, 0);
+        EnemyShip e2 = new EnemyShip(m, 3, "src/graphicImages/enemyship1.png", 3, 0, 0);
+        EnemyShip e4 = new EnemyShip(m, 4, "src/graphicImages/enemyship1.png", 3, 0, 0);
 
         //add enemies to game
         LinkedList<EnemyShip> listEnemies = aGame.getEnemyShips();
@@ -88,10 +88,10 @@ public class PowerupTest {
         listPowerups.add(new Nuke(300, 300));
 
         //create enemies
-         e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
-         e2 = new EnemyShip(m, 2, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
-         e3 = new EnemyShip(m, 3, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
-         e4 = new EnemyShip(m, 4, "src/graphicImages/enemyship1.png", 3, 0, 0.001);
+         e1 = new EnemyShip(m, 1, "src/graphicImages/enemyship1.png", 3, 0, 0);
+         e2 = new EnemyShip(m, 2, "src/graphicImages/enemyship1.png", 3, 0, 0);
+         e3 = new EnemyShip(m, 3, "src/graphicImages/enemyship1.png", 3, 0, 0);
+         e4 = new EnemyShip(m, 4, "src/graphicImages/enemyship1.png", 3, 0, 0);
 
         //add enemies to game
         listEnemies.add(e1);
