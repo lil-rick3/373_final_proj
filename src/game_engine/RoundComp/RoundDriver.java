@@ -19,9 +19,9 @@ public class RoundDriver{
         double aggression;
         int i = 0;
       
-        for(int shipType = 1; shipType <= 7 ; shipType++){
-            for(int formation = 0; formation < 3; formation++){
-                for(int weapon = 0; weapon < 3; weapon ++){
+        for(int shipType = 1; shipType <= 2 ; shipType++){
+            for(int formation = 0; formation < 1; formation++){
+                for(int weapon = 0; weapon < 1; weapon ++){
                     health = 3 + (i/3);
                     aggression = 0.001 + 0.0001 * i;
                     roundList.add(new RoundData(formation, health, shipType, weapon, aggression));
